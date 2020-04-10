@@ -1,5 +1,5 @@
 - [Read the Certificate text](https://github.com/fahmifahim/linux-daily/blob/master/linux.md#read-the-certificate-text)
-- [Set hostname]
+- [Set hostname](https://github.com/fahmifahim/linux-daily/blob/master/linux.md#set-hostname)
 
 ##### Read the Certificate text
 ```bash
