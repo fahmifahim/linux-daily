@@ -29,6 +29,9 @@ $ du -ch dir
 5148 dir/subdir2
 10304 dir
 10304 Total 
-
-
 ```
+
+#### Regular Expression
+![Regular Expression](https://ping-t.com/mondai3/img/jpg/k34024.jpg)
+
+
