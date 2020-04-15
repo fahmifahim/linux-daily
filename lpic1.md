@@ -31,7 +31,35 @@ $ du -ch dir
 10304 Total 
 ```
 
-#### Regular Expression
+#### * Regular Expression
 ![Regular Expression](https://ping-t.com/mondai3/img/jpg/k34024.jpg)
+
+#### * nice - run a program with modified scheduling priority
+```
+$ nice [-n niceValue] command
+```
+![nice value](https://ping-t.com/mondai3/img/jpg/k34014.jpg)
+
+#### * Archive (zip, bz2, tar, gzip)
+```bash
+# How to unzip file.bz2?
+$ bunzip2 file.bz2
+$ bzip2 -d file.bz2
+
+```
+
+> image resource from https://ping-t.com
+
+
+
+
+
+
+
+
+
+
+
+
 
 
