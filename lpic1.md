@@ -137,6 +137,12 @@ N 5
 ```
 ![RunLevel](https://ping-t.com/mondai3/img/jpg/k33726.jpg)
 
+#### * Hard Disk Design
+- Physical Volume (pv): a whole drive or a partition. It is better to define partitions and not use whole disks - unpartitioned.
+- Volume Groups (vg): this is the collection of one or more pvs. OS will see the vg as one big disk. PVs in one vg, can have different sizes or even be on different physical disks.
+- Logical Volumes (lv): OS will see lvs as partitions. You can format an lv wit your OS and use it.
+![pv-vg-lv](https://ping-t.com/mondai3/img/jpg/k34230.jpg)
+
 > image resource from https://ping-t.com
 
 
