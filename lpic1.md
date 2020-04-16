@@ -40,8 +40,16 @@ $ nice [-n niceValue] command
 ```
 ![nice value](https://ping-t.com/mondai3/img/jpg/k34014.jpg)
 
-#### * Archive (zip, bz2, tar, gzip)
-- How to unzip file.bz2?
+#### * Archive (zip, bz2, tar, gzip) -> [reference](https://jadi.gitbooks.io/lpic1/content/1033_perform_basic_file_management.html)
+- tar 
+```bash
+# Decompress test.tar.gz
+$ tar xvfz test.tar.gz
+$ tar xfz test.tar.gz
+```
+![tar-command-option](https://ping-t.com/mondai3/img/jpg/k33965.jpg)
+
+- bz2 - How to unzip file.bz2?
 ```bash
 $ bunzip2 file.bz2
 $ bzip2 -d file.bz2
