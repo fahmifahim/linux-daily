@@ -93,6 +93,24 @@ $ sed s/pingt/hoge/g test.txt
 ![sed](https://ping-t.com/mondai3/img/jpg/k34032.jpg)
 
 
+#### * Process
+1. ps - report a snapshot of the current processes.
+```bash
+# To see every process on the system using standard syntax:
+$ ps -ef 
+UID        PID  PPID  C STIME TTY          TIME CMD
+root         1     0  0 Apr15 ?        00:00:12 /usr/lib/systemd/systemd 
+root         2     0  0 Apr15 ?        00:00:00 [kthreadd]
+root         3     2  0 Apr15 ?        00:00:00 [ksoftirqd/0]
+
+# To see every process on the system using BSD syntax:
+$ ps ax
+PID TTY      STAT   TIME COMMAND
+    1 ?        Ss     0:12 /usr/lib/systemd/systemd 
+    2 ?        S      0:00 [kthreadd]
+    3 ?        S      0:00 [ksoftirqd/0]
+```
+
 
 > image resource from https://ping-t.com
 
