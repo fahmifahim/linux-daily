@@ -62,10 +62,18 @@ $ cat /proc/bus/usb/devices
 ```
 
 #### * Package
+1. apt-get
 ```bash
 $ apt-get remove [package-name]
 ```
 ![apt-get](https://ping-t.com/mondai3/img/jpg/k33777.jpg)
+
+2. rpm - RPM Package Manager
+```bash
+$ rpm --query --list postfix
+$ rpm -ql posftfix
+```
+![rpm](https://ping-t.com/mondai3/img/jpg/k33797.jpg)
 
 #### * xargs - build and execute command lines from standard input 
 ```bash
