@@ -67,6 +67,33 @@ $ apt-get remove [package-name]
 ```
 ![apt-get](https://ping-t.com/mondai3/img/jpg/k33777.jpg)
 
+#### * xargs - build and execute command lines from standard input 
+```bash
+$ cat file1.txt
+aaaa.txt
+bbbb.txt
+cccc.txt
+
+$ cat file1.txt | xargs touch
+
+$ ls -l
+total 4
+-rw-r--r-- 1 root root  0 Apr 16 21:59 aaaa.txt
+-rw-r--r-- 1 root root  0 Apr 16 21:59 bbbb.txt
+-rw-r--r-- 1 root root  0 Apr 16 21:59 cccc.txt
+-rw-r--r-- 1 root root 28 Apr 16 21:58 file1.txt
+```
+
+#### * Text Editing (sed)
+1. sed - stream editor for filtering and transforming text
+```bash
+$ sed -e s/pingt/hoge/g test.txt
+$ sed s/pingt/hoge/g test.txt 
+```
+![sed](https://ping-t.com/mondai3/img/jpg/k34032.jpg)
+
+
+
 > image resource from https://ping-t.com
 
 
