@@ -111,6 +111,23 @@ PID TTY      STAT   TIME COMMAND
     3 ?        S      0:00 [ksoftirqd/0]
 ```
 
+#### * history
+```bash
+$ echo $HISTFILE
+/root/.bash_history
+
+$ echo $HISTSIZE
+1000
+
+$ history
+```
+
+#### * RunLevel
+```bash
+$ runlevel
+N 5
+```
+![RunLevel](https://ping-t.com/mondai3/img/jpg/k33726.jpg)
 
 > image resource from https://ping-t.com
 
