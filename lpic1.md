@@ -108,6 +108,29 @@ $ sed s/pingt/hoge/g test.txt
 ```
 ![sed](https://ping-t.com/mondai3/img/jpg/k34032.jpg)
 
+2. tr - Translate, squeeze, and/or delete characters from standard input, writing to standard output.
+```bash
+$ cat file
+aaa BBB
+111 222
+abc 123 ab3
+
+$ cat file | tr -s [:lower:]
+a BBB
+111 222
+abc 123 ab3
+
+$ cat file.txt
+PINGT
+PINGT
+
+$ cat file.txt | tr PINGT pingt
+pingt 
+pingt
+```
+![tr-option](https://ping-t.com/mondai3/img/jpg/kk33884.jpg)
+![tr-option2](https://ping-t.com/mondai3/img/jpg/kkk33884.jpg)
+
 
 #### * Process
 1. ps - report a snapshot of the current processes.
