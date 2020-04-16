@@ -41,12 +41,31 @@ $ nice [-n niceValue] command
 ![nice value](https://ping-t.com/mondai3/img/jpg/k34014.jpg)
 
 #### * Archive (zip, bz2, tar, gzip)
+- How to unzip file.bz2?
 ```bash
-# How to unzip file.bz2?
 $ bunzip2 file.bz2
 $ bzip2 -d file.bz2
 
 ```
+
+#### * Devices
+- USB device
+```bash
+$ lsusb
+Bus 002 Device 002: ID 8087:0020 Intel Corp. Integrated Rate Matching Hub
+Bus 002 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 001 Device 002: ID 8087:0020 Intel Corp. Integrated Rate Matching Hub
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+
+$ cat /proc/bus/usb/devices
+...
+```
+
+#### * Package
+```bash
+$ apt-get remove [package-name]
+```
+![apt-get](https://ping-t.com/mondai3/img/jpg/k33777.jpg)
 
 > image resource from https://ping-t.com
 
