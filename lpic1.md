@@ -1,3 +1,13 @@
+#### # Filesystem
+1. tune2fs - adjust tunable filesystem parameters on ext2/ext3/ext4 filesystems
+```bash
+$ tune2fs [option] DeviceName
+$ tune2fs -L /WORK /dev/hda5
+```
+![tune2fs](https://ping-t.com/mondai3/img/jpg/k34080.jpg)
+
+#### # Filesystem Hierarchy Standard
+![FHS](https://ping-t.com/mondai3/img/jpg/k34123.jpg)
 
 #### # fstab
 ```bash
@@ -154,6 +164,7 @@ PID TTY      STAT   TIME COMMAND
     2 ?        S      0:00 [kthreadd]
     3 ?        S      0:00 [ksoftirqd/0]
 ```
+![ps-process](https://ping-t.com/mondai3/img/jpg/k34339.jpg)
 
 #### # history
 ```bash
