@@ -1,5 +1,5 @@
 #### # vi / vim 
-vi command summary
+
 ![tune2fs](https://ping-t.com/mondai3/img/jpg/k33911.jpg)
 
 #### # Telinit
