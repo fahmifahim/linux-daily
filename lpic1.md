@@ -1,3 +1,5 @@
+
+#### # fstab
 ```bash
 # /etc/fstab
 user: mount by everone, unmount by only one user
@@ -6,7 +8,10 @@ nouser: no user can mount
 ro: read only
 rw: read write
 suid: suid and sgid available
+```
+![fstab](https://ping-t.com/mondai3/img/jpg/k34089.jpg)
 
+```bash
 # du
 -a      Display an entry for each file in a file hierarchy.
 -c      Display a grand total.
@@ -31,10 +36,10 @@ $ du -ch dir
 10304 Total 
 ```
 
-#### * Regular Expression
+#### # Regular Expression
 ![Regular Expression](https://ping-t.com/mondai3/img/jpg/k34024.jpg)
 
-#### * nice - run a program with modified scheduling priority
+#### # nice - run a program with modified scheduling priority
 ```
 $ nice [-n niceValue] command
 ```
@@ -56,7 +61,7 @@ $ bzip2 -d file.bz2
 
 ```
 
-#### * Devices
+#### # Devices
 - USB device
 ```bash
 $ lsusb
@@ -69,7 +74,7 @@ $ cat /proc/bus/usb/devices
 ...
 ```
 
-#### * Package
+#### # Package
 1. apt-get
 ```bash
 $ apt-get remove [package-name]
@@ -83,7 +88,7 @@ $ rpm -ql posftfix
 ```
 ![rpm](https://ping-t.com/mondai3/img/jpg/k33797.jpg)
 
-#### * xargs - build and execute command lines from standard input 
+#### # xargs - build and execute command lines from standard input 
 ```bash
 $ cat file1.txt
 aaaa.txt
@@ -100,7 +105,7 @@ total 4
 -rw-r--r-- 1 root root 28 Apr 16 21:58 file1.txt
 ```
 
-#### * Text Editing (sed)
+#### # Text Editing (sed)
 1. sed - stream editor for filtering and transforming text
 ```bash
 $ sed -e s/pingt/hoge/g test.txt
@@ -132,7 +137,7 @@ pingt
 ![tr-option2](https://ping-t.com/mondai3/img/jpg/kkk33884.jpg)
 
 
-#### * Process
+#### # Process
 1. ps - report a snapshot of the current processes.
 ```bash
 # To see every process on the system using standard syntax:
@@ -150,7 +155,7 @@ PID TTY      STAT   TIME COMMAND
     3 ?        S      0:00 [ksoftirqd/0]
 ```
 
-#### * history
+#### # history
 ```bash
 $ echo $HISTFILE
 /root/.bash_history
@@ -161,14 +166,14 @@ $ echo $HISTSIZE
 $ history
 ```
 
-#### * RunLevel
+#### # RunLevel
 ```bash
 $ runlevel
 N 5
 ```
 ![RunLevel](https://ping-t.com/mondai3/img/jpg/k33726.jpg)
 
-#### * Hard Disk Design
+#### # Hard Disk Design
 - Physical Volume (pv): a whole drive or a partition. It is better to define partitions and not use whole disks - unpartitioned.
 - Volume Groups (vg): this is the collection of one or more pvs. OS will see the vg as one big disk. PVs in one vg, can have different sizes or even be on different physical disks.
 - Logical Volumes (lv): OS will see lvs as partitions. You can format an lv wit your OS and use it.
