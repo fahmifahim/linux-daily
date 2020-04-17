@@ -1,5 +1,38 @@
-#### # vi / vim 
+#### # Sort 
+```bash
+$ sort [option] filename.txt
 
+$ cat file.txt
+aa 2 tttt
+bb 1 tttt
+zz 10 ttt
+bb 0 tttt
+nn 100 ttt
+
+$ sort -k 2 file.txt
+bb 0 tttt
+bb 1 tttt
+zz 10 ttt
+nn 100 ttt
+aa 2 tttt
+
+$ sort -k 2 -n file.txt
+bb 0 tttt
+bb 1 tttt
+aa 2 tttt
+zz 10 ttt
+nn 100 ttt
+
+$ sort -k 2 -n -r file.txt
+nn 100 ttt
+zz 10 ttt
+aa 2 tttt
+bb 1 tttt
+bb 0 tttt
+```
+![sort](https://ping-t.com/mondai3/img/jpg/k33873.jpg)
+
+#### # vi / vim 
 ![tune2fs](https://ping-t.com/mondai3/img/jpg/k33911.jpg)
 
 #### # Telinit
