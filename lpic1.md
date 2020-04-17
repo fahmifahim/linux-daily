@@ -1,3 +1,21 @@
+#### # vi / vim 
+vi command summary
+![tune2fs](https://ping-t.com/mondai3/img/jpg/k33911.jpg)
+
+#### # Telinit
+```bash
+telinit 0 
+Power-off the machine. 
+systemctl poweroff
+shutdown -h now
+
+telinit 6
+Reboot the machine. 
+systemctl reboot
+shutdown -r now
+reboot
+```
+
 #### # Filesystem
 1. tune2fs - adjust tunable filesystem parameters on ext2/ext3/ext4 filesystems
 ```bash
