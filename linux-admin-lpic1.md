@@ -147,7 +147,12 @@ $ apt-get remove [package-name]
 $ rpm --query --list postfix
 $ rpm -ql posftfix
 ```
+query<br>
 ![rpm](https://ping-t.com/mondai3/img/jpg/k33797.jpg)
+install<br>
+![rpm-install](https://ping-t.com/mondai3/img/jpg/k33792.jpg)
+
+3. zypper - SUSE based package manager
 
 #### # xargs - build and execute command lines from standard input 
 ```bash
