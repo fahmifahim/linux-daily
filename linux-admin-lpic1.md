@@ -1,3 +1,9 @@
+#### # File System
+1. xfs 
+
+![xfs-command](https://ping-t.com/mondai3/img/jpg/k34083.jpg)
+
+
 #### # Sort 
 ```bash
 $ sort [option] filename.txt
@@ -163,7 +169,16 @@ install<br>
 
 3. zypper - SUSE based package manager
 
-4. yum
+4. dpkg - Debian package manager
+```bash
+$ dpkg [option] action
+$ dpkg -Ei procmail_3.22-16_i386.deb
+$ dpkg -E --install procmail_3.22-16_i386.deb
+```
+
+![dpkg-command](https://ping-t.com/mondai3/img/jpg/k33766.jpg)
+
+5. yum
 ```bash
 Command is one of:
     * install package1 [package2] [...]
