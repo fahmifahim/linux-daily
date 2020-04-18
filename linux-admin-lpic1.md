@@ -245,6 +245,30 @@ N 5
 - Volume Groups (vg): this is the collection of one or more pvs. OS will see the vg as one big disk. PVs in one vg, can have different sizes or even be on different physical disks.
 - Logical Volumes (lv): OS will see lvs as partitions. You can format an lv wit your OS and use it.
 ![pv-vg-lv](https://ping-t.com/mondai3/img/jpg/k34230.jpg)
+<br>
+- <b>fdisk</b> is the main command for viewing / changing and creating
+```bash
+Command (m for help): m
+Command action
+   a   toggle a bootable flag
+   b   edit bsd disklabel
+   c   toggle the dos compatibility flag
+   d   delete a partition
+   g   create a new empty GPT partition table
+   G   create an IRIX (SGI) partition table
+   l   list known partition types
+   m   print this menu
+   n   add a new partition
+   o   create a new empty DOS partition table
+   p   print the partition table
+   q   quit without saving changes
+   s   create a new empty Sun disklabel
+   t   change a partition's system id
+   u   change display/entry units
+   v   verify the partition table
+   w   write table to disk and exit
+   x   extra functionality (experts only)
+```
 
 > image resource from https://ping-t.com
 
