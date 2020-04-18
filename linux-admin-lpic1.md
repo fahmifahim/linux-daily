@@ -312,6 +312,29 @@ root      10877   9464  0 22:09 pts/0    00:00:00 sleep 4000
 root      10881   9464  0 22:10 pts/0    00:00:00 grep --color=auto -Ei ppid|sleep
 [2]-  Terminated              sleep 2000
 ```
+- kill using signal name
+![kill-signal](https://ping-t.com/mondai3/img/jpg/k34001.jpg)
+```bash
+$ ps -ef | grep -Ei "ppid|sleep"
+UID         PID   PPID  C STIME TTY          TIME CMD
+root      10912   9464  0 22:17 pts/0    00:00:00 sleep 6000      -> KILL
+root      10919   9464  0 22:18 pts/0    00:00:00 sleep 7000      -> TERMINATE
+root      10920   9464  0 22:18 pts/0    00:00:00 sleep 8000
+
+$ kill -9 10912
+$ kill -KILL 10912
+$ kill -SIGKILL 10912
+
+$ kill -15 10919
+$ kill -TERM 10919
+$ kill -SIGTERM 10919
+
+$ ps -ef | grep -Ei "ppid|sleep"
+UID         PID   PPID  C STIME TTY          TIME CMD
+root      10920   9464  0 22:18 pts/0    00:00:00 sleep 8000
+[5]+  Killed                  sleep 6000
+[6]-  Terminated              sleep 7000
+```
 
 
 #### # Monitoring Process
