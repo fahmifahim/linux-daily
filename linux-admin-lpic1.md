@@ -1,3 +1,30 @@
+### # Boot the system
+#### 1. BIOS
+<p>BIOS is Basic Input Output System and does the first steps of the PC bootup. For example is does a POST (Power On Self Test) and decides which hardware should boot the system.</p>
+
+#### 2. bootloader
+<p>Bootloader can be GRUB (1&2) or LILO which are great for disks less than 2TB.</p>
+
+```bash
+/etc/lilo.conf
+/boot/grub/grub.cfg
+/boot/grub/menu.lst
+```
+
+#### 3. Kernel
+<p>Kernel parameters (sometimes called boot parameters) supply the kernel with information about hardware parameters that it might not determine on its own - say single user mod boot (S) </p>
+
+#### 4. init
+<p>When the kernel finishes loading, it usually starts /sbin/init. This program remains running until the system is shut down. It is always assigned process ID 1.</p>
+
+#### dmesg
+- Funny fact: During the bootup, only The Kernel is running so it should record and keep its own logs!
+- dmesg command will show the full data from kernel ring buffer up to now. 
+
+#### /var/log/messages
+- After the init process comes up, syslog daemon will log messages. It has timestamps and will persist during restarts.
+- Kernel is still logging its own messages in dmesg
+
 #### # File System
 1. xfs 
 
