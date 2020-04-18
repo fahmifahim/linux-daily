@@ -246,8 +246,8 @@ N 5
 - Logical Volumes (lv): OS will see lvs as partitions. You can format an lv wit your OS and use it.
 ![pv-vg-lv](https://ping-t.com/mondai3/img/jpg/k34230.jpg)
 <br>
-- <b>fdisk</b> is the main command for viewing / changing and creating
-```bash
+- fdisk is the main command for viewing / changing and creating<br>
+```
 Command (m for help): m
 Command action
    a   toggle a bootable flag
