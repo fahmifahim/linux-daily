@@ -312,8 +312,11 @@ root      10877   9464  0 22:09 pts/0    00:00:00 sleep 4000
 root      10881   9464  0 22:10 pts/0    00:00:00 grep --color=auto -Ei ppid|sleep
 [2]-  Terminated              sleep 2000
 ```
+
 - kill using signal name
+
 ![kill-signal](https://ping-t.com/mondai3/img/jpg/k34001.jpg)
+
 ```bash
 $ ps -ef | grep -Ei "ppid|sleep"
 UID         PID   PPID  C STIME TTY          TIME CMD
