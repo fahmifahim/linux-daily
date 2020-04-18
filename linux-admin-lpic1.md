@@ -325,12 +325,18 @@ root      10919   9464  0 22:18 pts/0    00:00:00 sleep 7000      -> TERMINATE
 root      10920   9464  0 22:18 pts/0    00:00:00 sleep 8000
 
 $ kill -9 10912
+$ kill -s 9 10912
 $ kill -KILL 10912
+$ kill -s KILL 10912
 $ kill -SIGKILL 10912
+$ kill -s SIGKILL 10912
 
 $ kill -15 10919
+$ kill -s 15 10919
 $ kill -TERM 10919
+$ kill -s TERM 10919
 $ kill -SIGTERM 10919
+$ kill -s SIGTERM 10919
 
 $ ps -ef | grep -Ei "ppid|sleep"
 UID         PID   PPID  C STIME TTY          TIME CMD
