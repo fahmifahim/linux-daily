@@ -276,6 +276,44 @@ $ nl file.txt
 
 
 ### # Process
+#### # Kill Process
+1. kill - terminate a process
+</br>You can control processes by signals. Actually pressing Ctrl+c and Ctrl+z is also sending signals. Another way for this is using the kill command:
+- kill using job number
+```bash
+$ jobs
+[4]   Running                 sleep 1000 &
+[5]-  Running                 sleep 2000 &
+[6]+  Running                 sleep 3000 &
+
+$ kill %4
+
+$ jobs
+[4]   Terminated              sleep 1000
+[5]-  Running                 sleep 2000 &
+[6]+  Running                 sleep 3000 &
+
+$ jobs
+[5]-  Running                 sleep 2000 &
+[6]+  Running                 sleep 3000 &
+```
+- kill using pid
+```bash
+$ ps -ef | grep -Ei "ppid|sleep"
+UID         PID   PPID  C STIME TTY          TIME CMD
+root      10837   9464  0 22:05 pts/0    00:00:00 sleep 2000
+root      10877   9464  0 22:09 pts/0    00:00:00 sleep 4000
+
+$ kill 10837
+
+$ ps -ef | grep -Ei "ppid|sleep"
+UID         PID   PPID  C STIME TTY          TIME CMD
+root      10877   9464  0 22:09 pts/0    00:00:00 sleep 4000
+root      10881   9464  0 22:10 pts/0    00:00:00 grep --color=auto -Ei ppid|sleep
+[2]-  Terminated              sleep 2000
+```
+
+
 #### # Monitoring Process
 1. ps - report a snapshot of the current processes.
 ```bash
