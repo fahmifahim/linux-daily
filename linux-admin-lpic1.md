@@ -109,17 +109,26 @@ $ nice [-n niceValue] command
 #### * Archive (zip, bz2, tar, gzip) -> [reference](https://jadi.gitbooks.io/lpic1/content/1033_perform_basic_file_management.html)
 - tar 
 ```bash
+# Compress and decompress tar.bzip2
+$ tar cfjv test.tar.bzip2 /test
+$ tar tfjv test.tar.bzip2
+$ tar xfjv test.tar.bzip2
+
 # Decompress test.tar.gz
 $ tar xvfz test.tar.gz
 $ tar xfz test.tar.gz
 ```
 ![tar-command-option](https://ping-t.com/mondai3/img/jpg/k33965.jpg)
 
-- bz2 - How to unzip file.bz2?
+- bz2 - How to unzip file.bz2?</br>
+<b>Notes:</b> bzip2 only works with file
 ```bash
 $ bunzip2 file.bz2
 $ bzip2 -d file.bz2
 
+# How to make file.bz2
+$ bzip2 file.txt
+-> file.txt.bz2 is created
 ```
 
 #### # Devices
@@ -153,6 +162,29 @@ install<br>
 ![rpm-install](https://ping-t.com/mondai3/img/jpg/k33792.jpg)
 
 3. zypper - SUSE based package manager
+
+4. yum
+```bash
+Command is one of:
+    * install package1 [package2] [...]
+    * update [package1] [package2] [...]
+    * update-to [package1] [package2] [...]
+    * update-minimal [package1] [package2] [...]
+    * check-update
+    * upgrade [package1] [package2] [...]
+    * upgrade-to [package1] [package2] [...]
+    * distribution-synchronization [package1] [package2] [...]
+    * remove | erase package1 [package2] [...]
+    * autoremove [package1] [...]
+    * list [...]
+    * info [...]
+    * provides | whatprovides feature1 [feature2] [...]
+    * clean [ packages | metadata | expire-cache | rpmdb | plugins | all ]
+    * makecache [fast]
+    * groups [...]
+    * search string1 [string2] [...]
+    * shell [filename]
+```
 
 #### # xargs - build and execute command lines from standard input 
 ```bash
@@ -202,6 +234,46 @@ pingt
 ![tr-option](https://ping-t.com/mondai3/img/jpg/kk33884.jpg)
 ![tr-option2](https://ping-t.com/mondai3/img/jpg/kkk33884.jpg)
 
+3. Line number
+- cat
+```bash
+$ cat file.txt
+aaa
+bbb
+
+ccc
+ddd
+
+eee
+
+$ cat -n file.txt
+     1  aaa
+     2  bbb
+     3
+     4  ccc
+     5  ddd
+     6
+     7  eee
+
+$ cat -b file.txt
+     1  aaa
+     2  bbb
+
+     3  ccc
+     4  ddd
+
+     5  eee
+     
+$ nl file.txt
+     1  aaa
+     2  bbb
+
+     3  ccc
+     4  ddd
+
+     5  eee
+```
+
 
 #### # Process
 1. ps - report a snapshot of the current processes.
@@ -245,9 +317,9 @@ N 5
 - Volume Groups (vg): this is the collection of one or more pvs. OS will see the vg as one big disk. PVs in one vg, can have different sizes or even be on different physical disks.
 - Logical Volumes (lv): OS will see lvs as partitions. You can format an lv wit your OS and use it.
 ![pv-vg-lv](https://ping-t.com/mondai3/img/jpg/k34230.jpg)
-<br>
+
 - fdisk is the main command for viewing / changing and creating<br>
-```
+```bash
 Command (m for help): m
 Command action
    a   toggle a bootable flag
