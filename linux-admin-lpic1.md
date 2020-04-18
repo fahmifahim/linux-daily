@@ -275,7 +275,8 @@ $ nl file.txt
 ```
 
 
-#### # Process
+### # Process
+#### # Monitoring Process
 1. ps - report a snapshot of the current processes.
 ```bash
 # To see every process on the system using standard syntax:
@@ -293,6 +294,24 @@ PID TTY      STAT   TIME COMMAND
     3 ?        S      0:00 [ksoftirqd/0]
 ```
 ![ps-process](https://ping-t.com/mondai3/img/jpg/k34339.jpg)
+
+2. top </br>
+Processes are changing and sometimes you need to check them live. top command will help you. </br>
+
+3. free - Display amount of free and used memory in the system
+```bash
+$ free -h 
+              total        used        free      shared  buff/cache   available
+Mem:           972M        139M        549M         13M        283M        656M
+Swap:          1.5G          0B        1.5G
+```
+
+4. uptime - Tell how long the system has been running.
+```bash
+$ uptime
+ 21:51:30 up 20:25,  2 users,  load average: 0.00, 0.01, 0.05
+```
+
 
 #### # history
 ```bash
