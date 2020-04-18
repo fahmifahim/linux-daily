@@ -345,12 +345,15 @@ Command action
 - <b>Primary, Extended & Logical Partitions</b>
 <p>The partition table is located in the master boot record (MBR) of a disk. The MBR is the first sector on the disk, so the partition table is not a very large part of it. This limits the primary partitions to 4 and the max size of a disk to around 2TBs. If you need more partitions you have a define one extended and then create logicals inside them.</p>
 <p>Linux numbers the primary partitions 1, 2, 3 & 4. If you define an extended partitions, logical partitions inside it will be called 5, 6, 7.</p>
-<p>Note: an Extended partition is just an empty box for creating Logical partitions inside it.</p>
+Note: an Extended partition is just an empty box for creating Logical partitions inside it.
+
 ```bash
 /dev/sda3 is the 3rd primary partition on the first disk
 /dev/sdb5 is the first logical partition on the second disk
 /dev/sda7 is the 3rd logical partition of the first physical disk
 ```
+![MBR](https://ping-t.com/mondai3/img/jpg/k34058.jpg)
+
 - GPT (GUID Partition Table)
 <p>If you format your disk with GTP you can have 128 primary partitions (no need to extended and logical).</p>
 
