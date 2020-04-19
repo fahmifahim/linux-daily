@@ -139,8 +139,8 @@ $ nice [-n niceValue] command
 ```
 ![nice value](https://ping-t.com/mondai3/img/jpg/k34014.jpg)
 
-#### * Archive (zip, bz2, tar, gzip) -> [reference](https://jadi.gitbooks.io/lpic1/content/1033_perform_basic_file_management.html)
-- tar 
+#### * Archive (tar, bz2, xz, gzip) -> [reference](https://jadi.gitbooks.io/lpic1/content/1033_perform_basic_file_management.html)
+1. tar 
 ```bash
 # Compress and decompress tar.bzip2
 $ tar cfjv test.tar.bzip2 /test
@@ -153,7 +153,7 @@ $ tar xfz test.tar.gz
 ```
 ![tar-command-option](https://ping-t.com/mondai3/img/jpg/k33965.jpg)
 
-- bz2 - How to unzip file.bz2?</br>
+2. bz2 - How to unzip file.bz2?</br>
 <b>Notes:</b> bzip2 only works with file
 ```bash
 $ bunzip2 file.bz2
@@ -162,6 +162,15 @@ $ bzip2 -d file.bz2
 # How to make file.bz2
 $ bzip2 file.txt
 -> file.txt.bz2 is created
+```
+
+3. xz 
+```bash
+$ xz [option] file-name-to-compress
+[option]: 
+-d --decompress
+-k --keep
+-l --list
 ```
 
 #### # Devices
