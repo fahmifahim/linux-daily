@@ -542,6 +542,15 @@ $ grub > kernel /boot/vmlinuz-2.6.35 1
 $ grub > kernel /boot/vmlinuz-2.6.35 single
 ```
 
+#### # Windows CRLF and Linux LF
+- Windows: CRLF \r\n
+- Linux: LF \n
+```bash
+# Change Windows format to Linux compatible
+$ tr -d '^M' < file1.txt > file2.txt
+$ sed s/^M//g file1.txt > file2.txt
+```
+
 ![grub](https://ping-t.com/mondai3/img/jpg/kk33690.jpg)
 
 </br> *Image resource from [ping-t.com](https://ping-t.com)
