@@ -306,6 +306,15 @@ $ cat -n file.txt
      6
      7  eee
 
+$ nl -b file.txt
+     1  aaa
+     2  bbb
+     3
+     4  ccc
+     5  ddd
+     6
+     7  eee
+
 $ cat -b file.txt
      1  aaa
      2  bbb
@@ -516,6 +525,16 @@ Note: an Extended partition is just an empty box for creating Logical partitions
 /dev/hdb    disk number 2
 /dev/hdc    disk number 3
 ```
+
+#### # Maintenance Mode on Grub
+```bash
+# Single Mode
+$ grub > kernel /boot/vmlinuz-2.6.35 s
+$ grub > kernel /boot/vmlinuz-2.6.35 1
+$ grub > kernel /boot/vmlinuz-2.6.35 single
+```
+
+![grub](https://ping-t.com/mondai3/img/jpg/kk33690.jpg)
 
 </br> *Image resource from [ping-t.com](https://ping-t.com)
 </br> *Reference book [jadi-lpic1-book](https://jadi.gitbooks.io/lpic1/content/)
