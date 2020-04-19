@@ -381,7 +381,7 @@ root      10881   9464  0 22:10 pts/0    00:00:00 grep --color=auto -Ei ppid|sle
 [2]-  Terminated              sleep 2000
 ```
 
-- kill using signal name
+- kill using signal name (pkill = kill using process name)
 
 ![kill-signal](https://ping-t.com/mondai3/img/jpg/k34001.jpg)
 
@@ -405,6 +405,8 @@ $ kill -TERM 10919
 $ kill -s TERM 10919
 $ kill -SIGTERM 10919
 $ kill -s SIGTERM 10919
+
+$ pkill -9 sleep        --> kill all sleep process
 
 $ ps -ef | grep -Ei "ppid|sleep"
 UID         PID   PPID  C STIME TTY          TIME CMD
@@ -542,16 +544,18 @@ $ grub > kernel /boot/vmlinuz-2.6.35 1
 $ grub > kernel /boot/vmlinuz-2.6.35 single
 ```
 
+![grub](https://ping-t.com/mondai3/img/jpg/kk33690.jpg)
+
 #### # Windows CRLF and Linux LF
 - Windows: CRLF \r\n
 - Linux: LF \n
 ```bash
 # Change Windows format to Linux compatible
 $ tr -d '^M' < file1.txt > file2.txt
+$ tr -d '\r' < file1.txt > file2.txt
+$ cat file1.txt | tr -d '\r' > file2.txt
 $ sed s/^M//g file1.txt > file2.txt
 ```
-
-![grub](https://ping-t.com/mondai3/img/jpg/kk33690.jpg)
 
 </br> *Image resource from [ping-t.com](https://ping-t.com)
 </br> *Reference book [jadi-lpic1-book](https://jadi.gitbooks.io/lpic1/content/)
