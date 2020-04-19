@@ -508,7 +508,8 @@ Note: an Extended partition is just an empty box for creating Logical partitions
 /dev/hdc    disk number 3
 ```
 
-> image resource from https://ping-t.com
+</br> *Image resource from [ping-t.com](https://ping-t.com)
+</br> *Reference book [jadi-lpic1-book](https://jadi.gitbooks.io/lpic1/content/)
 
 
 
