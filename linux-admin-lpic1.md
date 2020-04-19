@@ -82,6 +82,14 @@ shutdown -r now
 reboot
 ```
 
+#### # SUID, SGID, Stickybit
+```bash
+access mode	   octal	   symbolic
+suid	         4000	   u+s
+guid	         2000	   g+s
+sticky         1000	   t
+```
+
 #### # Filesystem
 1. tune2fs - adjust tunable filesystem parameters on ext2/ext3/ext4 filesystems
 ```bash
