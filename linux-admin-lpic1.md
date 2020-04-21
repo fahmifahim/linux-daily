@@ -12,7 +12,9 @@
 ```
 
 #### 3. Kernel
-<p>Kernel parameters (sometimes called boot parameters) supply the kernel with information about hardware parameters that it might not determine on its own - say single user mod boot (S) </p>
+- Kernel parameters (sometimes called boot parameters) supply the kernel with information about hardware parameters that it might not determine on its own - say single user mod boot (S)
+- Start the /sbin/init
+- Recognize and control hardware; then, performs various initialization processes such as mounting root file system.
 
 #### 4. init
 <p>When the kernel finishes loading, it usually starts /sbin/init. This program remains running until the system is shut down. It is always assigned process ID 1.</p>
