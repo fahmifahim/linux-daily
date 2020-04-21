@@ -1,6 +1,10 @@
 ### # Boot the system
 #### 1. BIOS
-<p>BIOS is Basic Input Output System and does the first steps of the PC bootup. For example is does a POST (Power On Self Test) and decides which hardware should boot the system.</p>
+- BIOS is Basic Input Output System and does the first steps of the PC bootup. For example is does a POST (Power On Self Test) and decides which hardware should boot the system.
+- PowerON --> BIOS --> Recognize HDD and decide the device priority by order. 
+- On each device: read the MBR (Master Boot Record) located on head sector. Bootloader is then executed.
+- Device priority can be set manually on BIOS display. 
+- Currently, other than BIOS, UEFI (Unified Extensible Firmware Interface) is recently developed and widely being used in the modern system. 
 
 #### 2. bootloader
 <p>Bootloader can be GRUB (1&2) or LILO which are great for disks less than 2TB.</p>
