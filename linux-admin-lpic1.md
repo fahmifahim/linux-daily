@@ -141,6 +141,9 @@ $ du -ch dir
 #### # Regular Expression
 ![Regular Expression](https://ping-t.com/mondai3/img/jpg/k34024.jpg)
 
+#### # Metacharacter
+![Metacharacter](https://ping-t.com/mondai3/img/jpg/k33833.jpg)
+
 #### # nice - run a program with modified scheduling priority
 ```
 $ nice [-n niceValue] command
