@@ -41,6 +41,17 @@
 
 ![xfs-command](https://ping-t.com/mondai3/img/jpg/k34083.jpg)
 
+2. Btrfs
+- Available for multidevice
+```bash
+mkfs.btrfs /dev/sda1 /dev/sda2
+```
+- Snapshot for subvolume
+```bash
+btrfs subvolume snapshot /home /tmp/home_bak
+```
+- Auto-archive function
+
 #### # Environment
 ```bash
 # Show to the Environment 
