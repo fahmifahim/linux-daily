@@ -228,10 +228,14 @@ $ apt-get remove [package-name]
 ```bash
 $ rpm --query --list postfix
 $ rpm -ql posftfix
+
+$ rpm --query --requires --package emacs
+$ rpm -qRp emacs
 ```
-query<br>
-![rpm](https://ping-t.com/mondai3/img/jpg/k33797.jpg)
-install<br>
+- <b>query</b></br>
+![rpm](https://ping-t.com/mondai3/img/jpg/k35692.jpg)
+
+- <b>install</b></br>
 ![rpm-install](https://ping-t.com/mondai3/img/jpg/k33792.jpg)
 
 3. zypper - SUSE based package manager
