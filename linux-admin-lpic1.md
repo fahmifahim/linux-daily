@@ -105,18 +105,20 @@ reboot
 #### # File and Directory Permission (SUID, SGID, Stickybit)
 
 - SUID SGID Stickybit
+
 | Access Mode | Octal | Symbolic |
-|:---|:---:|---:|
+|:---:|:---:|:---:|
 |suid |4000 |u+s |
 |guid |2000 |g+s |
 |stickybit |1000 |t |
 
 - File and Directory permission 
+
 | Permission | File | Directory |
-|:---|:---:|---:|
-|Read |Read file content (cat,more,less) |List and refer content of directory (ls,find) |
-|Write |Write to file |Create, delete and rename file (touch,mv,rm) |
-|eXecute |execute file |Access to file inside directory, change to directory (cd) |
+|:---:|:---:|:---:|
+| Read | Read file content (cat,more,less) | List and refer content of directory (ls,find) |
+| Write | Write to file | Create, delete and rename file (touch,mv,rm) |
+| eXecute | execute file | Access to file inside directory, change to directory (cd) |
 
 
 #### # Filesystem
