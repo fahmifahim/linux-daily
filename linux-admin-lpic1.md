@@ -41,6 +41,15 @@
 
 ![xfs-command](https://ping-t.com/mondai3/img/jpg/k34083.jpg)
 
+#### # Environment
+```bash
+# Show to the Environment 
+$ env 
+$ printenv
+$ set
+```
+![printenv](https://ping-t.com/mondai3/img/jpg/k34146.jpg)
+
 
 #### # Sort 
 ```bash
