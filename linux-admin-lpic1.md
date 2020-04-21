@@ -31,6 +31,12 @@
 #### dmesg
 - Funny fact: During the bootup, only The Kernel is running so it should record and keep its own logs!
 - dmesg command will show the full data from kernel ring buffer up to now. 
+```bash
+# Print or control the kernel ring buffer
+$ dmesg
+$ journalctl -k
+$ journalctl --dmesg
+```
 
 #### /var/log/messages
 - After the init process comes up, syslog daemon will log messages. It has timestamps and will persist during restarts.
@@ -194,8 +200,12 @@ $ tune2fs -L /WORK /dev/hda5
 ```
 ![tune2fs](https://ping-t.com/mondai3/img/jpg/k34080.jpg)
 
-#### # Filesystem Hierarchy Standard
+#### # Filesystem Hierarchy Standard ([FHS wikipedia](https://en.wikipedia.org/wiki/Filesystem_Hierarchy_Standard))
 ![FHS](https://ping-t.com/mondai3/img/jpg/k34123.jpg)
+
+- directory structure
+
+![directory](https://ping-t.com/mondai3/img/jpg/k33739.jpg)
 
 #### # fstab
 ```bash
