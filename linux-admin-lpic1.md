@@ -120,6 +120,60 @@ reboot
 | Write | Write to file | Create, delete and rename file (touch,mv,rm) |
 | eXecute | execute file | Access to file inside directory, change to directory (cd) |
 
+```bash
+d------r-- root:root /read.d
+  |-- [---------x root:root]  /read.d/execute.txt
+  |-- [-------r-- root:root]  /read.d/read.txt
+  '-- [--------w- root:root]  /read.d/write.txt
+
+d-------w- root:root /write.d
+  |-- [---------x root:root]  /read.d/execute.txt
+  |-- [-------r-- root:root]  /read.d/read.txt
+  '-- [--------w- root:root]  /read.d/write.txt
+
+d--------x root:root /execute.d
+  |-- [---------x root:root]  /read.d/execute.txt
+  |-- [-------r-- root:root]  /read.d/read.txt
+  '-- [--------w- root:root]  /read.d/write.txt
+
+# List and find content inside the folder
+$ su fahmi
+$ ls /read.d/
+ ls: cannot access /read.d/read.txt: Permission denied
+ ls: cannot access /read.d/write.txt: Permission denied
+ ls: cannot access /read.d/execute.txt: Permission denied
+ execute.txt  read.txt  write.txt
+$ ls /read.d/ | wc -l
+ 3
+$ find /read.d/ -type f
+ /read.d/read.txt
+ /read.d/write.txt
+ /read.d/execute.txt
+
+---
+$ ls /write.d/
+ ls: cannot open directory /write.d/: Permission denied
+$ find /write.d/ -type f
+ find: '/write.d/': Permission denied
+
+---
+$ ls /execute.d/
+ ls: cannot open directory /execute.d/: Permission denied
+$ find /execute.d/ -type f
+ find: '/execute.d/': Permission denied
+ 
+ # Change Directory 
+ $ cd /read.d/
+bash: cd: /read.d/: Permission denied
+
+]$ cd /write.d/
+bash: cd: /write.d/: Permission denied
+
+$ cd /execute.d/
+[execute.d]$
+
+```
+
 
 #### # Filesystem
 1. tune2fs - adjust tunable filesystem parameters on ext2/ext3/ext4 filesystems
