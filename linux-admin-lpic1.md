@@ -296,7 +296,11 @@ $ cat /proc/bus/usb/devices
 #### # Package
 1. apt-get
 ```bash
+# Remove specific package
 $ apt-get remove [package-name]
+
+# Upgrade all packages
+$ apt-get upgrade
 ```
 ![apt-get](https://ping-t.com/mondai3/img/jpg/k33777.jpg)
 
