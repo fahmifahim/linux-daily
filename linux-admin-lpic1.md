@@ -17,11 +17,16 @@
 
 #### 3. Kernel
 - Kernel parameters (sometimes called boot parameters) supply the kernel with information about hardware parameters that it might not determine on its own - say single user mod boot (S)
-- Start the /sbin/init
 - Recognize and control hardware; then, performs various initialization processes such as mounting root file system.
+- Kernel image, kernel version is located on /boot directory. 
+- Start the /sbin/init
 
 #### 4. init
-<p>When the kernel finishes loading, it usually starts /sbin/init. This program remains running until the system is shut down. It is always assigned process ID 1.</p>
+- When the kernel finishes loading, it usually starts /sbin/init. This program remains running until the system is shut down. It is always assigned process ID 1.
+- PID 1 is the firstly created process ID. 
+- In SysVinit system, /sbin/init is started during the initial process. Autostart application is executed by order as recorded in the `/etc/inittab`. 
+- In recent/modern system (like `systemd`), /etc/inittab is no more used.  
+
 
 #### dmesg
 - Funny fact: During the bootup, only The Kernel is running so it should record and keep its own logs!
