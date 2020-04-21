@@ -1,4 +1,4 @@
-### # Boot the system
+### # Boot Linux system
 #### 1. BIOS
 - BIOS is Basic Input Output System and does the first steps of the PC bootup. For example is does a POST (Power On Self Test) and decides which hardware should boot the system.
 - PowerON --> BIOS --> Recognize HDD and decide the device priority by order. 
