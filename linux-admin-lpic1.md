@@ -78,7 +78,7 @@ The following is a partial list of the used files, terms and utilities:
 - mkfs
 - mkswap
 
-##### mkfs
+##### *mkfs*
 ```bash
 $ mkfs [option] [device-name]
 $ mkfs -t ext3 -c /dev/sda2
@@ -86,7 +86,10 @@ $ mkfs -t ext4 /dev/sdc1
 ```
 ![mkfs](https://ping-t.com/mondai3/img/jpg/k34068.jpg)
 
-
+##### *mkswap*
+```bash
+$ mkswap /dev/sda6
+```
 ***
 #### 104.2 Maintain the integrity of filesystems
 Weight: 2
