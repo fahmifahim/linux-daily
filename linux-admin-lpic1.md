@@ -78,6 +78,24 @@ The following is a partial list of the used files, terms and utilities:
 - xfs_fsr
 - xfs_db
 
+##### mke2fs
+```bash
+$ mke2fs [option] [device-name]
+$ mke2fs -j /dev/sda2     --> create ext3 FileSystem
+$ mke2fs -t ext2 /dev/sda2
+$ mke2fs -t ext3 /dev/sda2
+```
+
+![mke2fs](https://ping-t.com/mondai3/img/jpg/kk34068.jpg)
+
+##### mkfs
+```bash
+$ mkfs [option] [device-name]
+```
+
+![mkfs](https://ping-t.com/mondai3/img/jpg/k34068.jpg)
+
+
 ***
 #### # Symbolic and Hard link
 - *Symbolic link*: 
@@ -891,14 +909,14 @@ $ journalctl --since today
 $ journalctl -S "2020-01-01 11:00:00" -U "2020-01-02 12:00:00"
 
 # Specify the Priority
-"emerg"ï¼ˆ0â ï¼‰
-"alert"ï¼ˆ1â ï¼‰
-"crit"ï¼ˆ2â ï¼‰
-"err"ï¼ˆ3â ï¼‰
-"warning"ï¼ˆ4â ï¼‰
-"notice"ï¼ˆ5â ï¼‰â 
-"info"ï¼ˆ6â ï¼‰
-"debug"ï¼ˆ7ï¼‰
+"emerg"?¼?0â??¼?
+"alert"?¼?1â??¼?
+"crit"?¼?2â??¼?
+"err"?¼?3â??¼?
+"warning"?¼?4â??¼?
+"notice"?¼?5â??¼‰â 
+"info"?¼?6â??¼?
+"debug"?¼?7?¼?
 $ journalctl -p [priority-number]
 $ journalctl -p 3
 ... : Failed to start Network Manager Wait Online...
@@ -922,17 +940,3 @@ $ sed s/^M//g file1.txt > file2.txt
 
 </br> *Image resource from [ping-t.com](https://ping-t.com)
 </br> *Reference book [jadi-lpic1-book](https://jadi.gitbooks.io/lpic1/content/)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
