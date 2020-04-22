@@ -123,21 +123,34 @@ $ mke2fs -t ext3 /dev/sda2
 ![mke2fs](https://ping-t.com/mondai3/img/jpg/kk34068.jpg)
 
 ***
-#### # Symbolic and Hard link
-- *Symbolic link*: 
+
+#### 104.6 Create and change hard and symbolic links
+Weight: 2
+
+*Description:* Candidates should be able to create and manage hard and symbolic links to a file.
+
+*Key Knowledge Areas:*
+- Create links.
+- Identify hard and/or soft links.
+- Copying versus linking files.
+- Use links to support system administration tasks.
+
+The following is a partial list of the used files, terms and utilities:
+- ln
+- ls
+
+*Symbolic link*: 
 1. Link can be created even in different file system.
 2. `lrwxr-xr-x symlink1 -> test1.txt`
 3. Symbolic link file has different inode with the physical file.
 4. If we delete the physical file, symbolic link will not be deleted. But there will be error if we show the content of the symbolic link.
 5. Symbolic link only work with file, not folder. 
-
 ![symboliclink](https://ping-t.com/mondai3/img/jpg/kkkk34107.jpg)
 
-- *Hard link*:
+*Hard link*:
 1. Hardlink has the same inode with the physical file.
 2. Deleting the physical file, will not effect hardlink. 
-3. Hardlink works with file and directory. 
-
+3. Hardlink works with file. 
 ![hardlink](https://ping-t.com/mondai3/img/jpg/k34107.jpg)
 
 ```bash
@@ -155,6 +168,8 @@ $ ls -il
 8613901762 -rw-r--r--   2 fahmi  staff    6 Apr 22 11:09 hardlink1
 8613901770 lrwxr-xr-x   1 fahmi  staff    9 Apr 22 11:09 symlink1 -> test1.txt
 ```
+
+***
 
 #### # File access timestamp
 - *stat*
