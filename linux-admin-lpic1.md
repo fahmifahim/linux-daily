@@ -112,7 +112,33 @@ The following is a partial list of the used files, terms and utilities:
 - xfs_fsr
 - xfs_db
 
-##### mke2fs
+##### *du disk usage*
+```bash
+# du
+-a      Display an entry for each file in a file hierarchy.
+-c      Display a grand total.
+-h      "Human-readable" output.
+-s      Display total for specified file/directory.
+
+$ du -a dir
+5144 dir/subdir1/test.txt
+5148 dir/subdir1
+5144 dir/subdir2/file
+5148 dir/subdir2
+4 dir/file1.txt
+10304 dir
+
+$ du -s dir
+10304 dir
+
+$ du -ch dir
+5148 dir/subdir1
+5148 dir/subdir2
+10304 dir
+10304 Total 
+```
+
+##### *mke2fs*
 ```bash
 $ mke2fs [option] [device-name]
 $ mke2fs -j /dev/sda2     --> create ext3 FileSystem
@@ -121,6 +147,62 @@ $ mke2fs -t ext3 /dev/sda2
 ```
 
 ![mke2fs](https://ping-t.com/mondai3/img/jpg/kk34068.jpg)
+
+***
+#### 104.3 Control mounting and unmounting of filesystems
+Weight: 3
+
+*Description:* Candidates should be able to configure the mounting of a filesystem.
+
+*Key Knowledge Areas:*
+- Manually mount and unmount filesystems.
+- Configure filesystem mounting on bootup.
+- Configure user mountable removable filesystems.
+- Use of labels and UUIDs for identifying and mounting file systems.
+- Awareness of systemd mount units.
+
+The following is a partial list of the used files, terms and utilities:
+- /etc/fstab
+- /media/
+- mount
+- umount
+- blkid
+- lsblk
+
+**fstab**
+```bash
+# /etc/fstab
+user: mount by everone, unmount by only one user
+users: mount by everyone, unmount by everyone
+nouser: no user can mount 
+ro: read only
+rw: read write
+suid: suid and sgid available
+```
+
+![fstab](https://ping-t.com/mondai3/img/jpg/k34089.jpg)
+
+**mount**
+```bash
+# Mount all content on /etc/fstab
+$ mount -a 
+
+# Set the mount type (-t) and additional option (-o)
+$ mount -t ext3 -o ro /dev/sda3 /mnt/mydata
+
+# Bind directory
+$ ls systemlogs
+  --> Before mount nothing happen
+$ mount --bind /var/log /root/systemlogs
+
+$ ls systemlogs
+  --> Display all files on /var/log 
+```
+
+- `cat /etc/mtab`
+- `mount`
+- `cat /proc/mounts`
+- `cat /proc/self/mounts`
 
 ***
 
@@ -455,63 +537,6 @@ $ tune2fs -L /WORK /dev/hda5
 
 ![directory](https://ping-t.com/mondai3/img/jpg/k33739.jpg)
 
-#### # fstab and mount
-1. *fstab*
-```bash
-# /etc/fstab
-user: mount by everone, unmount by only one user
-users: mount by everyone, unmount by everyone
-nouser: no user can mount 
-ro: read only
-rw: read write
-suid: suid and sgid available
-```
-![fstab](https://ping-t.com/mondai3/img/jpg/k34089.jpg)
-
-2. *mount*
-
-```bash
-# Mount all content on /etc/fstab
-$ mount -a 
-
-# Set the mount type (-t) and additional option (-o)
-$ mount -t ext3 -o ro /dev/sda3 /mnt/mydata
-
-# Bind directory
-$ ls systemlogs
-  --> Before mount nothing happen
-$ mount --bind /var/log /root/systemlogs
-
-$ ls systemlogs
-  --> Display all files on /var/log 
-```
-
-3. *disk usage du*
-
-```bash
-# du
--a      Display an entry for each file in a file hierarchy.
--c      Display a grand total.
--h      "Human-readable" output.
--s      Display total for specified file/directory.
-
-$ du -a dir
-5144 dir/subdir1/test.txt
-5148 dir/subdir1
-5144 dir/subdir2/file
-5148 dir/subdir2
-4 dir/file1.txt
-10304 dir
-
-$ du -s dir
-10304 dir
-
-$ du -ch dir
-5148 dir/subdir1
-5148 dir/subdir2
-10304 dir
-10304 Total 
-```
 
 #### # Regular Expression
 ![Regular Expression](https://ping-t.com/mondai3/img/jpg/k34024.jpg)
