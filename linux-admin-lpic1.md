@@ -182,7 +182,7 @@ suid: suid and sgid available
 
 ![fstab](https://ping-t.com/mondai3/img/jpg/k34089.jpg)
 
-**mount**
+*mount*
 ```bash
 # Mount all content on /etc/fstab
 $ mount -a 
