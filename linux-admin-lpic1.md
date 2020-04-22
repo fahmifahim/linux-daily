@@ -105,15 +105,56 @@ bb 0 tttt
 #### # vi / vim 
 ![tune2fs](https://ping-t.com/mondai3/img/jpg/k33911.jpg)
 
+#### # Systemctl command
+- structure: `systemctl [subcommand] [Unit-name]`
+- subcommand: 
+```bash
+# systemctl subcommand with unit-name
+disable
+enable
+is-active
+start
+stop
+restart
+status
+reload
+
+# systemctl subcommand without unit-name
+list-unit-files
+get-default
+halt
+reboot
+poweroff
+```
+
+- More about systemctl
+```bash
+$ ls -l /etc/systemd/system
+default.target -> /lib/systemd/system/multi-user.target
+default.target.wants
+multi-user.target.wants
+socket.target.wants
+system-update.target.wants
+
+# For example observe the httpd
+$ systemctl status httpd
+httpd.service 
+Loaded: loaded (/usr/lib/systemd/system/httpd.service): enable
+
+$ ls /etc/systemd/system/multi-user.target.wants
+/etc/systemd/system/multi-user.target.wants -> /usr/lib/systemd/system/httpd.service
+
+```
+
 #### # Telinit
 ```bash
+# Power-off the machine. 
 telinit 0 
-Power-off the machine. 
 systemctl poweroff
 shutdown -h now
 
+# Reboot the machine. 
 telinit 6
-Reboot the machine. 
 systemctl reboot
 shutdown -r now
 reboot
