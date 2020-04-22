@@ -709,6 +709,37 @@ $ grub > kernel /boot/vmlinuz-2.6.35 single
 
 ![grub](https://ping-t.com/mondai3/img/jpg/kk33690.jpg)
 
+#### # journalctl
+- journalctl config file: /etc/systemd/journald.conf
+```bash
+# Check log based on unit
+$ journalctl -u systemd-resolved.service
+$ journalctl -u 'systemd*'
+$ journalctl -u '*docker*'
+
+# Specify time using --since(-S) and --until(-U)
+$ journalctl --since today
+$ journalctl -S "2020-01-01 11:00:00" -U "2020-01-02 12:00:00"
+
+# Specify the Priority
+"emerg"（0⁠）
+"alert"（1⁠）
+"crit"（2⁠）
+"err"（3⁠）
+"warning"（4⁠）
+"notice"（5⁠）⁠
+"info"（6⁠）
+"debug"（7）
+$ journalctl -p [priority-number]
+$ journalctl -p 3
+... : Failed to start Network Manager Wait Online...
+
+# Tail the new entry
+$ journalctl -f -u '*docker*'
+
+
+```
+
 #### # Windows CRLF and Linux LF
 - Windows: CRLF \r\n
 - Linux: LF \n
