@@ -57,6 +57,38 @@ The following is a partial list of the used files, terms and utilities:
 2. *Dynamic linking* is when you just say in your program "We need this and that library to run this program". This way your program is smaller but you need to install those libraries separately. This makes programs more secure (because libraries can be updated centrally), more advanced (any improvement in a library will improve the whole program) and smaller.
 
 ***
+#### 104.1 Create partitions and filesystems
+Weight: 2
+
+*Description:* Candidates should be able to configure disk partitions and then create filesystems on media such as hard disks. This includes the handling of swap partitions.
+
+*Key Knowledge Areas:*
+- Manage MBR and GPT partition tables
+- Use various mkfs commands to create various filesystems such as:
+  - ext2/ext3/ext4
+  - XFS
+  - VFAT
+  - exFAT
+- Basic feature knowledge of Btrfs, including multi-device filesystems, compression and subvolumes.
+
+The following is a partial list of the used files, terms and utilities:
+- fdisk
+- gdisk
+- parted
+- mkfs
+- mkswap
+
+##### mkfs
+```bash
+$ mkfs [option] [device-name]
+$ mkfs -t ext3 -c /dev/sda2
+$ mkfs -t ext4 /dev/sdc1
+```
+
+![mkfs](https://ping-t.com/mondai3/img/jpg/k34068.jpg)
+
+
+***
 #### 104.2 Maintain the integrity of filesystems
 Weight: 2
 
@@ -87,14 +119,6 @@ $ mke2fs -t ext3 /dev/sda2
 ```
 
 ![mke2fs](https://ping-t.com/mondai3/img/jpg/kk34068.jpg)
-
-##### mkfs
-```bash
-$ mkfs [option] [device-name]
-```
-
-![mkfs](https://ping-t.com/mondai3/img/jpg/k34068.jpg)
-
 
 ***
 #### # Symbolic and Hard link
