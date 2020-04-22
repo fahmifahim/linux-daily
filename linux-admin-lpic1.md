@@ -31,6 +31,38 @@ $ ls -il
 8613901770 lrwxr-xr-x   1 fahmi  staff    9 Apr 22 11:09 symlink1 -> test1.txt
 ```
 
+#### # File access timestamp
+- *stat*
+```bash
+$ stat test.txt
+File: 'test.txt'
+Size: 4
+Access: (0644/-rw-r--r--)
+Context: unconfined_u:object_r:admin_home_t:s0
+Access: 2020-01-01 10:00:00
+Modify: 2020-01-01 10:00:00
+Change: 2020-01-01 10:00:00
+
+# Access time stamp CHANGED after the file command
+$ file test.txt
+text.txt ASCII text
+
+$ stat test.txt
+...
+Access: 2020-01-01 11:00:00
+...
+
+# Access/Modify/Change Time stamp change after the `touch` `echo`
+$ touch test.txt
+$ echo "hello" > test.txt
+$ stat test.txt
+...
+Access: 2020-01-02 10:00:00
+Modify: 2020-01-02 10:00:00
+Change: 2020-01-02 10:00:00
+...
+```
+
 ### # Boot Linux System
 #### 1. BIOS
 - BIOS is Basic Input Output System and does the first steps of the PC bootup. For example is does a POST (Power On Self Test) and decides which hardware should boot the system.
@@ -281,7 +313,8 @@ $ tune2fs -L /WORK /dev/hda5
 
 ![directory](https://ping-t.com/mondai3/img/jpg/k33739.jpg)
 
-#### # fstab
+#### # fstab and mount
+1. *fstab*
 ```bash
 # /etc/fstab
 user: mount by everone, unmount by only one user
@@ -292,6 +325,26 @@ rw: read write
 suid: suid and sgid available
 ```
 ![fstab](https://ping-t.com/mondai3/img/jpg/k34089.jpg)
+
+2. *mount*
+
+```bash
+# Mount all content on /etc/fstab
+$ mount -a 
+
+# Set the mount type (-t) and additional option (-o)
+$ mount -t ext3 -o ro /dev/sda3 /mnt/mydata
+
+# Bind directory
+$ ls systemlogs
+  --> Before mount nothing happen
+$ mount --bind /var/log /root/systemlogs
+
+$ ls systemlogs
+  --> Display all files on /var/log 
+```
+
+3. *disk usage du*
 
 ```bash
 # du
