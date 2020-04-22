@@ -1,15 +1,19 @@
 #### # Symbolic and Hard link
-- Symbolic link: 
+- *Symbolic link*: 
 1. Link can be created even in different file system.
 2. `lrwxr-xr-x symlink1 -> test1.txt`
 3. Symbolic link file has different inode with the physical file.
 4. If we delete the physical file, symbolic link will not be deleted. But there will be error if we show the content of the symbolic link.
 5. Symbolic link only work with file, not folder. 
 
-- Hard link:
+![symboliclink](https://ping-t.com/mondai3/img/jpg/kkkk34107.jpg)
+
+- *Hard link*:
 1. Hardlink has the same inode with the physical file.
 2. Deleting the physical file, will not effect hardlink. 
 3. Hardlink works with file and directory. 
+
+![hardlink](https://ping-t.com/mondai3/img/jpg/k34107.jpg)
 
 ```bash
 $ ls -il
