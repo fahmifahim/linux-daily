@@ -1,3 +1,32 @@
+#### # Symbolic and Hard link
+- Symbolic link: 
+1. Link can be created even in different file system.
+2. `lrwxr-xr-x symlink1 -> test1.txt`
+3. Symbolic link file has different inode with the physical file.
+4. If we delete the physical file, symbolic link will not be deleted. But there will be error if we show the content of the symbolic link.
+5. Symbolic link only work with file, not folder. 
+
+- Hard link:
+1. Hardlink has the same inode with the physical file.
+2. Deleting the physical file, will not effect hardlink. 
+3. Hardlink works with file and directory. 
+
+```bash
+$ ls -il
+8613901762 -rw-r--r--   1 fahmi  staff    6 Apr 22 11:09 test1.txt
+
+# Create Symbolic link
+$ ln -s test1.txt symlink1
+
+# Create Hard link
+$ ln -n test1.txt hardlink1
+
+$ ls -il
+8613901762 -rw-r--r--   2 fahmi  staff    6 Apr 22 11:09 test1.txt
+8613901762 -rw-r--r--   2 fahmi  staff    6 Apr 22 11:09 hardlink1
+8613901770 lrwxr-xr-x   1 fahmi  staff    9 Apr 22 11:09 symlink1 -> test1.txt
+```
+
 ### # Boot Linux System
 #### 1. BIOS
 - BIOS is Basic Input Output System and does the first steps of the PC bootup. For example is does a POST (Power On Self Test) and decides which hardware should boot the system.
