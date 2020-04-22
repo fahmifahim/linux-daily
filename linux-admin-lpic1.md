@@ -57,6 +57,28 @@ The following is a partial list of the used files, terms and utilities:
 2. *Dynamic linking* is when you just say in your program "We need this and that library to run this program". This way your program is smaller but you need to install those libraries separately. This makes programs more secure (because libraries can be updated centrally), more advanced (any improvement in a library will improve the whole program) and smaller.
 
 ***
+#### 104.2 Maintain the integrity of filesystems
+Weight: 2
+
+*Description:* Candidates should be able to maintain a standard filesystem, as well as the extra data associated with a journaling filesystem.
+
+*Key Knowledge Areas:*
+- Verify the integrity of filesystems.
+- Monitor free space and inodes.
+- Repair simple filesystem problems.
+
+The following is a partial list of the used files, terms and utilities:
+- du
+- df
+- fsck
+- e2fsck
+- mke2fs
+- tune2fs
+- xfs_repair
+- xfs_fsr
+- xfs_db
+
+***
 #### # Symbolic and Hard link
 - *Symbolic link*: 
 1. Link can be created even in different file system.
