@@ -84,7 +84,6 @@ $ mkfs [option] [device-name]
 $ mkfs -t ext3 -c /dev/sda2
 $ mkfs -t ext4 /dev/sdc1
 ```
-
 ![mkfs](https://ping-t.com/mondai3/img/jpg/k34068.jpg)
 
 
