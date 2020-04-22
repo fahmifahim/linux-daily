@@ -44,6 +44,14 @@ The following is a partial list of the used files, terms and utilities:
     $ export  LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/test/mylib
     ```
 
+- Common library directory
+```bash
+/lib
+/lib64
+/usr/lib
+/usr/lib64
+```
+
 *Linking*
 1. *Static linking* is when you add this library to your executable program. In this method your program size is big because it has all the needed libraries. One good advantage is your program can be run without being dependent to other programs / libraries.
 2. *Dynamic linking* is when you just say in your program "We need this and that library to run this program". This way your program is smaller but you need to install those libraries separately. This makes programs more secure (because libraries can be updated centrally), more advanced (any improvement in a library will improve the whole program) and smaller.
@@ -814,7 +822,9 @@ Note: an Extended partition is just an empty box for creating Logical partitions
 ![MBR](https://ping-t.com/mondai3/img/jpg/k34058.jpg)
 
 - GPT (GUID Partition Table)
-<p>If you format your disk with GTP you can have 128 primary partitions (no need to extended and logical).</p>
+  - 128 primary partitions are available (no need to extended and logical).
+  - Maximum storage 9.4ZB. 
+  - UEFI (Unified Extensible Firmware Interface) is needed. 
 
 - SCSI device naming rule
 ```bash
