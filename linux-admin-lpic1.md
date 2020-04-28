@@ -355,7 +355,7 @@ Change: 2020-01-02 10:00:00
 - Start the /sbin/init
 
 #### 4. init
-- When the kernel finishes loading, it usually starts /sbin/init. This program remains running until the system is shut down. 
+- When the kernel finishes loading, it usually starts /sbin/init. This program remains running until the system is shutdown. 
 - It is always assigned PID 1 for init process.
 - In SysVinit system, /sbin/init is started during the initial process. Autostart application is executed by order as recorded in the `/etc/inittab`. 
 - In recent/modern system (like `systemd`), /etc/inittab is no more used.  
