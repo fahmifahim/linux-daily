@@ -373,7 +373,7 @@ $ journalctl --dmesg
 
 #### /var/log/messages
 - After the init process comes up, syslog daemon will log messages. It has timestamps and will persist during restarts.
-- Kernel is still logging its own messages in dmesg
+- Kernel is still logging its own messages in dmesg.
 
 #### # File System
 1. xfs 
