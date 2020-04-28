@@ -90,6 +90,23 @@ $ mkfs -t ext4 /dev/sdc1
 ```bash
 $ mkswap /dev/sda6
 ```
+
+##### *xfs* 
+
+![xfs-command](https://ping-t.com/mondai3/img/jpg/k34083.jpg)
+
+##### *Btrfs*
+- Available for multidevice
+```bash
+mkfs.btrfs /dev/sda1 /dev/sda2
+```
+- Snapshot for subvolume
+```bash
+btrfs subvolume snapshot /home /tmp/home_bak
+```
+- Auto-archive function
+
+
 ***
 #### 104.2 Maintain the integrity of filesystems
 Weight: 2
@@ -374,22 +391,6 @@ $ journalctl --dmesg
 #### /var/log/messages
 - After the init process comes up, syslog daemon will log messages. It has timestamps and will persist during restarts.
 - Kernel is still logging its own messages in dmesg.
-
-#### # File System
-1. xfs 
-
-![xfs-command](https://ping-t.com/mondai3/img/jpg/k34083.jpg)
-
-2. Btrfs
-- Available for multidevice
-```bash
-mkfs.btrfs /dev/sda1 /dev/sda2
-```
-- Snapshot for subvolume
-```bash
-btrfs subvolume snapshot /home /tmp/home_bak
-```
-- Auto-archive function
 
 #### # Environment
 ```bash
