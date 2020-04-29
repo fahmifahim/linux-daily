@@ -930,7 +930,7 @@ $ history
 $ runlevel
 N 5
 ```
-![RunLevel](https://ping-t.com/mondai3/img/jpg/k33726.jpg)
+![RunLevel](https://ping-t.com/mondai3/img/jpg/kkk34236.jpg)
 
 #### # Hard Disk Design
 - Physical Volume (pv): a whole drive or a partition. It is better to define partitions and not use whole disks - unpartitioned.
