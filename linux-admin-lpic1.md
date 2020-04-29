@@ -80,6 +80,7 @@ $ ls /etc/systemd/system/multi-user.target.wants
 
 ![systemd](https://upload.wikimedia.org/wikipedia/commons/3/35/Systemd_components.svg)
 
+![architecture](https://upload.wikimedia.org/wikipedia/commons/e/e7/Linux_kernel_unified_hierarchy_cgroups_and_systemd.svg)
 
 ***
 #### # 102.3 Manage shared libraries
