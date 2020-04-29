@@ -76,8 +76,10 @@ Loaded: loaded (/usr/lib/systemd/system/httpd.service): enable
 
 $ ls /etc/systemd/system/multi-user.target.wants
 /etc/systemd/system/multi-user.target.wants -> /usr/lib/systemd/system/httpd.service
-
 ```
+
+![systemd](https://upload.wikimedia.org/wikipedia/commons/3/35/Systemd_components.svg)
+
 
 ***
 #### # 102.3 Manage shared libraries
