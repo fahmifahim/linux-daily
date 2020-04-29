@@ -1,4 +1,77 @@
 ***
+#### # 101.2 Boot the system
+Weight: 3
+
+*Description:* Candidates should be able to guide the system through the booting process.
+
+*Key Knowledge Areas:*
+- Provide common commands to the boot loader and options to the kernel at boot time.
+- Demonstrate knowledge of the boot sequence from BIOS/UEFI to boot completion.
+- Understanding of SysVinit and systemd.
+- Awareness of Upstart.
+- Check boot events in the log files.
+
+The following is a partial list of the used files, terms and utilities:
+- dmesg
+- journalctl
+- BIOS
+- UEFI
+- bootloader
+- kernel
+- initramfs
+- init
+- SysVinit
+- systemd
+
+### # Boot Linux System
+#### 1. BIOS
+- BIOS is Basic Input Output System and does the first steps of the PC bootup. For example is does a POST (Power On Self Test) and decides which hardware should boot the system.
+- PowerON --> BIOS --> Recognize HDD and decide the device priority by order. 
+- On each device: read the MBR (Master Boot Record) located on head sector. Bootloader is then executed.
+- Device priority can be set manually on BIOS display. 
+- Currently, other than BIOS, UEFI (Unified Extensible Firmware Interface) is recently developed and widely being used in the modern system. 
+
+#### 2. bootloader
+<p>Bootloader can be GRUB (1&2) or LILO which are great for disks less than 2TB.</p>
+
+```bash
+/etc/lilo.conf
+/boot/grub/grub.cfg
+/boot/grub/menu.lst
+```
+
+#### 3. Kernel
+- Kernel parameters (sometimes called boot parameters) supply the kernel with information about hardware parameters that it might not determine on its own - say single user mod boot (S)
+- Recognize and control hardware; then, performs various initialization processes such as mounting root file system.
+- Kernel image, kernel version is located on /boot directory. 
+- Start the /sbin/init
+
+#### 4. init
+- When the kernel finishes loading, it usually starts /sbin/init. This program remains running until the system is shutdown. 
+- It is always assigned PID 1 for init process.
+- In SysVinit system, /sbin/init is started during the initial process. Autostart application is executed by order as recorded in the `/etc/inittab`. 
+- In recent/modern system (like `systemd`), /etc/inittab is no more used.  
+
+#### dmesg
+- Funny fact: During the bootup, only The Kernel is running so it should record and keep its own logs!
+- dmesg command will show the full data from kernel ring buffer up to now. 
+```bash
+# Print or control the kernel ring buffer
+$ dmesg
+$ journalctl -k
+$ journalctl --dmesg
+```
+
+#### /var/log/messages
+- After the init process comes up, syslog daemon will log messages. It has timestamps and will persist during restarts.
+- Kernel is still logging its own messages in dmesg.
+
+#### initramfs
+- The only purpose of an initramfs is to mount the root filesystem. The initramfs is a complete set of directories that you would find on a normal root filesystem. It is bundled into a single cpio archive and compressed with one of several compression algorithms.
+- At boot time, the boot loader loads the kernel and the initramfs image into memory and starts the kernel. The kernel checks for the presence of the initramfs and, if found, mounts it as / and runs /init. The init program is typically a shell script. Note that the boot process takes longer, possibly significantly longer, if an initramfs is used.
+- It is located on /boot directory
+
+***
 #### # 101.3 Change runlevels / boot targets and shutdown or reboot system
 Weight: 3
 
@@ -434,50 +507,6 @@ Modify: 2020-01-02 10:00:00
 Change: 2020-01-02 10:00:00
 ...
 ```
-
-### # Boot Linux System
-#### 1. BIOS
-- BIOS is Basic Input Output System and does the first steps of the PC bootup. For example is does a POST (Power On Self Test) and decides which hardware should boot the system.
-- PowerON --> BIOS --> Recognize HDD and decide the device priority by order. 
-- On each device: read the MBR (Master Boot Record) located on head sector. Bootloader is then executed.
-- Device priority can be set manually on BIOS display. 
-- Currently, other than BIOS, UEFI (Unified Extensible Firmware Interface) is recently developed and widely being used in the modern system. 
-
-#### 2. bootloader
-<p>Bootloader can be GRUB (1&2) or LILO which are great for disks less than 2TB.</p>
-
-```bash
-/etc/lilo.conf
-/boot/grub/grub.cfg
-/boot/grub/menu.lst
-```
-
-#### 3. Kernel
-- Kernel parameters (sometimes called boot parameters) supply the kernel with information about hardware parameters that it might not determine on its own - say single user mod boot (S)
-- Recognize and control hardware; then, performs various initialization processes such as mounting root file system.
-- Kernel image, kernel version is located on /boot directory. 
-- Start the /sbin/init
-
-#### 4. init
-- When the kernel finishes loading, it usually starts /sbin/init. This program remains running until the system is shutdown. 
-- It is always assigned PID 1 for init process.
-- In SysVinit system, /sbin/init is started during the initial process. Autostart application is executed by order as recorded in the `/etc/inittab`. 
-- In recent/modern system (like `systemd`), /etc/inittab is no more used.  
-
-
-#### dmesg
-- Funny fact: During the bootup, only The Kernel is running so it should record and keep its own logs!
-- dmesg command will show the full data from kernel ring buffer up to now. 
-```bash
-# Print or control the kernel ring buffer
-$ dmesg
-$ journalctl -k
-$ journalctl --dmesg
-```
-
-#### /var/log/messages
-- After the init process comes up, syslog daemon will log messages. It has timestamps and will persist during restarts.
-- Kernel is still logging its own messages in dmesg.
 
 #### # Environment
 ```bash
