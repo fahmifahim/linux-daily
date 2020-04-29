@@ -1,3 +1,83 @@
+***
+#### # 101.3 Change runlevels / boot targets and shutdown or reboot system
+Weight: 3
+
+*Description:* Candidates should be able to manage the SysVinit runlevel or systemd boot target of the system. This objective includes changing to single user mode, shutdown or rebooting the system. Candidates should be able to alert users before switching runlevels / boot targets and properly terminate processes. This objective also includes setting the default SysVinit runlevel or systemd boot target. It also includes awareness of Upstart as an alternative to SysVinit or systemd.
+
+*Key Knowledge Areas:*
+- Set the default runlevel or boot target.
+- Change between runlevels / boot targets including single user mode.
+- Shutdown and reboot from the command line.
+- Alert users before switching runlevels / boot targets or other major system events.
+- Properly terminate processes.
+- Awareness of acpid.
+
+The following is a partial list of the used files, terms and utilities:
+- /etc/inittab
+- shutdown
+- init
+- /etc/init.d/
+- telinit
+- systemd
+- systemctl
+- /etc/systemd/
+- /usr/lib/systemd/
+- wall
+
+#### # Telinit
+```bash
+# Power-off the machine. 
+telinit 0 
+systemctl poweroff.target
+shutdown -h now
+
+# Reboot the machine. 
+telinit 6
+systemctl reboot.target
+shutdown -r now
+reboot
+```
+
+#### # Systemctl command
+- structure: `systemctl [subcommand] [Unit-name]`
+- subcommand: 
+```bash
+# systemctl subcommand with unit-name
+disable
+enable
+is-active
+start
+stop
+restart
+status
+reload
+
+# systemctl subcommand without unit-name
+list-unit-files
+get-default
+halt
+reboot
+poweroff
+```
+
+- More about systemctl
+```bash
+$ ls -l /etc/systemd/system
+default.target -> /lib/systemd/system/multi-user.target
+default.target.wants
+multi-user.target.wants
+socket.target.wants
+system-update.target.wants
+
+# For example observe the httpd
+$ systemctl status httpd
+httpd.service 
+Loaded: loaded (/usr/lib/systemd/system/httpd.service): enable
+
+$ ls /etc/systemd/system/multi-user.target.wants
+/etc/systemd/system/multi-user.target.wants -> /usr/lib/systemd/system/httpd.service
+
+```
 
 ***
 #### # 102.3 Manage shared libraries
@@ -439,60 +519,6 @@ bb 0 tttt
 #### # vi / vim 
 ![tune2fs](https://ping-t.com/mondai3/img/jpg/k33911.jpg)
 
-#### # Systemctl command
-- structure: `systemctl [subcommand] [Unit-name]`
-- subcommand: 
-```bash
-# systemctl subcommand with unit-name
-disable
-enable
-is-active
-start
-stop
-restart
-status
-reload
-
-# systemctl subcommand without unit-name
-list-unit-files
-get-default
-halt
-reboot
-poweroff
-```
-
-- More about systemctl
-```bash
-$ ls -l /etc/systemd/system
-default.target -> /lib/systemd/system/multi-user.target
-default.target.wants
-multi-user.target.wants
-socket.target.wants
-system-update.target.wants
-
-# For example observe the httpd
-$ systemctl status httpd
-httpd.service 
-Loaded: loaded (/usr/lib/systemd/system/httpd.service): enable
-
-$ ls /etc/systemd/system/multi-user.target.wants
-/etc/systemd/system/multi-user.target.wants -> /usr/lib/systemd/system/httpd.service
-
-```
-
-#### # Telinit
-```bash
-# Power-off the machine. 
-telinit 0 
-systemctl poweroff
-shutdown -h now
-
-# Reboot the machine. 
-telinit 6
-systemctl reboot
-shutdown -r now
-reboot
-```
 
 #### # File and Directory Permission (SUID, SGID, Stickybit)
 
