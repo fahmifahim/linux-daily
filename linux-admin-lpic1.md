@@ -24,6 +24,10 @@ The following is a partial list of the used files, terms and utilities:
 - /usr/lib/systemd/
 - wall
 
+#### # SysVinit
+- /sbin/init is started during the initial process. Autostart application is executed by order as recorded in the `/etc/inittab`.
+- Multi-User system, start the script from `/etc/rc3.d`
+
 #### # Telinit
 ```bash
 # Power-off the machine. 
