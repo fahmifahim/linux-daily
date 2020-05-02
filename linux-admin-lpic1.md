@@ -520,6 +520,7 @@ The following is a partial list of the used files, terms and utilities:
 - tmux
 
 *foreground and background jobs*
+
 Normally if you run a program on the terminal, it blocks your terminal but sending a command to the background will prevent this:
 
 xeyes &
