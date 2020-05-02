@@ -485,6 +485,50 @@ Traditional format specifications may be intermixed; they accumulate:
 
        -x     same as -t x2, select hexadecimal 2-byte units
 ```
+***
+
+#### # 103.7 Search text files using regular expressions
+
+Weight: 3
+
+*Description:* Candidates should be able to manipulate files and text data using regular expressions. This objective includes creating simple regular expressions containing several notational elements as well as understanding the differences between basic and extended regular expressions. It also includes using regular expression tools to perform searches through a filesystem or file content.
+
+Key Knowledge Areas:
+- Create simple regular expressions containing several notational elements.
+- Understand the differences between basic and extended regular expressions.
+- Understand the concepts of special characters, character classes, quantifiers and anchors.
+- Use regular expression tools to perform searches through a filesystem or file content.
+- Use regular expressions to delete, change and substitute text.
+
+The following is a partial list of the used files, terms and utilities:
+- grep
+- egrep
+- fgrep
+- sed
+- regex(7)
+
+#### # Regular Expression
+![Regular Expression](https://ping-t.com/mondai3/img/jpg/k34024.jpg)
+
+#### # Metacharacter
+![Metacharacter](https://ping-t.com/mondai3/img/jpg/k33833.jpg)
+
+*grep*
+```bash
+grep [option]
+
+-F, --fixed-strings, --fixed-regexp
+              Interpret  PATTERN  as  a  list of fixed strings, separated by newlines, any of which is to be matched.
+-E, --extended-regexp
+              Interpret PATTERN as an extended regular expression (ERE, see below).
+-n, --line-number
+              Prefix each line of output with the 1-based line number within its input file.
+-i, --ignore-case
+              Ignore case distinctions in both the PATTERN and the input files.
+-v, --invert-match
+              to select non-matching lines.
+```
+
 
 ***
 
@@ -773,12 +817,6 @@ $ tune2fs -L /WORK /dev/hda5
 
 ![directory](https://ping-t.com/mondai3/img/jpg/k33739.jpg)
 
-
-#### # Regular Expression
-![Regular Expression](https://ping-t.com/mondai3/img/jpg/k34024.jpg)
-
-#### # Metacharacter
-![Metacharacter](https://ping-t.com/mondai3/img/jpg/k33833.jpg)
 
 #### # nice - run a program with modified scheduling priority
 ```
