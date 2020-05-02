@@ -582,11 +582,10 @@ rtt min/avg/max/mdev = 223.584/224.767/225.950/1.183 ms
 ```
 > It is common to use 2> to redirect the nohup errors to a file: nohup script.sh > mynohup.out 2>&1 &
 
-
 ### # Process
 #### # Kill Process
 1. kill - terminate a process
-</br>You can control processes by signals. Actually pressing Ctrl+c and Ctrl+z is also sending signals. Another way for this is using the kill command:
+</br>You can control processes by using signals. Actually pressing Ctrl+c and Ctrl+z is also sending signals. Another way for this is using the kill command:
 - kill using job number
 ```bash
 $ jobs
