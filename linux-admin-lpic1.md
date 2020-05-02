@@ -25,7 +25,7 @@ The following is a partial list of the used files, terms and utilities:
 
 **/proc** 
 | FileName | Details | 
-| :---: | :---: |
+| :--- | :--- |
 | /proc/interrupts | IRQ information | 
 | /proc/ioports | I/O address | 
 | /proc/bus/pci/devices | PCI device | 
