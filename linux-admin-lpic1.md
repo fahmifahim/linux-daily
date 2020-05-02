@@ -583,7 +583,6 @@ rtt min/avg/max/mdev = 223.584/224.767/225.950/1.183 ms
 > It is common to use 2> to redirect the nohup errors to a file: nohup script.sh > mynohup.out 2>&1 &
 
 
-
 ### # Process
 #### # Kill Process
 1. kill - terminate a process
