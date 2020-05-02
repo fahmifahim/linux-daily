@@ -115,6 +115,13 @@ shutdown -r now
 reboot
 ```
 
+#### # Shutdown 
+```bash
+# Currently at 22:00 and will shutdown the system on 23:00
+$ shutdown -h +60
+$ shutdown -h 23:00
+```
+
 #### # Systemctl command
 - structure: `systemctl [subcommand] [Unit-name]`
 - subcommand: 
@@ -283,6 +290,10 @@ The following is a partial list of the used files, terms and utilities:
 - df
 - fsck
 - e2fsck
+  ```bash
+  # auto check the question
+  $ e2fsck -y /dev/sda4
+  ```
 - mke2fs
 - tune2fs
 - xfs_repair
@@ -1131,6 +1142,7 @@ $ dpkg -E --install procmail_3.22-16_i386.deb
 ![dpkg-command](https://ping-t.com/mondai3/img/jpg/k33766.jpg)
 
 5. yum
+- `/etc/yum.repos.d`
 ```bash
 Command is one of:
     * install package1 [package2] [...]
