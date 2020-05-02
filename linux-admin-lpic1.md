@@ -247,8 +247,14 @@ The following is a partial list of the used files, terms and utilities:
 #### # dpkg - Debian package manager
 ```bash
 $ dpkg [option] action
+
+# dpkg skip same version -E, --skip-same-version
 $ dpkg -Ei procmail_3.22-16_i386.deb
 $ dpkg -E --install procmail_3.22-16_i386.deb
+
+# Search for a filename from installed packages.
+$ dpkg --search /usr/share/doc/ssh
+$ dpkg -S /usr/share/doc/ssh
 ```
 
 ![dpkg-command](https://ping-t.com/mondai3/img/jpg/k33766.jpg)
@@ -269,7 +275,7 @@ $ apt-get upgrade
 
 #### # 102.5 Use RPM and YUM package management
 
-WeightÅF  3
+Weight: 3
 
 *Description:* Candidates should be able to perform package management using RPM, YUM and Zypper.
 
