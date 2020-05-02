@@ -923,6 +923,39 @@ $ uptime
  21:51:30 up 20:25,  2 users,  load average: 0.00, 0.01, 0.05
 ```
 
+***
+
+#### # 103.6 Modify process execution priorities
+
+Weight: 2
+
+*Description:* Candidates should should be able to manage process execution priorities.
+
+Key Knowledge Areas:
+- Know the default priority of a job that is created.
+- Run a program with higher or lower priority than the default.
+- Change the priority of a running process.
+
+The following is a partial list of the used files, terms and utilities:
+- nice
+- ps
+- renice
+- top
+
+**nice**  - run a program with modified scheduling priority
+**renice** - alter priority of running processes
+```bash
+$ nice [-n niceValue] command
+
+# Set test1 to top priority
+$ nice -n -20 test1
+$ nice --20 test1
+
+# Set an already run process (pid 100) to top priority
+$ renice -20 -p 100
+$ renice -20 100
+```
+![nice value](https://ping-t.com/mondai3/img/jpg/k34014.jpg)
 
 
 ***
@@ -1269,12 +1302,6 @@ $ tune2fs [option] DeviceName
 $ tune2fs -L /WORK /dev/hda5
 ```
 ![tune2fs](https://ping-t.com/mondai3/img/jpg/k34080.jpg)
-
-#### # nice - run a program with modified scheduling priority
-```
-$ nice [-n niceValue] command
-```
-![nice value](https://ping-t.com/mondai3/img/jpg/k34014.jpg)
 
 #### * Archive (tar, bz2, xz, gzip) -> [reference](https://jadi.gitbooks.io/lpic1/content/1033_perform_basic_file_management.html)
 1. tar 
