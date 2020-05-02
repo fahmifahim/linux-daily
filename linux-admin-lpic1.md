@@ -306,6 +306,10 @@ $ dpkg -E --install procmail_3.22-16_i386.deb
 # Search for a filename from installed packages.
 $ dpkg --search /usr/share/doc/ssh
 $ dpkg -S /usr/share/doc/ssh
+
+# Install all packages recursively from directory
+$ dpkg -Ri /directory
+$ dpkg --recursive --install
 ```
 
 ![dpkg-command](https://ping-t.com/mondai3/img/jpg/k33766.jpg)
