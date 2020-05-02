@@ -357,15 +357,14 @@ The following is a partial list of the used files, terms and utilities:
 - tail
 - wc
 
-#### # Text Editing (sed)
-1. sed - stream editor for filtering and transforming text
+- sed - stream editor for filtering and transforming text
 ```bash
 $ sed -e s/pingt/hoge/g test.txt
 $ sed s/pingt/hoge/g test.txt 
 ```
 ![sed](https://ping-t.com/mondai3/img/jpg/k34032.jpg)
 
-2. tr - Translate, squeeze, and/or delete characters from standard input, writing to standard output.
+- tr - Translate, squeeze, and/or delete characters from standard input, writing to standard output.
 ```bash
 $ cat file
 aaa BBB
@@ -388,8 +387,8 @@ pingt
 ![tr-option](https://ping-t.com/mondai3/img/jpg/kk33884.jpg)
 ![tr-option2](https://ping-t.com/mondai3/img/jpg/kkk33884.jpg)
 
-3. Line number
-- cat
+*Line number*
+- cat and nl
 ```bash
 $ cat file.txt
 aaa
@@ -437,6 +436,16 @@ $ nl file.txt
      5  eee
 ```
 
+- tail 
+```bash
+$ tail -n 3 httpd.conf
+# line1
+# line2
+# line3
+
+$ tail -f /Logs/OS/messages
+
+```
 
 ***
 
