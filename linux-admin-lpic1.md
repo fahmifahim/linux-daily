@@ -826,14 +826,6 @@ $ tune2fs -L /WORK /dev/hda5
 ```
 ![tune2fs](https://ping-t.com/mondai3/img/jpg/k34080.jpg)
 
-#### # Filesystem Hierarchy Standard ([FHS wikipedia](https://en.wikipedia.org/wiki/Filesystem_Hierarchy_Standard))
-![FHS](https://ping-t.com/mondai3/img/jpg/k34123.jpg)
-
-- directory structure
-
-![directory](https://ping-t.com/mondai3/img/jpg/k33739.jpg)
-
-
 #### # nice - run a program with modified scheduling priority
 ```
 $ nice [-n niceValue] command
@@ -1214,6 +1206,38 @@ $ tr -d '\r' < file1.txt > file2.txt
 $ cat file1.txt | tr -d '\r' > file2.txt
 $ sed s/^M//g file1.txt > file2.txt
 ```
+
+***
+#### # 104.7 Find system files and place files in the correct location
+
+Weight: 2
+
+*Description:* Candidates should be thoroughly familiar with the Filesystem Hierarchy Standard (FHS), including typical file locations and directory classifications.
+
+Key Knowledge Areas:
+- Understand the correct locations of files under the FHS.
+- Find files and commands on a Linux system.
+- Know the location and purpose of important file and directories as defined in the FHS.
+
+The following is a partial list of the used files, terms and utilities:
+- find
+- locate
+- updatedb
+- whereis
+- which
+- type
+- /etc/updatedb.conf
+
+#### # Filesystem Hierarchy Standard ([FHS wikipedia](https://en.wikipedia.org/wiki/Filesystem_Hierarchy_Standard))
+![FHS](https://ping-t.com/mondai3/img/jpg/k34123.jpg)
+
+- directory structure
+
+![directory](https://ping-t.com/mondai3/img/jpg/k33739.jpg)
+
+
+
+***
 
 </br> *Image resource from [ping-t.com](https://ping-t.com)
 </br> *Reference book [jadi-lpic1-book](https://jadi.gitbooks.io/lpic1/content/)
