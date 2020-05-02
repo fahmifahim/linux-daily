@@ -447,6 +447,45 @@ $ tail -f /Logs/OS/messages
 
 ```
 
+- od
+```bash
+$ cat file1.txt
+hello
+goodbye
+
+$ cat file1.txt | od -c
+$ od -t c file1.txt
+0000000   h   e   l   l   o  \n   g   o   o   d   b   y   e  \n
+0000017
+
+$ od -t cx2 file1.txt
+0000000   h   e   l   l   o  \n   g   o   o   d   b   y   e  \n
+           6568    6c6c    0a6f    6f67    646f    7962    0a65
+0000016
+
+
+Traditional format specifications may be intermixed; they accumulate:
+       -a     same as -t a,  select named characters, ignoring high-order bit
+
+       -b     same as -t o1, select octal bytes
+
+       -c     same as -t c,  select printable characters or backslash escapes
+
+       -d     same as -t u2, select unsigned decimal 2-byte units
+
+       -f     same as -t fF, select floats
+
+       -i     same as -t dI, select decimal ints
+
+       -l     same as -t dL, select decimal longs
+
+       -o     same as -t o2, select octal 2-byte units
+
+       -s     same as -t d2, select decimal 2-byte units
+
+       -x     same as -t x2, select hexadecimal 2-byte units
+```
+
 ***
 
 #### 104.3 Control mounting and unmounting of filesystems
