@@ -412,8 +412,10 @@ The following is a partial list of the used files, terms and utilities:
 - fsck
 - e2fsck
   ```bash
-  # auto check the question
+  # automatically select "yes" for the question
   $ e2fsck -y /dev/sda4
+  # Automatically repair ("preen") the file system
+  $ e2fsck -p /dev/sda4
   ```
 - mke2fs
 - tune2fs
