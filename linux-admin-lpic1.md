@@ -224,6 +224,127 @@ The following is a partial list of the used files, terms and utilities:
 2. *Dynamic linking* is when you just say in your program "We need this and that library to run this program". This way your program is smaller but you need to install those libraries separately. This makes programs more secure (because libraries can be updated centrally), more advanced (any improvement in a library will improve the whole program) and smaller.
 
 ***
+
+#### # 102.4 Use Debian package management
+
+Weight: 3
+
+*Description:* Candidates should be able to perform package management using the Debian package tools.
+
+Key Knowledge Areas:
+- Install, upgrade and uninstall Debian binary packages.
+- Find packages containing specific files or libraries which may or may not be installed.
+- Obtain package information like version, content, dependencies, package integrity and installation status (whether or not the package is installed).
+- Awareness of apt.
+
+The following is a partial list of the used files, terms and utilities:
+- /etc/apt/sources.list
+- dpkg
+- dpkg-reconfigure
+- apt-get
+- apt-cache
+
+##### dpkg - Debian package manager
+```bash
+$ dpkg [option] action
+$ dpkg -Ei procmail_3.22-16_i386.deb
+$ dpkg -E --install procmail_3.22-16_i386.deb
+```
+
+![dpkg-command](https://ping-t.com/mondai3/img/jpg/k33766.jpg)
+
+##### apt-get
+```bash
+# Remove specific package
+$ apt-get remove [package-name]
+
+# Upgrade all packages
+$ apt-get upgrade
+```
+![apt-get](https://ping-t.com/mondai3/img/jpg/k33777.jpg)
+
+
+
+***
+
+#### # 102.5 Use RPM and YUM package management
+
+WeightÅF  3
+
+*Description:* Candidates should be able to perform package management using RPM, YUM and Zypper.
+
+Key Knowledge Areas:
+- Install, re-install, upgrade and remove packages using RPM, YUM and Zypper.
+- Obtain information on RPM packages such as version, status, dependencies, integrity and signatures.
+- Determine what files a package provides, as well as find which package a specific file comes from.
+- Awareness of dnf.
+
+The following is a partial list of the used files, terms and utilities:
+- rpm
+- rpm2cpio
+- /etc/yum.conf
+- /etc/yum.repos.d/
+- yum
+- zypper
+
+##### rpm - RPM Package Manager
+```bash
+# Find 
+$ rpm --query --list postfix
+$ rpm -ql posftfix
+
+# Find dependency on package
+$ rpm --query --requires --package emacs
+$ rpm -qRp emacs
+
+# Find change history on specific RPM package
+$ rpm -q --changelog nfs-utils-1.3.0-0.61.el7.x86_64
+```
+- <b>query</b></br>
+![rpm](https://ping-t.com/mondai3/img/jpg/k35692.jpg)
+
+- <b>install</b></br>
+![rpm-install](https://ping-t.com/mondai3/img/jpg/k33792.jpg)
+
+##### zypper - SUSE based package manager
+```bash
+$ zypper [option] subcommand
+-- subcommand: 
+  install | in
+  update | up
+  remove | rm
+  info
+  search | se
+  list-updates | lu
+  repos | lr
+  refresh
+```
+
+**yum**
+- `/etc/yum.repos.d`
+```bash
+Command is one of:
+    * install package1 [package2] [...]
+    * update [package1] [package2] [...]
+    * update-to [package1] [package2] [...]
+    * update-minimal [package1] [package2] [...]
+    * check-update
+    * upgrade [package1] [package2] [...]
+    * upgrade-to [package1] [package2] [...]
+    * distribution-synchronization [package1] [package2] [...]
+    * remove | erase package1 [package2] [...]
+    * autoremove [package1] [...]
+    * list [...]
+    * info [...]
+    * provides | whatprovides feature1 [feature2] [...]
+    * clean [ packages | metadata | expire-cache | rpmdb | plugins | all ]
+    * makecache [fast]
+    * groups [...]
+    * search string1 [string2] [...]
+    * shell [filename]
+```
+
+***
 #### 104.1 Create partitions and filesystems
 Weight: 2
 
@@ -1098,71 +1219,6 @@ Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
 
 $ cat /proc/bus/usb/devices
 ...
-```
-
-#### # Package
-1. apt-get
-```bash
-# Remove specific package
-$ apt-get remove [package-name]
-
-# Upgrade all packages
-$ apt-get upgrade
-```
-![apt-get](https://ping-t.com/mondai3/img/jpg/k33777.jpg)
-
-2. rpm - RPM Package Manager
-```bash
-# Find 
-$ rpm --query --list postfix
-$ rpm -ql posftfix
-
-# Find dependency on package
-$ rpm --query --requires --package emacs
-$ rpm -qRp emacs
-
-# Find change history on specific RPM package
-$ rpm -q --changelog nfs-utils-1.3.0-0.61.el7.x86_64
-```
-- <b>query</b></br>
-![rpm](https://ping-t.com/mondai3/img/jpg/k35692.jpg)
-
-- <b>install</b></br>
-![rpm-install](https://ping-t.com/mondai3/img/jpg/k33792.jpg)
-
-3. zypper - SUSE based package manager
-
-4. dpkg - Debian package manager
-```bash
-$ dpkg [option] action
-$ dpkg -Ei procmail_3.22-16_i386.deb
-$ dpkg -E --install procmail_3.22-16_i386.deb
-```
-
-![dpkg-command](https://ping-t.com/mondai3/img/jpg/k33766.jpg)
-
-5. yum
-- `/etc/yum.repos.d`
-```bash
-Command is one of:
-    * install package1 [package2] [...]
-    * update [package1] [package2] [...]
-    * update-to [package1] [package2] [...]
-    * update-minimal [package1] [package2] [...]
-    * check-update
-    * upgrade [package1] [package2] [...]
-    * upgrade-to [package1] [package2] [...]
-    * distribution-synchronization [package1] [package2] [...]
-    * remove | erase package1 [package2] [...]
-    * autoremove [package1] [...]
-    * list [...]
-    * info [...]
-    * provides | whatprovides feature1 [feature2] [...]
-    * clean [ packages | metadata | expire-cache | rpmdb | plugins | all ]
-    * makecache [fast]
-    * groups [...]
-    * search string1 [string2] [...]
-    * shell [filename]
 ```
 
 #### # xargs - build and execute command lines from standard input 
