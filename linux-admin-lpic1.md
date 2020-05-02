@@ -520,50 +520,58 @@ The following is a partial list of the used files, terms and utilities:
 - tmux
 
 **foreground and background jobs**
-
-Normally if you run a program on the terminal, it blocks your terminal but sending a command to the background will prevent this:
-
+- Normally if you run a program on the terminal, it blocks your terminal but sending a command to the background will prevent this:
+```bash
 xeyes &
-
-But what if we started it normally? We can break / cancel it with Ctrl+c or suspend it using Ctrl+z.
-
+```
+- But what if we started it normally? We can break / cancel it with Ctrl+c or suspend it using Ctrl+z.
+```bash
 $ xeyes 
 ^Z
 [1]+  Stopped                 xeyes
+
 $ jobs
 [1]+  Stopped                 xeyes
+
 $ bg
 [1]+ xeyes &
+
 $ jobs
 [1]+  Running                 xeyes &
+
 $ sleep 1000 & 
 [2] 7395
+
 $ jobs
 [1]-  Running                 xeyes &
 [2]+  Running                 sleep 1000 &
+
 $ fg %2
 sleep 1000
 ^Z
 [2]+  Stopped                 sleep 1000
+
 $ jobs
 [1]-  Running                 xeyes &
 [2]+  Stopped                 sleep 1000
+
 $ bg sle
 [2]+ sleep 1000 &
+
 $ jobs
 [1]-  Running                 xeyes &
 [2]+  Running                 sleep 1000 &
-`
+```
+> -l switch of jobs will also show the process ID
 
-    -l switch of jobs will also show the process ID
-
-nohup
-
-The nohup command lets you run your commands even after you logged out and writes its output to nohup.out:
-
+**nohup**
+- The nohup command lets you run your commands even after you logged out and writes its output to nohup.out:
+```bash
 $ nohup ping 4.2.2.4
 nohup: ignoring input and appending output to enohup.outf
-^C$ cat nohup.out 
+^C
+
+$ cat nohup.out 
 PING 4.2.2.4 (4.2.2.4) 56(84) bytes of data.
 64 bytes from 4.2.2.4: icmp_seq=1 ttl=51 time=225 ms
 64 bytes from 4.2.2.4: icmp_seq=3 ttl=51 time=223 ms
@@ -571,8 +579,8 @@ PING 4.2.2.4 (4.2.2.4) 56(84) bytes of data.
 --- 4.2.2.4 ping statistics ---
 4 packets transmitted, 2 received, 50% packet loss, time 3010ms
 rtt min/avg/max/mdev = 223.584/224.767/225.950/1.183 ms
-
-    It is common to use 2> to redirect the nohup errors to a file: nohup script.sh > mynohup.out 2>&1 &
+```
+> It is common to use 2> to redirect the nohup errors to a file: nohup script.sh > mynohup.out 2>&1 &
 
 
 
