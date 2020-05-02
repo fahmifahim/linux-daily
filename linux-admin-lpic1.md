@@ -489,7 +489,7 @@ btrfs subvolume snapshot /home /tmp/home_bak
 | ext4 | Nextgen ext3, Journaling filesystem |
 | XFS | Developed by Silicongraphics, Journaling filesystem, Dynamic inode |
 | JFS | Developed by IBM, Journaling filesystem, Dynamic inod |
- 
+
 ***
 #### 104.2 Maintain the integrity of filesystems
 Weight: 2
@@ -514,9 +514,10 @@ The following is a partial list of the used files, terms and utilities:
   ```
 - mke2fs
 - tune2fs
-- xfs_repair
-- xfs_fsr
-- xfs_db
+- xfs_repair - repair an XFS filesystem
+- xfs_fsr - filesystem reorganizer for XFS
+- xfs_db - debug an XFS filesystem
+- xfs_check - check an XFS filesystem
 
 ##### *du disk usage*
 ```bash
