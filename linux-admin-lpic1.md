@@ -310,6 +310,9 @@ $ dpkg -S /usr/share/doc/ssh
 # Install all packages recursively from directory
 $ dpkg -Ri /directory
 $ dpkg --recursive --install
+
+# Refuse downgrade --refuse-downgrade
+$ dpkg -Gi packages
 ```
 
 ![dpkg-command](https://ping-t.com/mondai3/img/jpg/k33766.jpg)
@@ -478,7 +481,15 @@ btrfs subvolume snapshot /home /tmp/home_bak
 ```
 - Auto-archive function
 
-
+**File System**
+| File System | Details | 
+| :--- | :--- | 
+| ext2 | Standard file system for traditional Linux | 
+| ext3 | Nextgen ext2, Journaling filesystem  |
+| ext4 | Nextgen ext3, Journaling filesystem |
+| XFS | Developed by Silicongraphics, Journaling filesystem, Dynamic inode |
+| JFS | Developed by IBM, Journaling filesystem, Dynamic inod |
+ 
 ***
 #### 104.2 Maintain the integrity of filesystems
 Weight: 2
