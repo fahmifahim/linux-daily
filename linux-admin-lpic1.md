@@ -111,6 +111,13 @@ The following is a partial list of the used files, terms and utilities:
 $ dmesg
 $ journalctl -k
 $ journalctl --dmesg
+[996822.568071] userif-3: sent link down event.
+[996822.568078] userif-3: sent link up event.
+[996823.415945] wlp16s0: authenticate with 50:c4:dd:3b:8d:08
+
+# Clear the dmesg log
+$ dmesg --clear
+
 ```
 
 #### /var/log/messages
