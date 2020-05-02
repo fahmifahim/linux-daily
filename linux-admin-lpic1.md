@@ -204,7 +204,6 @@ The following is a partial list of the used files, terms and utilities:
     $ ldconfig
     ```
     - ldconfig will update the `/etc/ld.so.cache`
-    <br>
     
   2. Set the library path to LD_LIBRARY_PATH
   - Use this variable if you need to override the original installed libraries and use your own or a specific library. 
@@ -245,7 +244,7 @@ The following is a partial list of the used files, terms and utilities:
 - apt-get
 - apt-cache
 
-##### dpkg - Debian package manager
+#### # dpkg - Debian package manager
 ```bash
 $ dpkg [option] action
 $ dpkg -Ei procmail_3.22-16_i386.deb
