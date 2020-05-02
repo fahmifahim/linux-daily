@@ -23,6 +23,12 @@ The following is a partial list of the used files, terms and utilities:
 - lspci
 - lsusb
 
+**/proc** 
+| FileName | Details | 
+| :---: | :---: |
+| /proc/interrupts | IRQ information | 
+
+
 **lsusb** - list USB devices
 ```bash
 $ lsusb
