@@ -269,7 +269,30 @@ $ apt-get upgrade
 ```
 ![apt-get](https://ping-t.com/mondai3/img/jpg/k33777.jpg)
 
+##### apt-cache
+- apt-cache is purposed to provide information about the Debian package database
+```bash
+# Search for a program
+$ apt-cache search [keyword]
 
+# Display detail information 
+$ apt-cache show [package-name]
+
+# Display package information
+$ apt-cache showpkg [package-name]
+
+# Display dependencies
+$ apt-cache depends [package-name]
+```
+
+##### aptitude
+- update
+- show [package-name]
+- search [pattern]
+- install [package-name]
+- remove [package-name]
+- download [package-name]
+- upgrade [package-name]
 
 ***
 
