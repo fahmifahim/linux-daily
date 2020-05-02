@@ -357,6 +357,87 @@ The following is a partial list of the used files, terms and utilities:
 - tail
 - wc
 
+#### # Text Editing (sed)
+1. sed - stream editor for filtering and transforming text
+```bash
+$ sed -e s/pingt/hoge/g test.txt
+$ sed s/pingt/hoge/g test.txt 
+```
+![sed](https://ping-t.com/mondai3/img/jpg/k34032.jpg)
+
+2. tr - Translate, squeeze, and/or delete characters from standard input, writing to standard output.
+```bash
+$ cat file
+aaa BBB
+111 222
+abc 123 ab3
+
+$ cat file | tr -s [:lower:]
+a BBB
+111 222
+abc 123 ab3
+
+$ cat file.txt
+PINGT
+PINGT
+
+$ cat file.txt | tr PINGT pingt
+pingt 
+pingt
+```
+![tr-option](https://ping-t.com/mondai3/img/jpg/kk33884.jpg)
+![tr-option2](https://ping-t.com/mondai3/img/jpg/kkk33884.jpg)
+
+3. Line number
+- cat
+```bash
+$ cat file.txt
+aaa
+bbb
+
+ccc
+ddd
+
+eee
+
+$ cat -n file.txt
+     1  aaa
+     2  bbb
+     3
+     4  ccc
+     5  ddd
+     6
+     7  eee
+
+$ nl -b file.txt
+     1  aaa
+     2  bbb
+     3
+     4  ccc
+     5  ddd
+     6
+     7  eee
+
+$ cat -b file.txt
+     1  aaa
+     2  bbb
+
+     3  ccc
+     4  ddd
+
+     5  eee
+     
+$ nl file.txt
+     1  aaa
+     2  bbb
+
+     3  ccc
+     4  ddd
+
+     5  eee
+```
+
+
 ***
 
 #### 104.3 Control mounting and unmounting of filesystems
@@ -784,87 +865,6 @@ total 4
 -rw-r--r-- 1 root root  0 Apr 16 21:59 cccc.txt
 -rw-r--r-- 1 root root 28 Apr 16 21:58 file1.txt
 ```
-
-#### # Text Editing (sed)
-1. sed - stream editor for filtering and transforming text
-```bash
-$ sed -e s/pingt/hoge/g test.txt
-$ sed s/pingt/hoge/g test.txt 
-```
-![sed](https://ping-t.com/mondai3/img/jpg/k34032.jpg)
-
-2. tr - Translate, squeeze, and/or delete characters from standard input, writing to standard output.
-```bash
-$ cat file
-aaa BBB
-111 222
-abc 123 ab3
-
-$ cat file | tr -s [:lower:]
-a BBB
-111 222
-abc 123 ab3
-
-$ cat file.txt
-PINGT
-PINGT
-
-$ cat file.txt | tr PINGT pingt
-pingt 
-pingt
-```
-![tr-option](https://ping-t.com/mondai3/img/jpg/kk33884.jpg)
-![tr-option2](https://ping-t.com/mondai3/img/jpg/kkk33884.jpg)
-
-3. Line number
-- cat
-```bash
-$ cat file.txt
-aaa
-bbb
-
-ccc
-ddd
-
-eee
-
-$ cat -n file.txt
-     1  aaa
-     2  bbb
-     3
-     4  ccc
-     5  ddd
-     6
-     7  eee
-
-$ nl -b file.txt
-     1  aaa
-     2  bbb
-     3
-     4  ccc
-     5  ddd
-     6
-     7  eee
-
-$ cat -b file.txt
-     1  aaa
-     2  bbb
-
-     3  ccc
-     4  ddd
-
-     5  eee
-     
-$ nl file.txt
-     1  aaa
-     2  bbb
-
-     3  ccc
-     4  ddd
-
-     5  eee
-```
-
 
 ### # Process
 #### # Kill Process
