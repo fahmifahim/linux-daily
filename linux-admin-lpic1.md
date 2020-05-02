@@ -527,6 +527,22 @@ grep [option]
               Ignore case distinctions in both the PATTERN and the input files.
 -v, --invert-match
               to select non-matching lines.
+-c, --count
+              Suppress normal output; instead print a count of matching lines for each input file.
+```
+- Sample for grep 
+```bash
+$ cat test.txt
+PINGT
+PingT
+pingt
+.*
+
+$ grep '\.\*' test.txt
+$ fgrep '.*' test.txt
+$ grep -F '.*' test.txt
+.*  --> Result the same
+
 ```
 
 
