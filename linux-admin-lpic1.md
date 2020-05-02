@@ -485,6 +485,151 @@ Traditional format specifications may be intermixed; they accumulate:
 
        -x     same as -t x2, select hexadecimal 2-byte units
 ```
+
+***
+
+#### # 103.5 Create, monitor and kill processes
+
+Weight: 4
+
+*Description:* Candidates should be able to perform basic process management.
+
+Key Knowledge Areas:
+- Run jobs in the foreground and background.
+- Signal a program to continue running after logout.
+- Monitor active processes.
+- Select and sort processes for display.
+- Send signals to processes.
+
+The following is a partial list of the used files, terms and utilities:
+- &
+- bg
+- fg
+- jobs
+- kill
+- nohup
+- ps
+- top
+- free
+- uptime
+- pgrep
+- pkill
+- killall
+- watch
+- screen
+- tmux
+
+### # Process
+#### # Kill Process
+1. kill - terminate a process
+</br>You can control processes by signals. Actually pressing Ctrl+c and Ctrl+z is also sending signals. Another way for this is using the kill command:
+- kill using job number
+```bash
+$ jobs
+[4]   Running                 sleep 1000 &
+[5]-  Running                 sleep 2000 &
+[6]+  Running                 sleep 3000 &
+
+$ kill %4
+
+$ jobs
+[4]   Terminated              sleep 1000
+[5]-  Running                 sleep 2000 &
+[6]+  Running                 sleep 3000 &
+
+$ jobs
+[5]-  Running                 sleep 2000 &
+[6]+  Running                 sleep 3000 &
+```
+- kill using pid
+```bash
+$ ps -ef | grep -Ei "ppid|sleep"
+UID         PID   PPID  C STIME TTY          TIME CMD
+root      10837   9464  0 22:05 pts/0    00:00:00 sleep 2000
+root      10877   9464  0 22:09 pts/0    00:00:00 sleep 4000
+
+$ kill 10837
+
+$ ps -ef | grep -Ei "ppid|sleep"
+UID         PID   PPID  C STIME TTY          TIME CMD
+root      10877   9464  0 22:09 pts/0    00:00:00 sleep 4000
+root      10881   9464  0 22:10 pts/0    00:00:00 grep --color=auto -Ei ppid|sleep
+[2]-  Terminated              sleep 2000
+```
+
+- kill using signal name (pkill = kill using process name)
+
+![kill-signal](https://ping-t.com/mondai3/img/jpg/k34001.jpg)
+
+```bash
+$ ps -ef | grep -Ei "ppid|sleep"
+UID         PID   PPID  C STIME TTY          TIME CMD
+root      10912   9464  0 22:17 pts/0    00:00:00 sleep 6000      -> KILL
+root      10919   9464  0 22:18 pts/0    00:00:00 sleep 7000      -> TERMINATE
+root      10920   9464  0 22:18 pts/0    00:00:00 sleep 8000
+
+$ kill -9 10912
+$ kill -s 9 10912
+$ kill -KILL 10912
+$ kill -s KILL 10912
+$ kill -SIGKILL 10912
+$ kill -s SIGKILL 10912
+
+$ kill -15 10919
+$ kill -s 15 10919
+$ kill -TERM 10919
+$ kill -s TERM 10919
+$ kill -SIGTERM 10919
+$ kill -s SIGTERM 10919
+
+$ pkill -9 sleep        --> kill all sleep process
+
+$ ps -ef | grep -Ei "ppid|sleep"
+UID         PID   PPID  C STIME TTY          TIME CMD
+root      10920   9464  0 22:18 pts/0    00:00:00 sleep 8000
+[5]+  Killed                  sleep 6000
+[6]-  Terminated              sleep 7000
+```
+
+
+#### # Monitoring Process
+1. ps - report a snapshot of the current processes.
+```bash
+# To see every process on the system using standard syntax:
+$ ps -ef 
+UID        PID  PPID  C STIME TTY          TIME CMD
+root         1     0  0 Apr15 ?        00:00:12 /usr/lib/systemd/systemd 
+root         2     0  0 Apr15 ?        00:00:00 [kthreadd]
+root         3     2  0 Apr15 ?        00:00:00 [ksoftirqd/0]
+
+# To see every process on the system using BSD syntax:
+$ ps ax
+PID TTY      STAT   TIME COMMAND
+    1 ?        Ss     0:12 /usr/lib/systemd/systemd 
+    2 ?        S      0:00 [kthreadd]
+    3 ?        S      0:00 [ksoftirqd/0]
+```
+![ps-process](https://ping-t.com/mondai3/img/jpg/k34339.jpg)
+
+2. top </br>
+Processes are changing and sometimes you need to check them live. top command will help you. </br>
+
+3. free - Display amount of free and used memory in the system
+```bash
+$ free -h 
+              total        used        free      shared  buff/cache   available
+Mem:           972M        139M        549M         13M        283M        656M
+Swap:          1.5G          0B        1.5G
+```
+
+4. uptime - Tell how long the system has been running.
+```bash
+$ uptime
+ 21:51:30 up 20:25,  2 users,  load average: 0.00, 0.01, 0.05
+```
+
+
+
 ***
 
 #### # 103.7 Search text files using regular expressions
@@ -958,115 +1103,6 @@ total 4
 -rw-r--r-- 1 root root  0 Apr 16 21:59 bbbb.txt
 -rw-r--r-- 1 root root  0 Apr 16 21:59 cccc.txt
 -rw-r--r-- 1 root root 28 Apr 16 21:58 file1.txt
-```
-
-### # Process
-#### # Kill Process
-1. kill - terminate a process
-</br>You can control processes by signals. Actually pressing Ctrl+c and Ctrl+z is also sending signals. Another way for this is using the kill command:
-- kill using job number
-```bash
-$ jobs
-[4]   Running                 sleep 1000 &
-[5]-  Running                 sleep 2000 &
-[6]+  Running                 sleep 3000 &
-
-$ kill %4
-
-$ jobs
-[4]   Terminated              sleep 1000
-[5]-  Running                 sleep 2000 &
-[6]+  Running                 sleep 3000 &
-
-$ jobs
-[5]-  Running                 sleep 2000 &
-[6]+  Running                 sleep 3000 &
-```
-- kill using pid
-```bash
-$ ps -ef | grep -Ei "ppid|sleep"
-UID         PID   PPID  C STIME TTY          TIME CMD
-root      10837   9464  0 22:05 pts/0    00:00:00 sleep 2000
-root      10877   9464  0 22:09 pts/0    00:00:00 sleep 4000
-
-$ kill 10837
-
-$ ps -ef | grep -Ei "ppid|sleep"
-UID         PID   PPID  C STIME TTY          TIME CMD
-root      10877   9464  0 22:09 pts/0    00:00:00 sleep 4000
-root      10881   9464  0 22:10 pts/0    00:00:00 grep --color=auto -Ei ppid|sleep
-[2]-  Terminated              sleep 2000
-```
-
-- kill using signal name (pkill = kill using process name)
-
-![kill-signal](https://ping-t.com/mondai3/img/jpg/k34001.jpg)
-
-```bash
-$ ps -ef | grep -Ei "ppid|sleep"
-UID         PID   PPID  C STIME TTY          TIME CMD
-root      10912   9464  0 22:17 pts/0    00:00:00 sleep 6000      -> KILL
-root      10919   9464  0 22:18 pts/0    00:00:00 sleep 7000      -> TERMINATE
-root      10920   9464  0 22:18 pts/0    00:00:00 sleep 8000
-
-$ kill -9 10912
-$ kill -s 9 10912
-$ kill -KILL 10912
-$ kill -s KILL 10912
-$ kill -SIGKILL 10912
-$ kill -s SIGKILL 10912
-
-$ kill -15 10919
-$ kill -s 15 10919
-$ kill -TERM 10919
-$ kill -s TERM 10919
-$ kill -SIGTERM 10919
-$ kill -s SIGTERM 10919
-
-$ pkill -9 sleep        --> kill all sleep process
-
-$ ps -ef | grep -Ei "ppid|sleep"
-UID         PID   PPID  C STIME TTY          TIME CMD
-root      10920   9464  0 22:18 pts/0    00:00:00 sleep 8000
-[5]+  Killed                  sleep 6000
-[6]-  Terminated              sleep 7000
-```
-
-
-#### # Monitoring Process
-1. ps - report a snapshot of the current processes.
-```bash
-# To see every process on the system using standard syntax:
-$ ps -ef 
-UID        PID  PPID  C STIME TTY          TIME CMD
-root         1     0  0 Apr15 ?        00:00:12 /usr/lib/systemd/systemd 
-root         2     0  0 Apr15 ?        00:00:00 [kthreadd]
-root         3     2  0 Apr15 ?        00:00:00 [ksoftirqd/0]
-
-# To see every process on the system using BSD syntax:
-$ ps ax
-PID TTY      STAT   TIME COMMAND
-    1 ?        Ss     0:12 /usr/lib/systemd/systemd 
-    2 ?        S      0:00 [kthreadd]
-    3 ?        S      0:00 [ksoftirqd/0]
-```
-![ps-process](https://ping-t.com/mondai3/img/jpg/k34339.jpg)
-
-2. top </br>
-Processes are changing and sometimes you need to check them live. top command will help you. </br>
-
-3. free - Display amount of free and used memory in the system
-```bash
-$ free -h 
-              total        used        free      shared  buff/cache   available
-Mem:           972M        139M        549M         13M        283M        656M
-Swap:          1.5G          0B        1.5G
-```
-
-4. uptime - Tell how long the system has been running.
-```bash
-$ uptime
- 21:51:30 up 20:25,  2 users,  load average: 0.00, 0.01, 0.05
 ```
 
 
