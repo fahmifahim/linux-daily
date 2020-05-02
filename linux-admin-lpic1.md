@@ -27,6 +27,13 @@ The following is a partial list of the used files, terms and utilities:
 | FileName | Details | 
 | :---: | :---: |
 | /proc/interrupts | IRQ information | 
+| /proc/ioports | I/O address | 
+| /proc/bus/pci/devices | PCI device | 
+| /proc/bus/usb/devices | USB device | 
+| /proc/meminfo | Memory information | 
+| /proc/cpuinfo | CPU information | 
+| /proc/dma | DMA channel information | 
+| /proc/modules | Loaded modules information | 
 
 
 **lsusb** - list USB devices
