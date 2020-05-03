@@ -225,6 +225,118 @@ $ ls /etc/systemd/system/multi-user.target.wants
 ![architecture](https://upload.wikimedia.org/wikipedia/commons/e/e7/Linux_kernel_unified_hierarchy_cgroups_and_systemd.svg)
 
 ***
+
+#### # 102.1 Design hard disk layout
+
+Weight: 2
+
+*Description:* Candidates should be able to design a disk partitioning scheme for a Linux system.
+
+Key Knowledge Areas:
+- Allocate filesystems and swap space to separate partitions or disks.
+- Tailor the design to the intended use of the system.
+- Ensure the /boot partition conforms to the hardware architecture requirements for booting.
+- Knowledge of basic features of LVM.
+
+The following is a partial list of the used files, terms and utilities:
+- / (root) filesystem
+- /var filesystem
+- /home filesystem
+- /boot filesystem
+- EFI System Partition (ESP)
+- swap space
+- mount points
+- partitions
+
+#### # Hard Disk Design
+- Physical Volume (pv): a whole drive or a partition. It is better to define partitions and not use whole disks - unpartitioned.
+- Volume Groups (vg): this is the collection of one or more pvs. OS will see the vg as one big disk. PVs in one vg, can have different sizes or even be on different physical disks.
+- Logical Volumes (lv): OS will see lvs as partitions. You can format an lv wit your OS and use it.
+![pv-vg-lv](https://ping-t.com/mondai3/img/jpg/k34230.jpg)
+
+- fdisk is the main command for viewing / changing and creating<br>
+```bash
+Command (m for help): m
+Command action
+   a   toggle a bootable flag
+   b   edit bsd disklabel
+   c   toggle the dos compatibility flag
+   d   delete a partition
+   g   create a new empty GPT partition table
+   G   create an IRIX (SGI) partition table
+   l   list known partition types
+   m   print this menu
+   n   add a new partition
+   o   create a new empty DOS partition table
+   p   print the partition table
+   q   quit without saving changes
+   s   create a new empty Sun disklabel
+   t   change a partition's system id
+   u   change display/entry units
+   v   verify the partition table
+   w   write table to disk and exit
+   x   extra functionality (experts only)
+```
+
+- <b>Primary, Extended & Logical Partitions</b>
+<p>The partition table is located in the master boot record (MBR) of a disk. The MBR is the first sector on the disk, so the partition table is not a very large part of it. This limits the primary partitions to 4 and the max size of a disk to around 2TBs. If you need more partitions you have a define one extended and then create logicals inside them.</p>
+<p>Linux numbers the primary partitions 1, 2, 3 & 4. If you define an extended partitions, logical partitions inside it will be called 5, 6, 7.</p>
+Note: an Extended partition is just an empty box for creating Logical partitions inside it.
+
+```bash
+/dev/sda3 is the 3rd primary partition on the first disk
+/dev/sdb5 is the first logical partition on the second disk
+/dev/sda7 is the 3rd logical partition of the first physical disk
+```
+![MBR](https://ping-t.com/mondai3/img/jpg/k34058.jpg)
+
+- GPT (GUID Partition Table)
+  - 128 primary partitions are available (no need to extended and logical).
+  - Maximum storage 9.4ZB. 
+  - UEFI (Unified Extensible Firmware Interface) is needed. 
+
+- SCSI device naming rule
+```bash
+# SCSI disk number rule
+/dev/sda    disk number 1
+/dev/sdb    disk number 2
+/dev/sdc    disk number 3
+
+# SCSI partition number rule
+/dev/sda1   disk number 1, partition number 1
+/dev/sdc3   disk number 3, partition number 3
+```
+
+- IDE device naming rule
+```bash
+# IDE disk number rule
+/dev/hda    disk number 1
+/dev/hdb    disk number 2
+/dev/hdc    disk number 3
+```
+
+***
+
+#### # 102.2 Install a boot manager
+
+Weight: 2
+
+Description: Candidates should be able to select, install and configure a boot manager.
+
+Key Knowledge Areas:
+- Providing alternative boot locations and backup boot options.
+- Install and configure a boot loader such as GRUB Legacy.
+- Perform basic configuration changes for GRUB 2.
+- Interact with the boot loader.
+
+The following is a partial list of the used files, terms and utilities:
+- menu.lst, grub.cfg and grub.conf
+- grub-install
+- grub-mkconfig
+- MBR
+
+
+***
 #### # 102.3 Manage shared libraries
 
 Weight: 1
@@ -439,6 +551,31 @@ Command is one of:
 ```
 
 ***
+
+#### # 102.6 Linux as a virtualization guest
+
+Weight: 1
+
+Description: Candidates should understand the implications of virtualization and cloud computing on a Linux guest system.
+
+Key Knowledge Areas:
+- Understand the general concept of virtual machines and containers.
+- Understand common elements virtual machines in an IaaS cloud, such as computing instances, block storage and networking.
+- Understand unique properties of a Linux system which have to changed when a system is cloned or used as a template.
+- Understand how system images are used to deploy virtual machines, cloud instances and containers.
+- Understand Linux extensions which integrate Linux with a virtualization product.
+- Awareness of cloud-init.
+
+The following is a partial list of the used files, terms and utilities:
+- Virtual machine
+- Linux container
+- Application container
+- Guest drivers
+- SSH host keys
+- D-Bus machine id
+
+
+***
 #### 104.1 Create partitions and filesystems
 Weight: 2
 
@@ -561,6 +698,49 @@ $ mke2fs -t ext3 /dev/sda2
 ```
 
 ![mke2fs](https://ping-t.com/mondai3/img/jpg/kk34068.jpg)
+
+***
+
+### # Topic 103: GNU and Unix Commands
+#### # 103.1 Work on the command line
+
+Weight: 4
+
+Description: Candidates should be able to interact with shells and commands using the command line. The objective assumes the Bash shell.
+
+Key Knowledge Areas:
+- Use single shell commands and one line command sequences to perform basic tasks on the command line.
+- Use and modify the shell environment including defining, referencing and exporting environment variables.
+- Use and edit command history.
+- Invoke commands inside and outside the defined path.
+
+The following is a partial list of the used files, terms and utilities:
+- bash
+- echo
+- env
+- export
+- pwd
+- set
+- unset
+- type
+- which
+- man
+- uname
+- history
+- .bash_history
+- Quoting
+
+#### # history
+```bash
+$ echo $HISTFILE
+/root/.bash_history
+
+$ echo $HISTSIZE
+1000
+
+$ history
+```
+
 
 ***
 
@@ -721,6 +901,112 @@ Traditional format specifications may be intermixed; they accumulate:
        -s     same as -t d2, select decimal 2-byte units
 
        -x     same as -t x2, select hexadecimal 2-byte units
+```
+
+***
+
+#### # 103.3 Perform basic file management
+
+Weight: 4
+
+Description: Candidates should be able to use the basic Linux commands to manage files and directories.
+
+Key Knowledge Areas:
+- Copy, move and remove files and directories individually.
+- Copy multiple files and directories recursively.
+- Remove files and directories recursively.
+- Use simple and advanced wildcard specifications in commands.
+- Using find to locate and act on files based on type, size, or time.
+- Usage of tar, cpio and dd.
+
+The following is a partial list of the used files, terms and utilities:
+- cp
+- find
+- mkdir
+- mv
+- ls
+- rm
+- rmdir
+- touch
+- tar
+- cpio
+- dd
+- file
+- gzip
+- gunzip
+- bzip2
+- bunzip2
+- xz
+- unxz
+- file globbing
+
+#### * Archive (tar, bz2, xz, gzip) -> [reference](https://jadi.gitbooks.io/lpic1/content/1033_perform_basic_file_management.html)
+1. tar 
+```bash
+# Compress and decompress tar.bzip2
+$ tar cfjv test.tar.bzip2 /test
+$ tar tfjv test.tar.bzip2
+$ tar xfjv test.tar.bzip2
+
+# Decompress test.tar.gz
+$ tar xvfz test.tar.gz
+$ tar xfz test.tar.gz
+```
+![tar-command-option](https://ping-t.com/mondai3/img/jpg/k33965.jpg)
+
+2. bz2 - How to unzip file.bz2?</br>
+<b>Notes:</b> bzip2 only works with file
+```bash
+$ bunzip2 file.bz2
+$ bzip2 -d file.bz2
+
+# How to make file.bz2
+$ bzip2 file.txt
+-> file.txt.bz2 is created
+```
+
+3. xz 
+```bash
+$ xz [option] file-name-to-compress
+[option]: 
+-d --decompress
+-k --keep
+-l --list
+```
+
+***
+ 
+#### # 103.4 Use streams, pipes and redirects
+
+Weight: 4
+
+Description: Candidates should be able to redirect streams and connect them in order to efficiently process textual data. Tasks include redirecting standard input, standard output and standard error, piping the output of one command to the input of another command, using the output of one command as arguments to another command and sending output to both stdout and a file.
+
+Key Knowledge Areas:
+- Redirecting standard input, standard output and standard error.
+- Pipe the output of one command to the input of another command.
+- Use the output of one command as arguments to another command.
+- Send output to both stdout and a file.
+
+The following is a partial list of the used files, terms and utilities:
+- tee
+- xargs
+
+#### # xargs - build and execute command lines from standard input 
+```bash
+$ cat file1.txt
+aaaa.txt
+bbbb.txt
+cccc.txt
+
+$ cat file1.txt | xargs touch
+
+$ ls -l
+total 4
+-rw-r--r-- 1 root root  0 Apr 16 21:59 aaaa.txt
+-rw-r--r-- 1 root root  0 Apr 16 21:59 bbbb.txt
+-rw-r--r-- 1 root root  0 Apr 16 21:59 cccc.txt
+-rw-r--r-- 1 root root 28 Apr 16 21:58 file1.txt
 ```
 
 ***
@@ -1310,68 +1596,6 @@ $ tune2fs -L /WORK /dev/hda5
 ```
 ![tune2fs](https://ping-t.com/mondai3/img/jpg/k34080.jpg)
 
-#### * Archive (tar, bz2, xz, gzip) -> [reference](https://jadi.gitbooks.io/lpic1/content/1033_perform_basic_file_management.html)
-1. tar 
-```bash
-# Compress and decompress tar.bzip2
-$ tar cfjv test.tar.bzip2 /test
-$ tar tfjv test.tar.bzip2
-$ tar xfjv test.tar.bzip2
-
-# Decompress test.tar.gz
-$ tar xvfz test.tar.gz
-$ tar xfz test.tar.gz
-```
-![tar-command-option](https://ping-t.com/mondai3/img/jpg/k33965.jpg)
-
-2. bz2 - How to unzip file.bz2?</br>
-<b>Notes:</b> bzip2 only works with file
-```bash
-$ bunzip2 file.bz2
-$ bzip2 -d file.bz2
-
-# How to make file.bz2
-$ bzip2 file.txt
--> file.txt.bz2 is created
-```
-
-3. xz 
-```bash
-$ xz [option] file-name-to-compress
-[option]: 
--d --decompress
--k --keep
--l --list
-```
-
-#### # xargs - build and execute command lines from standard input 
-```bash
-$ cat file1.txt
-aaaa.txt
-bbbb.txt
-cccc.txt
-
-$ cat file1.txt | xargs touch
-
-$ ls -l
-total 4
--rw-r--r-- 1 root root  0 Apr 16 21:59 aaaa.txt
--rw-r--r-- 1 root root  0 Apr 16 21:59 bbbb.txt
--rw-r--r-- 1 root root  0 Apr 16 21:59 cccc.txt
--rw-r--r-- 1 root root 28 Apr 16 21:58 file1.txt
-```
-
-
-#### # history
-```bash
-$ echo $HISTFILE
-/root/.bash_history
-
-$ echo $HISTSIZE
-1000
-
-$ history
-```
 
 #### # RunLevel
 ```bash
@@ -1379,73 +1603,6 @@ $ runlevel
 N 5
 ```
 ![RunLevel](https://ping-t.com/mondai3/img/jpg/kkk34236.jpg)
-
-#### # Hard Disk Design
-- Physical Volume (pv): a whole drive or a partition. It is better to define partitions and not use whole disks - unpartitioned.
-- Volume Groups (vg): this is the collection of one or more pvs. OS will see the vg as one big disk. PVs in one vg, can have different sizes or even be on different physical disks.
-- Logical Volumes (lv): OS will see lvs as partitions. You can format an lv wit your OS and use it.
-![pv-vg-lv](https://ping-t.com/mondai3/img/jpg/k34230.jpg)
-
-- fdisk is the main command for viewing / changing and creating<br>
-```bash
-Command (m for help): m
-Command action
-   a   toggle a bootable flag
-   b   edit bsd disklabel
-   c   toggle the dos compatibility flag
-   d   delete a partition
-   g   create a new empty GPT partition table
-   G   create an IRIX (SGI) partition table
-   l   list known partition types
-   m   print this menu
-   n   add a new partition
-   o   create a new empty DOS partition table
-   p   print the partition table
-   q   quit without saving changes
-   s   create a new empty Sun disklabel
-   t   change a partition's system id
-   u   change display/entry units
-   v   verify the partition table
-   w   write table to disk and exit
-   x   extra functionality (experts only)
-```
-
-- <b>Primary, Extended & Logical Partitions</b>
-<p>The partition table is located in the master boot record (MBR) of a disk. The MBR is the first sector on the disk, so the partition table is not a very large part of it. This limits the primary partitions to 4 and the max size of a disk to around 2TBs. If you need more partitions you have a define one extended and then create logicals inside them.</p>
-<p>Linux numbers the primary partitions 1, 2, 3 & 4. If you define an extended partitions, logical partitions inside it will be called 5, 6, 7.</p>
-Note: an Extended partition is just an empty box for creating Logical partitions inside it.
-
-```bash
-/dev/sda3 is the 3rd primary partition on the first disk
-/dev/sdb5 is the first logical partition on the second disk
-/dev/sda7 is the 3rd logical partition of the first physical disk
-```
-![MBR](https://ping-t.com/mondai3/img/jpg/k34058.jpg)
-
-- GPT (GUID Partition Table)
-  - 128 primary partitions are available (no need to extended and logical).
-  - Maximum storage 9.4ZB. 
-  - UEFI (Unified Extensible Firmware Interface) is needed. 
-
-- SCSI device naming rule
-```bash
-# SCSI disk number rule
-/dev/sda    disk number 1
-/dev/sdb    disk number 2
-/dev/sdc    disk number 3
-
-# SCSI partition number rule
-/dev/sda1   disk number 1, partition number 1
-/dev/sdc3   disk number 3, partition number 3
-```
-
-- IDE device naming rule
-```bash
-# IDE disk number rule
-/dev/hda    disk number 1
-/dev/hdb    disk number 2
-/dev/hdc    disk number 3
-```
 
 #### # Maintenance Mode on Grub
 ```bash
