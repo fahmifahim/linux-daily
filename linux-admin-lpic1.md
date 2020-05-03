@@ -129,6 +129,35 @@ $ dmesg --clear
 - At boot time, the boot loader loads the kernel and the initramfs image into memory and starts the kernel. The kernel checks for the presence of the initramfs and, if found, mounts it as / and runs /init. The init program is typically a shell script. Note that the boot process takes longer, possibly significantly longer, if an initramfs is used.
 - It is located on /boot directory
 
+#### # journalctl
+- journalctl config file: /etc/systemd/journald.conf
+```bash
+# Check log based on unit
+$ journalctl -u systemd-resolved.service
+$ journalctl -u 'systemd*'
+$ journalctl -u '*docker*'
+
+# Specify time using --since(-S) and --until(-U)
+$ journalctl --since today
+$ journalctl -S "2020-01-01 11:00:00" -U "2020-01-02 12:00:00"
+
+# Specify the Priority
+"emerg" 0
+"alert" 1  
+"crit" 2  
+"err" 3  
+"warning" 4  
+"notice" 5
+"info" 6  
+"debug" 7 
+$ journalctl -p [priority-number]
+$ journalctl -p 3
+... : Failed to start Network Manager Wait Online...
+
+# Tail the new entry
+$ journalctl -f -u '*docker*'
+```
+
 ***
 #### # 101.3 Change runlevels / boot targets and shutdown or reboot system
 Weight: 3
@@ -574,131 +603,6 @@ The following is a partial list of the used files, terms and utilities:
 - SSH host keys
 - D-Bus machine id
 
-
-***
-#### 104.1 Create partitions and filesystems
-Weight: 2
-
-*Description:* Candidates should be able to configure disk partitions and then create filesystems on media such as hard disks. This includes the handling of swap partitions.
-
-*Key Knowledge Areas:*
-- Manage MBR and GPT partition tables
-- Use various mkfs commands to create various filesystems such as:
-  - ext2/ext3/ext4
-  - XFS
-  - VFAT
-  - exFAT
-- Basic feature knowledge of Btrfs, including multi-device filesystems, compression and subvolumes.
-
-The following is a partial list of the used files, terms and utilities:
-- fdisk
-- gdisk
-- parted
-- mkfs
-- mkswap
-
-##### *mkfs*
-```bash
-$ mkfs [option] [device-name]
-$ mkfs -t ext3 -c /dev/sda2
-$ mkfs -t ext4 /dev/sdc1
-```
-![mkfs](https://ping-t.com/mondai3/img/jpg/k34068.jpg)
-
-##### *mkswap*
-```bash
-$ mkswap /dev/sda6
-```
-
-##### *xfs* 
-
-![xfs-command](https://ping-t.com/mondai3/img/jpg/k34083.jpg)
-
-##### *Btrfs*
-- Available for multidevice
-```bash
-mkfs.btrfs /dev/sda1 /dev/sda2
-```
-- Snapshot for subvolume
-```bash
-btrfs subvolume snapshot /home /tmp/home_bak
-```
-- Auto-archive function
-
-**File System**
-| File System | Details | 
-| :--- | :--- | 
-| ext2 | Standard file system for traditional Linux | 
-| ext3 | Nextgen ext2, Journaling filesystem  |
-| ext4 | Nextgen ext3, Journaling filesystem |
-| XFS | Developed by Silicongraphics, Journaling filesystem, Dynamic inode |
-| JFS | Developed by IBM, Journaling filesystem, Dynamic inod |
-
-***
-#### 104.2 Maintain the integrity of filesystems
-Weight: 2
-
-*Description:* Candidates should be able to maintain a standard filesystem, as well as the extra data associated with a journaling filesystem.
-
-*Key Knowledge Areas:*
-- Verify the integrity of filesystems.
-- Monitor free space and inodes.
-- Repair simple filesystem problems.
-
-The following is a partial list of the used files, terms and utilities:
-- du
-- df
-- fsck
-- e2fsck
-  ```bash
-  # automatically select "yes" for the question
-  $ e2fsck -y /dev/sda4
-  # Automatically repair ("preen") the file system
-  $ e2fsck -p /dev/sda4
-  ```
-- mke2fs
-- tune2fs
-- xfs_repair - repair an XFS filesystem
-- xfs_fsr - filesystem reorganizer for XFS
-- xfs_db - debug an XFS filesystem
-- xfs_check - check an XFS filesystem
-
-##### *du disk usage*
-```bash
-# du
--a      Display an entry for each file in a file hierarchy.
--c      Display a grand total.
--h      "Human-readable" output.
--s      Display total for specified file/directory.
-
-$ du -a dir
-5144 dir/subdir1/test.txt
-5148 dir/subdir1
-5144 dir/subdir2/file
-5148 dir/subdir2
-4 dir/file1.txt
-10304 dir
-
-$ du -s dir
-10304 dir
-
-$ du -ch dir
-5148 dir/subdir1
-5148 dir/subdir2
-10304 dir
-10304 Total 
-```
-
-##### *mke2fs*
-```bash
-$ mke2fs [option] [device-name]
-$ mke2fs -j /dev/sda2     --> create ext3 FileSystem
-$ mke2fs -t ext2 /dev/sda2
-$ mke2fs -t ext3 /dev/sda2
-```
-
-![mke2fs](https://ping-t.com/mondai3/img/jpg/kk34068.jpg)
-
 ***
 
 ### # Topic 103: GNU and Unix Commands
@@ -729,6 +633,15 @@ The following is a partial list of the used files, terms and utilities:
 - history
 - .bash_history
 - Quoting
+
+#### # Environment
+```bash
+# Show to the Environment 
+$ env 
+$ printenv
+$ set
+```
+![printenv](https://ping-t.com/mondai3/img/jpg/k34146.jpg)
 
 #### # history
 ```bash
@@ -939,6 +852,38 @@ The following is a partial list of the used files, terms and utilities:
 - xz
 - unxz
 - file globbing
+
+#### # File access timestamp
+- *stat*
+```bash
+$ stat test.txt
+File: 'test.txt'
+Size: 4
+Access: (0644/-rw-r--r--)
+Context: unconfined_u:object_r:admin_home_t:s0
+Access: 2020-01-01 10:00:00
+Modify: 2020-01-01 10:00:00
+Change: 2020-01-01 10:00:00
+
+# Access time stamp CHANGED after the file command
+$ file test.txt
+text.txt ASCII text
+
+$ stat test.txt
+...
+Access: 2020-01-01 11:00:00
+...
+
+# Access/Modify/Change Time stamp change after the `touch` `echo`
+$ touch test.txt
+$ echo "hello" > test.txt
+$ stat test.txt
+...
+Access: 2020-01-02 10:00:00
+Modify: 2020-01-02 10:00:00
+Change: 2020-01-02 10:00:00
+...
+```
 
 #### * Archive (tar, bz2, xz, gzip) -> [reference](https://jadi.gitbooks.io/lpic1/content/1033_perform_basic_file_management.html)
 1. tar 
@@ -1314,6 +1259,131 @@ $ grep -F '.*' test.txt
 
 ***
 
+#### 104.1 Create partitions and filesystems
+Weight: 2
+
+*Description:* Candidates should be able to configure disk partitions and then create filesystems on media such as hard disks. This includes the handling of swap partitions.
+
+*Key Knowledge Areas:*
+- Manage MBR and GPT partition tables
+- Use various mkfs commands to create various filesystems such as:
+  - ext2/ext3/ext4
+  - XFS
+  - VFAT
+  - exFAT
+- Basic feature knowledge of Btrfs, including multi-device filesystems, compression and subvolumes.
+
+The following is a partial list of the used files, terms and utilities:
+- fdisk
+- gdisk
+- parted
+- mkfs
+- mkswap
+
+##### *mkfs*
+```bash
+$ mkfs [option] [device-name]
+$ mkfs -t ext3 -c /dev/sda2
+$ mkfs -t ext4 /dev/sdc1
+```
+![mkfs](https://ping-t.com/mondai3/img/jpg/k34068.jpg)
+
+##### *mkswap*
+```bash
+$ mkswap /dev/sda6
+```
+
+##### *xfs* 
+
+![xfs-command](https://ping-t.com/mondai3/img/jpg/k34083.jpg)
+
+##### *Btrfs*
+- Available for multidevice
+```bash
+mkfs.btrfs /dev/sda1 /dev/sda2
+```
+- Snapshot for subvolume
+```bash
+btrfs subvolume snapshot /home /tmp/home_bak
+```
+- Auto-archive function
+
+**File System**
+| File System | Details | 
+| :--- | :--- | 
+| ext2 | Standard file system for traditional Linux | 
+| ext3 | Nextgen ext2, Journaling filesystem  |
+| ext4 | Nextgen ext3, Journaling filesystem |
+| XFS | Developed by Silicongraphics, Journaling filesystem, Dynamic inode |
+| JFS | Developed by IBM, Journaling filesystem, Dynamic inod |
+
+***
+#### 104.2 Maintain the integrity of filesystems
+Weight: 2
+
+*Description:* Candidates should be able to maintain a standard filesystem, as well as the extra data associated with a journaling filesystem.
+
+*Key Knowledge Areas:*
+- Verify the integrity of filesystems.
+- Monitor free space and inodes.
+- Repair simple filesystem problems.
+
+The following is a partial list of the used files, terms and utilities:
+- du
+- df
+- fsck
+- e2fsck
+  ```bash
+  # automatically select "yes" for the question
+  $ e2fsck -y /dev/sda4
+  # Automatically repair ("preen") the file system
+  $ e2fsck -p /dev/sda4
+  ```
+- mke2fs
+- tune2fs
+- xfs_repair - repair an XFS filesystem
+- xfs_fsr - filesystem reorganizer for XFS
+- xfs_db - debug an XFS filesystem
+- xfs_check - check an XFS filesystem
+
+##### *du disk usage*
+```bash
+# du
+-a      Display an entry for each file in a file hierarchy.
+-c      Display a grand total.
+-h      "Human-readable" output.
+-s      Display total for specified file/directory.
+
+$ du -a dir
+5144 dir/subdir1/test.txt
+5148 dir/subdir1
+5144 dir/subdir2/file
+5148 dir/subdir2
+4 dir/file1.txt
+10304 dir
+
+$ du -s dir
+10304 dir
+
+$ du -ch dir
+5148 dir/subdir1
+5148 dir/subdir2
+10304 dir
+10304 Total 
+```
+
+##### *mke2fs*
+```bash
+$ mke2fs [option] [device-name]
+$ mke2fs -j /dev/sda2     --> create ext3 FileSystem
+$ mke2fs -t ext2 /dev/sda2
+$ mke2fs -t ext3 /dev/sda2
+```
+
+![mke2fs](https://ping-t.com/mondai3/img/jpg/kk34068.jpg)
+
+***
+
 #### 104.3 Control mounting and unmounting of filesystems
 Weight: 3
 
@@ -1382,138 +1452,27 @@ $ umount /mnt/mydata
 
 ***
 
-#### 104.6 Create and change hard and symbolic links
-Weight: 2
-
-*Description:* Candidates should be able to create and manage hard and symbolic links to a file.
-
-*Key Knowledge Areas:*
-- Create links.
-- Identify hard and/or soft links.
-- Copying versus linking files.
-- Use links to support system administration tasks.
-
-The following is a partial list of the used files, terms and utilities:
-- ln
-- ls
-
-*Symbolic link*: 
-1. Link can be created even in different file system.
-2. `lrwxr-xr-x symlink1 -> test1.txt`
-3. Symbolic link file has different inode with the physical file.
-4. If we delete the physical file, symbolic link will not be deleted. But there will be error if we show the content of the symbolic link.
-5. Symbolic link works with file and folder. 
-
-![symboliclink](https://ping-t.com/mondai3/img/jpg/kkkk34107.jpg)
-
-*Hard link*:
-1. Hardlink has the same inode with the physical file.
-2. Deleting the physical file, will not effect hardlink. 
-3. Hardlink works with file, not folder.
-
-![hardlink](https://ping-t.com/mondai3/img/jpg/k34107.jpg)
-
-```bash
-$ ls -il
-8613901762 -rw-r--r--   1 fahmi  staff    6 Apr 22 11:09 test1.txt
-
-# Create Symbolic link for file
-$ ln -s test1.txt symlink1
-# Create Symbolic link for directory
-$ ln -s dir1/ dir-symlink1
-
-# Create Hard link
-$ ln -n test1.txt hardlink1
-
-$ ls -il
-8613901762 -rw-r--r--   2 fahmi  staff    6 Apr 22 11:09 test1.txt
-8613901762 -rw-r--r--   2 fahmi  staff    6 Apr 22 11:09 hardlink1
-8613901770 lrwxr-xr-x   1 fahmi  staff    9 Apr 22 11:09 symlink1 -> test1.txt
-269011342 lrwxrwxrwx 1 root root  5 May  2 15:22 dir-symlink1 -> dir1/
-269011185 drwxr-xr-x 2 root root  6 May  2 15:19 dir1
-```
+#### # 104.4 Removed
 
 ***
+ 
+#### # 104.5 Manage file permissions and ownership
 
-#### # File access timestamp
-- *stat*
-```bash
-$ stat test.txt
-File: 'test.txt'
-Size: 4
-Access: (0644/-rw-r--r--)
-Context: unconfined_u:object_r:admin_home_t:s0
-Access: 2020-01-01 10:00:00
-Modify: 2020-01-01 10:00:00
-Change: 2020-01-01 10:00:00
+Weight: 3
 
-# Access time stamp CHANGED after the file command
-$ file test.txt
-text.txt ASCII text
+Description: Candidates should be able to control file access through the proper use of permissions and ownerships.
 
-$ stat test.txt
-...
-Access: 2020-01-01 11:00:00
-...
+Key Knowledge Areas:
+- Manage access permissions on regular and special files as well as directories.
+- Use access modes such as suid, sgid and the sticky bit to maintain security.
+- Know how to change the file creation mask.
+- Use the group field to grant file access to group members.
 
-# Access/Modify/Change Time stamp change after the `touch` `echo`
-$ touch test.txt
-$ echo "hello" > test.txt
-$ stat test.txt
-...
-Access: 2020-01-02 10:00:00
-Modify: 2020-01-02 10:00:00
-Change: 2020-01-02 10:00:00
-...
-```
-
-#### # Environment
-```bash
-# Show to the Environment 
-$ env 
-$ printenv
-$ set
-```
-![printenv](https://ping-t.com/mondai3/img/jpg/k34146.jpg)
-
-
-#### # Sort 
-```bash
-$ sort [option] filename.txt
-
-$ cat file.txt
-aa 2 tttt
-bb 1 tttt
-zz 10 ttt
-bb 0 tttt
-nn 100 ttt
-
-$ sort -k 2 file.txt
-bb 0 tttt
-bb 1 tttt
-zz 10 ttt
-nn 100 ttt
-aa 2 tttt
-
-$ sort -k 2 -n file.txt
-bb 0 tttt
-bb 1 tttt
-aa 2 tttt
-zz 10 ttt
-nn 100 ttt
-
-$ sort -k 2 -n -r file.txt
-nn 100 ttt
-zz 10 ttt
-aa 2 tttt
-bb 1 tttt
-bb 0 tttt
-```
-![sort](https://ping-t.com/mondai3/img/jpg/k33873.jpg)
-
-#### # vi / vim 
-![tune2fs](https://ping-t.com/mondai3/img/jpg/k33911.jpg)
-
+The following is a partial list of the used files, terms and utilities:
+- chmod
+- umask
+- chown
+- chgrp
 
 #### # File and Directory Permission (SUID, SGID, Stickybit)
 
@@ -1588,6 +1547,100 @@ $ cd /execute.d/
 ```
 
 
+***
+
+#### 104.6 Create and change hard and symbolic links
+Weight: 2
+
+*Description:* Candidates should be able to create and manage hard and symbolic links to a file.
+
+*Key Knowledge Areas:*
+- Create links.
+- Identify hard and/or soft links.
+- Copying versus linking files.
+- Use links to support system administration tasks.
+
+The following is a partial list of the used files, terms and utilities:
+- ln
+- ls
+
+*Symbolic link*: 
+1. Link can be created even in different file system.
+2. `lrwxr-xr-x symlink1 -> test1.txt`
+3. Symbolic link file has different inode with the physical file.
+4. If we delete the physical file, symbolic link will not be deleted. But there will be error if we show the content of the symbolic link.
+5. Symbolic link works with file and folder. 
+
+![symboliclink](https://ping-t.com/mondai3/img/jpg/kkkk34107.jpg)
+
+*Hard link*:
+1. Hardlink has the same inode with the physical file.
+2. Deleting the physical file, will not effect hardlink. 
+3. Hardlink works with file, not folder.
+
+![hardlink](https://ping-t.com/mondai3/img/jpg/k34107.jpg)
+
+```bash
+$ ls -il
+8613901762 -rw-r--r--   1 fahmi  staff    6 Apr 22 11:09 test1.txt
+
+# Create Symbolic link for file
+$ ln -s test1.txt symlink1
+# Create Symbolic link for directory
+$ ln -s dir1/ dir-symlink1
+
+# Create Hard link
+$ ln -n test1.txt hardlink1
+
+$ ls -il
+8613901762 -rw-r--r--   2 fahmi  staff    6 Apr 22 11:09 test1.txt
+8613901762 -rw-r--r--   2 fahmi  staff    6 Apr 22 11:09 hardlink1
+8613901770 lrwxr-xr-x   1 fahmi  staff    9 Apr 22 11:09 symlink1 -> test1.txt
+269011342 lrwxrwxrwx 1 root root  5 May  2 15:22 dir-symlink1 -> dir1/
+269011185 drwxr-xr-x 2 root root  6 May  2 15:19 dir1
+```
+
+***
+
+
+#### # Sort 
+```bash
+$ sort [option] filename.txt
+
+$ cat file.txt
+aa 2 tttt
+bb 1 tttt
+zz 10 ttt
+bb 0 tttt
+nn 100 ttt
+
+$ sort -k 2 file.txt
+bb 0 tttt
+bb 1 tttt
+zz 10 ttt
+nn 100 ttt
+aa 2 tttt
+
+$ sort -k 2 -n file.txt
+bb 0 tttt
+bb 1 tttt
+aa 2 tttt
+zz 10 ttt
+nn 100 ttt
+
+$ sort -k 2 -n -r file.txt
+nn 100 ttt
+zz 10 ttt
+aa 2 tttt
+bb 1 tttt
+bb 0 tttt
+```
+![sort](https://ping-t.com/mondai3/img/jpg/k33873.jpg)
+
+#### # vi / vim 
+![tune2fs](https://ping-t.com/mondai3/img/jpg/k33911.jpg)
+
+
 #### # Filesystem
 1. tune2fs - adjust tunable filesystem parameters on ext2/ext3/ext4 filesystems
 ```bash
@@ -1614,36 +1667,6 @@ $ grub > kernel /boot/vmlinuz-2.6.35 single
 
 ![grub](https://ping-t.com/mondai3/img/jpg/kk33690.jpg)
 
-#### # journalctl
-- journalctl config file: /etc/systemd/journald.conf
-```bash
-# Check log based on unit
-$ journalctl -u systemd-resolved.service
-$ journalctl -u 'systemd*'
-$ journalctl -u '*docker*'
-
-# Specify time using --since(-S) and --until(-U)
-$ journalctl --since today
-$ journalctl -S "2020-01-01 11:00:00" -U "2020-01-02 12:00:00"
-
-# Specify the Priority
-"emerg"?º?0‚Å??º?
-"alert"?º?1‚Å??º?
-"crit"?º?2‚Å??º?
-"err"?º?3‚Å??º?
-"warning"?º?4‚Å??º?
-"notice"?º?5‚Å??ºâ‚Å†
-"info"?º?6‚Å??º?
-"debug"?º?7?º?
-$ journalctl -p [priority-number]
-$ journalctl -p 3
-... : Failed to start Network Manager Wait Online...
-
-# Tail the new entry
-$ journalctl -f -u '*docker*'
-
-
-```
 
 #### # Windows CRLF and Linux LF
 - Windows: CRLF \r\n
