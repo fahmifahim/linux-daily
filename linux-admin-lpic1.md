@@ -1,5 +1,5 @@
 ***
-
+### # Topic 101: System Architecture
 #### # 101.1 Determine and configure hardware settings
 
 Weight: 2
@@ -263,7 +263,7 @@ $ ls /etc/systemd/system/multi-user.target.wants
 ![architecture](https://upload.wikimedia.org/wikipedia/commons/e/e7/Linux_kernel_unified_hierarchy_cgroups_and_systemd.svg)
 
 ***
-
+### # Topic 102: Linux Installation and Package Management
 #### # 102.1 Design hard disk layout
 
 Weight: 2
@@ -1330,8 +1330,8 @@ $ grep -F '.*' test.txt
 
 
 ***
-
-#### 104.1 Create partitions and filesystems
+### # Topic 104: Devices, Linux Filesystems, Filesystem Hierarchy Standard
+#### # 104.1 Create partitions and filesystems
 Weight: 2
 
 *Description:* Candidates should be able to configure disk partitions and then create filesystems on media such as hard disks. This includes the handling of swap partitions.
