@@ -202,6 +202,15 @@ shutdown -r now
 reboot
 ```
 
+
+#### # RunLevel
+```bash
+$ runlevel
+N 5
+```
+![RunLevel](https://ping-t.com/mondai3/img/jpg/kkk34236.jpg)
+
+
 #### # Shutdown 
 ```bash
 # Currently at 22:00 and will shutdown the system on 23:00
@@ -363,6 +372,17 @@ The following is a partial list of the used files, terms and utilities:
 - grub-install
 - grub-mkconfig
 - MBR
+
+
+#### # Maintenance Mode on Grub
+```bash
+# Single Mode
+$ grub > kernel /boot/vmlinuz-2.6.35 s
+$ grub > kernel /boot/vmlinuz-2.6.35 1
+$ grub > kernel /boot/vmlinuz-2.6.35 single
+```
+
+![grub](https://ping-t.com/mondai3/img/jpg/kk33690.jpg)
 
 
 ***
@@ -687,12 +707,29 @@ The following is a partial list of the used files, terms and utilities:
 - tail
 - wc
 
+#### # vi / vim 
+![tune2fs](https://ping-t.com/mondai3/img/jpg/k33911.jpg)
+
+
 - sed - stream editor for filtering and transforming text
 ```bash
 $ sed -e s/pingt/hoge/g test.txt
 $ sed s/pingt/hoge/g test.txt 
 ```
 ![sed](https://ping-t.com/mondai3/img/jpg/k34032.jpg)
+
+
+#### # Windows CRLF and Linux LF
+- Windows: CRLF \r\n
+- Linux: LF \n
+```bash
+# Change Windows format to Linux compatible
+$ tr -d '^M' < file1.txt > file2.txt
+$ tr -d '\r' < file1.txt > file2.txt
+$ cat file1.txt | tr -d '\r' > file2.txt
+$ sed s/^M//g file1.txt > file2.txt
+```
+
 
 - tr - Translate, squeeze, and/or delete characters from standard input, writing to standard output.
 ```bash
@@ -1381,6 +1418,16 @@ The following is a partial list of the used files, terms and utilities:
 - xfs_db - debug an XFS filesystem
 - xfs_check - check an XFS filesystem
 
+
+#### # Filesystem
+1. tune2fs - adjust tunable filesystem parameters on ext2/ext3/ext4 filesystems
+```bash
+$ tune2fs [option] DeviceName
+$ tune2fs -L /WORK /dev/hda5
+```
+![tune2fs](https://ping-t.com/mondai3/img/jpg/k34080.jpg)
+
+
 ##### *du disk usage*
 ```bash
 # du
@@ -1633,50 +1680,6 @@ $ ls -il
 8613901770 lrwxr-xr-x   1 fahmi  staff    9 Apr 22 11:09 symlink1 -> test1.txt
 269011342 lrwxrwxrwx 1 root root  5 May  2 15:22 dir-symlink1 -> dir1/
 269011185 drwxr-xr-x 2 root root  6 May  2 15:19 dir1
-```
-
-***
-
-#### # vi / vim 
-![tune2fs](https://ping-t.com/mondai3/img/jpg/k33911.jpg)
-
-
-#### # Filesystem
-1. tune2fs - adjust tunable filesystem parameters on ext2/ext3/ext4 filesystems
-```bash
-$ tune2fs [option] DeviceName
-$ tune2fs -L /WORK /dev/hda5
-```
-![tune2fs](https://ping-t.com/mondai3/img/jpg/k34080.jpg)
-
-
-#### # RunLevel
-```bash
-$ runlevel
-N 5
-```
-![RunLevel](https://ping-t.com/mondai3/img/jpg/kkk34236.jpg)
-
-#### # Maintenance Mode on Grub
-```bash
-# Single Mode
-$ grub > kernel /boot/vmlinuz-2.6.35 s
-$ grub > kernel /boot/vmlinuz-2.6.35 1
-$ grub > kernel /boot/vmlinuz-2.6.35 single
-```
-
-![grub](https://ping-t.com/mondai3/img/jpg/kk33690.jpg)
-
-
-#### # Windows CRLF and Linux LF
-- Windows: CRLF \r\n
-- Linux: LF \n
-```bash
-# Change Windows format to Linux compatible
-$ tr -d '^M' < file1.txt > file2.txt
-$ tr -d '\r' < file1.txt > file2.txt
-$ cat file1.txt | tr -d '\r' > file2.txt
-$ sed s/^M//g file1.txt > file2.txt
 ```
 
 ***
