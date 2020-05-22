@@ -2291,5 +2291,9 @@ $ chcon -t httpd_sys_content_t /folder1
 $ chcon -t httpd_sys_content_t /folder1/file1
 
 $ chcon -R -t httpd_sys_content_t /folder2   # Change recursively
+```
 
+- Permanent Change
 ```bash
+
+```
