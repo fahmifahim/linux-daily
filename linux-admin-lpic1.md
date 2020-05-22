@@ -2267,7 +2267,7 @@ Future changes to the objective will/may include:
 
 ## Others
 #### SELinux context
-
+- Reference: [RedHat Guide](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/selinux_users_and_administrators_guide/sect-security-enhanced_linux-working_with_selinux-selinux_contexts_labeling_files) 
 - SELinux context = user:role:type:level
 
 ```bash
@@ -2294,10 +2294,38 @@ $ chcon -R -t httpd_sys_content_t /folder2   # Change recursively
 ```
 
 - Persistent Context Change
+  - semanage fcontext 
+  - restorecon
 ```bash
+# Adding new recorde
 # Enter the following command, remembering to use the full path to the file or directory:
 semanage fcontext -a options file-name|directory-name
 
 # Use the restorecon utility to apply the context changes:
 restorecon -v file-name|directory-name
+
+
+# Modify recorde
+# Enter the following command, remembering to use the full path to the file or directory:
+semanage fcontext -m options file-name|directory-name
+
+# Use the restorecon utility to apply the context changes:
+restorecon -v file-name|directory-name
+```
+
+- Sample
+```bash
+semanage fcontext -a -t <type> <file-pah | folder-path>
+semanage fcontext -a httpd_sys_content_t /folder1
+
+-or to modify-
+
+semanage fcontext -m -t <type> <file-pah | folder-path>
+semanage fcontext -m -t httpd_sys_content_t /folder1
+
+# Don't forget to make it permanent by `restorecon`
+restorecon -v <file-pah | folder-path>
+restorecon -v /folder1
+   unconfined_u:object_r:etc_t:s0->system_u:object_r:httpd_sys_content_t:s0
+
 ```
