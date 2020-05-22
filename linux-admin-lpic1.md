@@ -1138,7 +1138,7 @@ $ jobs
 - The nohup command lets you run your commands even after you logged out and writes its output to nohup.out:
 ```bash
 $ nohup ping 4.2.2.4
-nohup: ignoring input and appending output to enohup.outf
+nohup: ignoring input and appending output to Âenohup.outÂf
 ^C
 
 $ cat nohup.out 
@@ -2262,3 +2262,7 @@ Future changes to the objective will/may include:
 
 </br> *Image resource from [ping-t.com](https://ping-t.com)
 </br> *Reference book [jadi-lpic1-book](https://jadi.gitbooks.io/lpic1/content/)
+
+
+
+## Others
