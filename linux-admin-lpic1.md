@@ -2268,5 +2268,10 @@ Future changes to the objective will/may include:
 ## Others
 #### SELinux context
 ```bash
+# Check SELinux enforcing mode
+getenforce
 
+# Check the SELinux context
+ls -lZ /folder1/file1.txt
+ls -ldZ /folder1
 ```
