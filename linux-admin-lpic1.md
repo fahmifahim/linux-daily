@@ -2267,6 +2267,9 @@ Future changes to the objective will/may include:
 
 ## Others
 #### SELinux context
+
+- SELinux context = user:role:type:level
+
 ```bash
 # Check SELinux enforcing mode
 $ getenforce
@@ -2283,5 +2286,10 @@ $ ls -lZ /folder1/file1.txt
 
 - Temporary Change (this change doesn't survive system relabel, or `restorecon` command)
 ```bash
+$ chcon -t <type> <file-pah | folder-path>
+$ chcon -t httpd_sys_content_t /folder1
+$ chcon -t httpd_sys_content_t /folder1/file1
+
+$ chcon -R -t httpd_sys_content_t /folder2   # Change recursively
 
 ```bash
