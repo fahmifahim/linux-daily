@@ -2270,10 +2270,18 @@ Future changes to the objective will/may include:
 ```bash
 # Check SELinux enforcing mode
 $ getenforce
+   Enforcing
 
 # Check the SELinux context
 $ ls -ldZ /folder1
-drwxr-xr-x root root unconfined_u:object_r:admin_home_t:s0 /folder1
+   drwxr-xr-x root root unconfined_u:object_r:etc_t:s0 /folder1
 
 $ ls -lZ /folder1/file1.txt
+   -rw-r--r--  root root unconfined_u:object_r:etc_t:s0 /folder1/file1.txt
+   
 ```
+
+- Temporary Change (this change doesn't survive system relabel, or `restorecon` command)
+```bash
+
+```bash
