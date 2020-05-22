@@ -2269,9 +2269,11 @@ Future changes to the objective will/may include:
 #### SELinux context
 ```bash
 # Check SELinux enforcing mode
-getenforce
+$ getenforce
 
 # Check the SELinux context
-ls -lZ /folder1/file1.txt
-ls -ldZ /folder1
+$ ls -ldZ /folder1
+drwxr-xr-x root root unconfined_u:object_r:admin_home_t:s0 /folder1
+
+$ ls -lZ /folder1/file1.txt
 ```
