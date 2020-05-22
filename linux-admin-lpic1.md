@@ -2293,7 +2293,11 @@ $ chcon -t httpd_sys_content_t /folder1/file1
 $ chcon -R -t httpd_sys_content_t /folder2   # Change recursively
 ```
 
-- Permanent Change
+- Persistent Context Change
 ```bash
+# Enter the following command, remembering to use the full path to the file or directory:
+semanage fcontext -a options file-name|directory-name
 
+# Use the restorecon utility to apply the context changes:
+restorecon -v file-name|directory-name
 ```
