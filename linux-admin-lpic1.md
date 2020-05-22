@@ -2329,3 +2329,16 @@ restorecon -v /folder1
    unconfined_u:object_r:etc_t:s0->system_u:object_r:httpd_sys_content_t:s0
 
 ```
+
+#### Network Check
+```bash
+# Destination IP address to check = 1.2.3.4
+# Source IP = 4.3.2.1
+# Test the ping connection
+ping 1.2.3.4
+
+# Scan the available port
+nmap 1.2.3.4
+nmap -sT -p 443 1.2.3.4  # -sT : if the port is TCP protocol, -sU for UDP
+nmap -sT -p 80 1.2.3.4 -e eth1 4.3.2.1 
+```
