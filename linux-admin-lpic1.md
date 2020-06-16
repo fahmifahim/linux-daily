@@ -2342,3 +2342,24 @@ nmap 1.2.3.4
 nmap -sT -p 443 1.2.3.4  # -sT : if the port is TCP protocol, -sU for UDP
 nmap -sT -p 80 1.2.3.4 -e eth1 4.3.2.1 
 ```
+
+#### awk
+```bash
+echo Hello1 > file1111.txt
+echo Hello2 > file2222.txt
+echo Hello3 > file3333.txt
+echo Hello4 > test4444.txt
+
+ls
+    file1111.txt  file2222.txt  file3333.txt  test4444.txt
+
+ls | grep file | awk '{print "cat "$1}'
+    cat file1111.txt
+    cat file2222.txt
+    cat file3333.txt
+
+ls | grep file | awk '{print "cat "$1}' | sh
+    Hello1
+    Hello2
+    Hello3
+```
