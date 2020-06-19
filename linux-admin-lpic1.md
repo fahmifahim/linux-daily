@@ -2363,3 +2363,9 @@ ls | grep file | awk '{print "cat "$1}' | sh
     Hello2
     Hello3
 ```
+
+
+##### Certificate openssl
+```bash
+
+```
