@@ -2369,4 +2369,7 @@ ls | grep file | awk '{print "cat "$1}' | sh
 ```bash
 # Certificate expire dates
 openssl x509 -noout -dates -in [certificate-full-path]
+
+# Certificate full information
+openssl x509 -text -in [certificate-full-path]
 ```
