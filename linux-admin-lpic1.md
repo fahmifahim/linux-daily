@@ -2390,4 +2390,21 @@ cat log1.txt
     AAAAAA BBBBB CCCCC 5    # duplicate entry
     AAAAAA BBBBB CCCCC 9
     AAAAAA BBBBB CCCCC 10
+
+# Sort message at index 4. Sort this item as number
+cat log1.txt | sort -n -k 4
+    AAAAAA BBBBB CCCCC 1
+    AAAAAA BBBBB CCCCC 2
+    AAAAAA BBBBB CCCCC 3  # duplicate entry
+    AAAAAA BBBBB CCCCC 3  # duplicate entry
+    AAAAAA BBBBB CCCCC 4
+    AAAAAA BBBBB CCCCC 5  # duplicate entry
+    AAAAAA BBBBB CCCCC 5  # duplicate entry
+    AAAAAA BBBBB CCCCC 6
+    AAAAAA BBBBB CCCCC 7
+    AAAAAA BBBBB CCCCC 8
+    AAAAAA BBBBB CCCCC 9
+    AAAAAA BBBBB CCCCC 10
+
+
 ```
