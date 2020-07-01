@@ -2406,5 +2406,34 @@ cat log1.txt | sort -n -k 4
     AAAAAA BBBBB CCCCC 9
     AAAAAA BBBBB CCCCC 10
 
+# Sort message and only show the uniq entry
+cat log1.txt | sort -n -k 4 | uniq
+    AAAAAA BBBBB CCCCC 1
+    AAAAAA BBBBB CCCCC 2
+    AAAAAA BBBBB CCCCC 3
+    AAAAAA BBBBB CCCCC 4
+    AAAAAA BBBBB CCCCC 5
+    AAAAAA BBBBB CCCCC 6
+    AAAAAA BBBBB CCCCC 7
+    AAAAAA BBBBB CCCCC 8
+    AAAAAA BBBBB CCCCC 9
+    AAAAAA BBBBB CCCCC 10
 
+# Sort, show uniq entry and count the uniqness of each entry
+cat log1.txt | sort -n -k 4 | uniq -c
+    1 AAAAAA BBBBB CCCCC 1
+    1 AAAAAA BBBBB CCCCC 2
+    2 AAAAAA BBBBB CCCCC 3
+    1 AAAAAA BBBBB CCCCC 4
+    2 AAAAAA BBBBB CCCCC 5
+    1 AAAAAA BBBBB CCCCC 6
+    1 AAAAAA BBBBB CCCCC 7
+    1 AAAAAA BBBBB CCCCC 8
+    1 AAAAAA BBBBB CCCCC 9
+    1 AAAAAA BBBBB CCCCC 10
+
+# Find entry which has 2 duplicate entries
+cat log1.txt | sort -n -k 4 | uniq -c | awk '{print $1" "$2" "$3" "$4" "$5}' | grep ^2
+    2 AAAAAA BBBBB CCCCC 3
+    2 AAAAAA BBBBB CCCCC 5
 ```
