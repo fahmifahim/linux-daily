@@ -2374,7 +2374,7 @@ openssl x509 -noout -dates -in [certificate-full-path]
 openssl x509 -text -in [certificate-full-path]
 ```
 
-##### Find Duplicate on log
+##### Find duplicate entries on text file
 ```bash
 # Assume you have log file as follows: 
 cat log1.txt
