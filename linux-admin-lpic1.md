@@ -1691,6 +1691,11 @@ The following is a partial list of the used files, terms and utilities:
 ![hardlink](https://ping-t.com/mondai3/img/jpg/k34107.jpg)
 
 ```bash
+Usage: ln [OPTION]... [-T] TARGET LINK_NAME   (1st form)
+  or:  ln [OPTION]... TARGET                  (2nd form)
+  or:  ln [OPTION]... TARGET... DIRECTORY     (3rd form)
+  or:  ln [OPTION]... -t DIRECTORY TARGET...  (4th form)
+
 $ ls -il
 8613901762 -rw-r--r--   1 fahmi  staff    6 Apr 22 11:09 test1.txt
 
