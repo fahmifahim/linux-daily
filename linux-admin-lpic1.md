@@ -126,8 +126,15 @@ The following is a partial list of the used files, terms and utilities:
 - Start the /sbin/init
 - Parameters passed to the kernel at the time it is started is defined in `/proc/cmdline`
   ```bash
-  $ cat /proc/cmd/line
+  $ cat /proc/cmdline
   BOOT_IMAGE=/vmlinuz-3.10.0-957.el7.x86_64 root=UUID=f1f52244-7b2d-4383-b6ac-367d09e57a09 ro crashkernel=auto rhgb quiet LANG=en_US.UTF-8
+
+  # GRUB Legacy
+  grub> kernel [kernel-image] [option]
+  grub> kernel /boot/vmlinuz init=/bin/bash
+
+  # GRUB2
+  grub> linux /boot/vmlinuz init=/bin/bash quiet
   ```
 
 #### 4. init
