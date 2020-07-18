@@ -214,7 +214,27 @@ The following is a partial list of the used files, terms and utilities:
 
 #### # SysVinit
 - /sbin/init is started during the initial process. Autostart application is executed by order as recorded in the `/etc/inittab`.
+- Single-User system, start the script from `/etc/rc1.d`
 - Multi-User system, start the script from `/etc/rc3.d`
+- Rules: 
+  - The start script for Each RunLevel is determined: 
+    ```bash
+    /etc/rc[0-6].d
+    RunLevel: 
+    0 = poweroff
+    1 = rescue / single user
+    2,3,4 = multi-user
+    5 = graphical
+    6 = reboot
+    ```
+  - Script file name is determined: 
+    ```bash
+    First word: K (kill) or S (start)
+    Number: priority number
+    ServiceName
+    Example: K01Bluetooth
+    ```
+  - As mentioned above, in Single-User system, the appropriate Kill script name for Blueetooth process: `/etc/rc1.d/K01Bluetooth`
 
 #### # Telinit
 ```bash
@@ -1517,7 +1537,7 @@ The following is a partial list of the used files, terms and utilities:
 **fstab**
 ```bash
 # /etc/fstab
-user: mount by everone, unmount by only one user
+user: mount by everyone, unmount by only one user
 users: mount by everyone, unmount by everyone
 nouser: no user can mount 
 ro: read only
