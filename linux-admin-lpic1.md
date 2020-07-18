@@ -1686,7 +1686,7 @@ The following is a partial list of the used files, terms and utilities:
 *Hard link*:
 1. Hardlink has the same inode with the physical file.
 2. Deleting the physical file, will not effect hardlink. 
-3. Hardlink works with file, not folder.
+3. Hardlink works with file, NOT folder.
 
 ![hardlink](https://ping-t.com/mondai3/img/jpg/k34107.jpg)
 
@@ -1704,8 +1704,11 @@ $ ln -s test1.txt symlink1
 # Create Symbolic link for directory
 $ ln -s dir1/ dir-symlink1
 
-# Create Hard link
+# Create Hard link (ONLY for FILE)
 $ ln -n test1.txt hardlink1
+# ERROR for folder
+$ ln -n folder1 hardlinkFolder1
+ln: 'hardlinkFolder1': hard link not allowed for directory
 
 $ ls -il
 8613901762 -rw-r--r--   2 fahmi  staff    6 Apr 22 11:09 test1.txt
@@ -1713,6 +1716,10 @@ $ ls -il
 8613901770 lrwxr-xr-x   1 fahmi  staff    9 Apr 22 11:09 symlink1 -> test1.txt
 269011342 lrwxrwxrwx 1 root root  5 May  2 15:22 dir-symlink1 -> dir1/
 269011185 drwxr-xr-x 2 root root  6 May  2 15:19 dir1
+
+# Remove link
+$ unlink symlink1
+$ unlink dir-symlink1
 ```
 
 ***
