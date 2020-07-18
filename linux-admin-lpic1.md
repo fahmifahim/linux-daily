@@ -1758,10 +1758,10 @@ The following is a partial list of the used files, terms and utilities:
 - find
 - locate
 - updatedb
+- /etc/updatedb.conf
 - whereis
 - which
 - type
-- /etc/updatedb.conf
 
 #### # Filesystem Hierarchy Standard ([FHS wikipedia](https://en.wikipedia.org/wiki/Filesystem_Hierarchy_Standard))
 ![FHS](https://ping-t.com/mondai3/img/jpg/k34123.jpg)
@@ -1770,6 +1770,38 @@ The following is a partial list of the used files, terms and utilities:
 
 ![directory](https://ping-t.com/mondai3/img/jpg/k33739.jpg)
 
+#### # locate and updatedb
+- `find` can search files and directory, but it is slow. 
+- `locate` could do faster than `find` 
+
+```bash
+And it is fast:
+$ time locate kernel | wc -l 
+11235
+
+real    0m0.341s
+user    0m0.322s
+sys    0m0.015s
+```
+- This is fast because its data comes from a database created with `updatedb` command which is usually run on a daily basis with a cron job. Its configuration file is `/etc/updatedb.conf` or `/etc/sysconfig/locate`:
+
+```bash
+$ cat /etc/updatedb.conf 
+PRUNE_BIND_MOUNTS="yes"
+# PRUNENAMES=".git .bzr .hg .svn"
+PRUNEPATHS="/tmp /var/spool /media /home/.ecryptfs"
+PRUNEFS="NFS nfs nfs4 rpc_pipefs afs binfmt_misc proc smbfs autofs iso9660 ncpfs coda devpts ftpfs devfs mfs shfs sysfs cifs lustre tmpfs usbfs udf fuse.glusterfs fuse.sshfs curlftpfs ecryptfs fusesmb devtmpfs"
+```
+
+- You can update the db by running `updatedb` as root and get some info about it by -S switch of locate command:
+```bash
+$ locate -S
+Database /var/lib/mlocate/mlocate.db:
+    73,602 directories
+    711,894 files
+    46,160,154 bytes in file names
+    18,912,999 bytes used to store database
+```
 ***
 
 
