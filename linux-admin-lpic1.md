@@ -124,6 +124,11 @@ The following is a partial list of the used files, terms and utilities:
 - Recognize and control hardware; then, performs various initialization processes such as mounting root file system.
 - Kernel image, kernel version is located on /boot directory. 
 - Start the /sbin/init
+- Parameters passed to the kernel at the time it is started is defined in `/proc/cmdline`
+  ```bash
+  $ cat /proc/cmd/line
+  BOOT_IMAGE=/vmlinuz-3.10.0-957.el7.x86_64 root=UUID=f1f52244-7b2d-4383-b6ac-367d09e57a09 ro crashkernel=auto rhgb quiet LANG=en_US.UTF-8
+  ```
 
 #### 4. init
 - When the kernel finishes loading, it usually starts /sbin/init. This program remains running until the system is shutdown. 
@@ -1542,6 +1547,16 @@ The following is a partial list of the used files, terms and utilities:
 - lsblk
 
 **fstab**
+- /etc/fstab
+  1. File system: 
+    - Label -> LABEL=/boot
+    - UUID -> UUID=01240174917-1401924ohfaqgh
+    - device -> /dev/sda1
+  2. Mount point: swap or none for swap
+  3. Type: can be auto
+  4. Mount options: defaults, rw / ro, noauto, user, exec / noexec, noatime
+  5. Dump flag: 0 no dump, 1 dump activate. Mostly 0
+  6. pass: Non-zero values of pass specify the order of checking filesystems at boot time (seen in Integrity of file systems)
 ```bash
 # /etc/fstab
 user: mount by everyone, unmount by only one user
