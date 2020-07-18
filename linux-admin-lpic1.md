@@ -725,10 +725,21 @@ The following is a partial list of the used files, terms and utilities:
 
 #### # Environment
 ```bash
-# Show to the Environment 
-$ env 
-$ printenv
-$ set
+# Show variable to the Environment 
+$ env - print environment variables. 
+$ printenv - print environment variables. It can't see local ones
+$ set - built-in shell command, it shows shell-local variables (including shell functions)
+
+$ export var1=val1  # Define var1 as environment variable
+$ var2=val2         # Define var2 as local variable
+$ env | egrep var[1,2]
+    var1=val1       # env can't see the local variable
+$ printenv | egrep var[1,2]
+    var1=val1       # printenv can't see the local variable
+$ set | egrep var[1,2]
+    var1=val1
+    var2=val2
+
 ```
 ![printenv](https://ping-t.com/mondai3/img/jpg/k34146.jpg)
 
