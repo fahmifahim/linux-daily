@@ -283,6 +283,8 @@ N 5
 # Currently at 22:00 and will shutdown the system on 23:00
 $ shutdown -h +60
 $ shutdown -h 23:00
+$ shutdown -r 23:00 "Rebooting in 10 minutes"
+$ shutdown -r +10 "Rebooting in 10 minutes"
 ```
 
 #### # Systemctl command
@@ -632,14 +634,14 @@ $ rpm -q --changelog nfs-utils-1.3.0-0.61.el7.x86_64
 ```bash
 $ zypper [option] subcommand
 -- subcommand: 
-  install | in
-  update | up
-  remove | rm
-  info
-  search | se
-  list-updates | lu
-  repos | lr
-  refresh
+  install | in  -- install package
+  update | up   -- update package
+  remove | rm   -- uninstall package
+  info          -- display detail information of package
+  search | se   -- search package by entering keyword
+  list-updates | lu -- list updateable package
+  repos | lr    -- show list of repository
+  refresh       -- update repository
 ```
 
 **yum**
@@ -1653,6 +1655,7 @@ The following is a partial list of the used files, terms and utilities:
 |suid |4000 |u+s |
 |guid |2000 |g+s |
 |stickybit |1000 |t |
+
 
 - File and Directory permission 
 
