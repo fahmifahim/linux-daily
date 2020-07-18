@@ -1273,6 +1273,17 @@ PID TTY      STAT   TIME COMMAND
     1 ?        Ss     0:12 /usr/lib/systemd/systemd 
     2 ?        S      0:00 [kthreadd]
     3 ?        S      0:00 [ksoftirqd/0]
+
+# To see the process in tree
+$ ps axf
+  PID TTY      STAT   TIME COMMAND
+  655 ?        Ss     0:00 /usr/sbin/crond -n
+  659 tty1     Ss+    0:00 /sbin/agetty --noclear tty1 linux
+  897 ?        Ss     0:00 /usr/sbin/sshd -D
+ 4990 ?        Ss     0:00  \_ sshd: root@pts/0
+ 5011 pts/0    Ss     0:00      \_ -bash
+ 6734 pts/0    R+     0:00          \_ ps axf
+ 6735 pts/0    S+     0:00          \_ lessq 
 ```
 ![ps-process](https://ping-t.com/mondai3/img/jpg/k34339.jpg)
 
