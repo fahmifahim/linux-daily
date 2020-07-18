@@ -214,6 +214,13 @@ The following is a partial list of the used files, terms and utilities:
 
 #### # SysVinit
 - /sbin/init is started during the initial process. Autostart application is executed by order as recorded in the `/etc/inittab`.
+- If you edit the /etc/inittab and want to make the change directly to the system without rebooting, you may execute the below command: 
+  ```bash
+  init q
+  init Q
+  telinit q
+  telinit Q
+  ```
 - Single-User system, start the script from `/etc/rc1.d`
 - Multi-User system, start the script from `/etc/rc3.d`
 - Rules: 
