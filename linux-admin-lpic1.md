@@ -283,8 +283,8 @@ N 5
 # Currently at 22:00 and will shutdown the system on 23:00
 $ shutdown -h +60
 $ shutdown -h 23:00
-$ shutdown -r 23:00 "Rebooting in 10 minutes"
-$ shutdown -r +10 "Rebooting in 10 minutes"
+$ shutdown -r 23:00 "Rebooting in 60 minutes"
+$ shutdown -r +60 "Rebooting in 60 minutes"
 ```
 
 #### # Systemctl command
@@ -994,7 +994,7 @@ The following is a partial list of the used files, terms and utilities:
 - mv
 - ls
 - rm
-- rmdir
+- rmdir - remove empty directories
 - touch
 - tar
 - cpio
