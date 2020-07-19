@@ -1237,6 +1237,12 @@ The following is a partial list of the used files, terms and utilities:
 - free
 - uptime
 - pgrep
+  ```bash
+  # Find user process with pgrep 
+  $ pgrep -u root
+  - or - 
+  $ pgrep -u 0
+  ```
 - pkill
 - killall
 - watch
