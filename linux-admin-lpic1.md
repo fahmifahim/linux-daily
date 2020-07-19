@@ -790,6 +790,32 @@ The following is a partial list of the used files, terms and utilities:
 - tail
 - wc
 
+#### # uniq
+- uniq removes duplicate entries from its input
+```bash
+$ cat file1
+    aaaa
+    bbbb
+    bbbb
+    bbbb
+    bbbb
+
+$ uniq file1
+    aaaa
+    bbbb
+
+$ uniq -u file1
+aaaa  --> display only the uniqe entry
+
+$ uniq -d aaa
+bbbb  --> display the duplicate entry
+
+# Count the number of occurences
+$ uniq -c aaa
+      1 aaaa
+      4 bbbb
+```
+
 #### # vi / vim 
 ![tune2fs](https://ping-t.com/mondai3/img/jpg/k33911.jpg)
 
@@ -1007,6 +1033,17 @@ The following is a partial list of the used files, terms and utilities:
 - xz
 - unxz
 - file globbing
+
+- *rmdir*
+  - Remove multiple empty directory
+  ```bash
+  $ mkdir -p 1/2/3/4
+  $ rmdir 1
+      rmdir: failed to remove '1': Directory not empty
+  $ rmdir -p 1/2/3/4
+  $ ls 1
+      ls: cannot access 1: No such file or directory
+  ```
 
 #### # File access timestamp
 - *stat*
