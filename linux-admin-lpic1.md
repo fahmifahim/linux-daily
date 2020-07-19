@@ -1038,6 +1038,36 @@ Access: 2020-01-02 10:00:00
 Modify: 2020-01-02 10:00:00
 Change: 2020-01-02 10:00:00
 ...
+
+$ touch file1
+$ stat file1
+      File: 'file1'
+      Size: 0         	Blocks: 0          IO Block: 4096   regular empty file
+    Device: 806h/2054d	Inode: 269001541   Links: 1
+    Access: (0644/-rw-r--r--)  Uid: (    0/    root)   Gid: (    0/    root)
+    Access: 2020-07-19 17:29:13.546935453 +0900
+    Modify: 2020-07-19 17:29:13.546935453 +0900
+    Change: 2020-07-19 17:29:13.546935453 +0900
+    Birth: -
+
+$ touch -m file1
+$ stat file1
+      File: 'file1'
+      Size: 0         	Blocks: 0          IO Block: 4096   regular empty file
+    Device: 806h/2054d	Inode: 269001541   Links: 1
+    Access: (0644/-rw-r--r--)  Uid: (    0/    root)   Gid: (    0/    root)
+    Access: 2020-07-19 17:29:13.546935453 +0900
+    Modify: 2020-07-19 17:29:42.145041851 +0900     --> this time changed
+
+
+$ touch -a file1
+$ stat file1
+  File: 'file1'
+  Size: 0         	Blocks: 0          IO Block: 4096   regular empty file
+Device: 806h/2054d	Inode: 269001541   Links: 1
+Access: (0644/-rw-r--r--)  Uid: (    0/    root)   Gid: (    0/    root)
+Access: 2020-07-19 17:30:05.593129107 +0900       --> this time changed
+Modify: 2020-07-19 17:29:42.145041851 +0900
 ```
 
 #### * Archive (tar, bz2, xz, gzip) -> [reference](https://jadi.gitbooks.io/lpic1/content/1033_perform_basic_file_management.html)
@@ -1095,6 +1125,9 @@ $ ls -l | grep aaa
 
 # Decompress with gzip
 $ gzip -d aaa.gz
+- or -
+$ gunzip aaa.gz
+
 
 $ ls -l | grep aaa
     -rw-r--r-- 1 root  root   25 Jul 19 17:15 aaa
