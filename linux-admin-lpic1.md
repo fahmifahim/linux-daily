@@ -1074,6 +1074,37 @@ $ xz [option] file-name-to-compress
 -l --list
 ```
 
+4. gzip 
+```bash
+# Compress with gzip
+$ ls -l aaa.txt
+    -rwx------ 2 fahmi fahmi 25 Jul 18 16:26 aaa.txt
+
+$ cat aaa.txt
+    aaaa
+    bbbb
+    bbbb
+    bbbb
+    bbbb
+
+$ gzip -c aaa.txt > aaa.gz
+
+$ ls -l | grep aaa
+    -rw-r--r-- 1 root  root   37 Jul 19 17:15 aaa.gz
+    -rwx------ 2 fahmi fahmi  25 Jul 18 16:26 aaa.txt
+
+# Decompress with gzip
+$ gzip -d aaa.gz
+
+$ ls -l | grep aaa
+    -rw-r--r-- 1 root  root   25 Jul 19 17:15 aaa
+    -rwx------ 2 fahmi fahmi  25 Jul 18 16:26 aaa.txt
+
+$ diff aaa aaa.txt
+# no difference
+```
+
+
 ***
  
 #### # 103.4 Use streams, pipes and redirects
