@@ -311,6 +311,13 @@ poweroff
 ```
 
 - More about systemctl
+  - systemd unit : 
+    - target
+    - mount
+    - device
+    - service
+    - swap
+    
 ```bash
 $ ls -l /etc/systemd/system
 default.target -> /lib/systemd/system/multi-user.target
