@@ -578,6 +578,10 @@ $ dpkg --recursive --install
 
 # Refuse downgrade --refuse-downgrade
 $ dpkg -Gi packages
+
+# Show detail information of a package
+$ dpkg -s package-name
+$ dpkg --status package-name
 ```
 
 ![dpkg-command](https://ping-t.com/mondai3/img/jpg/k33766.jpg)
