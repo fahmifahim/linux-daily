@@ -111,7 +111,8 @@ The following is a partial list of the used files, terms and utilities:
 - Currently, other than BIOS, UEFI (Unified Extensible Firmware Interface) is recently developed and widely being used in the modern system. 
 
 #### 2. bootloader
-<p>Bootloader can be GRUB (1&2) or LILO which are great for disks less than 2TB.</p>
+- Load the Kernel from Harddisk drive
+- Bootloader can be GRUB (1&2) or LILO which are great for disks less than 2TB.
 
 ```bash
 /etc/lilo.conf
