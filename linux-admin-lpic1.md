@@ -118,6 +118,8 @@ The following is a partial list of the used files, terms and utilities:
 /etc/lilo.conf
 /boot/grub/menu.lst -- GRUB Legacy
 /boot/grub/grub.cfg -- GRUB2
+  - /etc/default/grub
+  - /etc/grub.d
 ```
 
 - GRUB Legacy (/boot/grub/menu.lst)
