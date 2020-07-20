@@ -116,9 +116,18 @@ The following is a partial list of the used files, terms and utilities:
 
 ```bash
 /etc/lilo.conf
-/boot/grub/grub.cfg
-/boot/grub/menu.lst
+/boot/grub/menu.lst -- GRUB Legacy
+/boot/grub/grub.cfg -- GRUB2
 ```
+
+- GRUB Legacy (/boot/grub/menu.lst)
+  - disk1, partition1 : hd0,0
+  - disk1, partition2 : hd0,1
+  - disk2, partition2 : hd1,1
+- GRUB2 (/boot/grub/grub.cfg)
+  - disk1, partition1 : hd0,1
+  - disk1, partition2 : hd0,2
+  - disk2, partition2 : hd1,2
 
 #### 3. Kernel
 - Kernel parameters (sometimes called boot parameters) supply the kernel with information about hardware parameters that it might not determine on its own - say single user mod boot (S)
@@ -268,6 +277,12 @@ telinit 6
 systemctl reboot.target
 shutdown -r now
 reboot
+
+# Switch to Single User or Maintenance mode
+init 1
+init s 
+telinit 1 
+telinit S
 ```
 
 
