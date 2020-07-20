@@ -1070,8 +1070,45 @@ The following is a partial list of the used files, terms and utilities:
       ls: cannot access 1: No such file or directory
   ```
 
+- cpio
+  - Gets a list of files and creates archive (one file) of it which can be opened later.
+  ```bash
+  $ ls | cpio -o > allfilesls.cpio
+  3090354 blocks
+  ```
+
+  - -o makes cpio to create an output from its input
+  - cpio does not goes into the folders. So mostly we use it with find:
+  ```bash
+  find . -name "*" | cpio -o > myarchivefind.cpio
+  ```
+  
+  - to decompress it:
+  ```bash
+  mkdir extract
+  mv myarchivefind.cpio extract
+  cd extract
+  cpio -id < myarchivefind.cpio
+  
+  # -d will create the folders
+  # -i is for extract
+  ```
+
 - *dd*
-  - Backup MBR
+  - The `dd` command copies data from one location to another. 
+  ```bash
+    $ cat howcool
+        jadi    5
+        sina    6
+    $ dd if=howcool of=newcool
+        0+1 records in
+        0+1 records out
+        30 bytes (30 B) copied, 0.0227904 s, 1.3 kB/s
+    $ cat newcool 
+        jadi    5
+        sina    6
+  ```
+  - Backup MBR (backup whole drive to file)
   `dd if=/dev/hda of=/backup/file bs=512 count=1`
   - Restore MBR
   `dd if=/backup/file of=/dev/hda bs=446 count=1`
