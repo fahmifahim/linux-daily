@@ -317,7 +317,7 @@ poweroff
     - device
     - service
     - swap
-    
+
 ```bash
 $ ls -l /etc/systemd/system
 default.target -> /lib/systemd/system/multi-user.target
@@ -1052,6 +1052,14 @@ The following is a partial list of the used files, terms and utilities:
   $ ls 1
       ls: cannot access 1: No such file or directory
   ```
+
+- *dd*
+  - Backup MBR
+  `dd if=/dev/hda of=/backup/file bs=512 count=1`
+  - Restore MBR
+  `dd if=/backup/file of=/dev/hda bs=446 count=1`
+  - Clear the bootloader
+  `dd if=/dev/zero of=/dev/sda bs=446 count=1`
 
 #### # File access timestamp
 - *stat*
