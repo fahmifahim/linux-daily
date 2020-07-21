@@ -655,6 +655,10 @@ $ rpm -qRp emacs
 
 # Find change history on specific RPM package
 $ rpm -q --changelog nfs-utils-1.3.0-0.61.el7.x86_64
+
+# Check and verify all packages
+$ rpm -Va
+$ rpm --verify --all
 ```
 - <b>query</b></br>
 ![rpm](https://ping-t.com/mondai3/img/jpg/k35692.jpg)
