@@ -1609,8 +1609,18 @@ dd e ff ggg
 
 $ fgrep '*.|' test2.txt
 $ grep -F '*.|' test2.txt
+$ grep '*' test2.txt
 *.|/
 --> fgrep interpret pattern as a list of Fixed Strings
+
+$ grep '*.' test2.txt
+*.|/
+
+$ egrep '*.' test2.txt
+$ grep -E '*.' test2.txt
+aaa bbb cc
+dd e ff ggg
+*.|/
 
 ```
 
