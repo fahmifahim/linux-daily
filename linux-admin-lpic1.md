@@ -1601,6 +1601,17 @@ $ fgrep '.*' test.txt
 $ grep -F '.*' test.txt
 .*  --> Result the same
 
+
+$ cat test2.txt
+aaa bbb cc
+dd e ff ggg
+*.|/
+
+$ fgrep '*.|' test2.txt
+$ grep -F '*.|' test2.txt
+*.|/
+--> fgrep interpret pattern as a list of Fixed Strings
+
 ```
 
 
