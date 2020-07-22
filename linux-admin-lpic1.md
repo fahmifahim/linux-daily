@@ -147,13 +147,13 @@ The following is a partial list of the used files, terms and utilities:
 ```
 
 - GRUB Legacy (/boot/grub/menu.lst)
-  - disk1, partition1 : hd0,0
-  - disk1, partition2 : hd0,1
-  - disk2, partition2 : hd1,1
+  - disk1, partition1 : root(hd0,0)
+  - disk1, partition2 : root(hd0,1)
+  - disk2, partition2 : root(hd1,1)
 - GRUB2 (/boot/grub/grub.cfg)
-  - disk1, partition1 : hd0,1
-  - disk1, partition2 : hd0,2
-  - disk2, partition2 : hd1,2
+  - disk1, partition1 : root(hd0,1)
+  - disk1, partition2 : root(hd0,2)
+  - disk2, partition2 : root(hd1,2)
 
 #### 3. Kernel
 - Kernel parameters (sometimes called boot parameters) supply the kernel with information about hardware parameters that it might not determine on its own - say single user mod boot (S)
@@ -583,6 +583,22 @@ The following is a partial list of the used files, terms and utilities:
 - dpkg-reconfigure
 - apt-get
 - apt-cache
+
+#### # Package location
+- Package location on Debian system is Repository of different Repositories which are defined at defined in `/etc/apt/sources.list`
+  ```bash
+  $ cat /etc/apt/sources.list
+      deb http://ir.archive.ubuntu.com/ubuntu/ utopic-updates multiverse
+
+      deb http://ir.archive.ubuntu.com/ubuntu/ utopic-backports main restricted universe multiverse
+
+      deb http://security.ubuntu.com/ubuntu utopic-security main restricted
+      deb http://security.ubuntu.com/ubuntu utopic-security universe
+      deb http://security.ubuntu.com/ubuntu utopic-security multiverse
+  ```
+- Update sources information
+  `apt-get update`
+
 
 #### # dpkg - Debian package manager
 ```bash
@@ -1679,6 +1695,8 @@ The following is a partial list of the used files, terms and utilities:
 - mkswap
 
 ##### *mkfs*
+- This command + option (-t) will create file system ext2/ext3/ext4/xfs/jfs
+- on the other hand, mke2fs creates ext2/ext3/ext4
 ```bash
 $ mkfs [option] [device-name]
 $ mkfs -t ext3 -c /dev/sda2
@@ -1781,11 +1799,13 @@ $ du -ch dir
 ```
 
 ##### *mke2fs*
+- This command is able to create ext2/ext3/ext4 file system
 ```bash
 $ mke2fs [option] [device-name]
 $ mke2fs -j /dev/sda2     --> create ext3 FileSystem
 $ mke2fs -t ext2 /dev/sda2
 $ mke2fs -t ext3 /dev/sda2
+$ mke2fs -t ext4 /dev/sda2
 ```
 
 ![mke2fs](https://ping-t.com/mondai3/img/jpg/kk34068.jpg)
@@ -2097,7 +2117,7 @@ Database /var/lib/mlocate/mlocate.db:
 ```
 ***
 
-
+## # Linux LPIC 102
 ### # Topic 105: Shells and Shell Scripting
 #### # 105.1 Customize and use the shell environment
 
