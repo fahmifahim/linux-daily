@@ -76,6 +76,29 @@ $ cat /proc/bus/usb/devices
 ...
 ```
 
+**lsmod**
+- Shows kernel modules 
+  ```bash
+  lsmod
+      Module                  Size  Used by
+      nf_conntrack_netlink    36354  0
+      xt_addrtype            12676  2
+      br_netfilter           22256  0
+      vmnet                  47193  13
+      xt_CHECKSUM            12549  2
+      drbg                   30186  1
+      ansi_cprng             12989  0
+  ```
+
+**modprobe**
+- Add new module to your kernel 
+  `modprobe Zwifi`
+  or
+  `insmod Zwifi`
+
+**rmmod**
+- Remove or uninstall module
+  `rmmod Zwifi`
 
 ***
 #### # 101.2 Boot the system
