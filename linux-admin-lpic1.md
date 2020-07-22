@@ -868,6 +868,9 @@ $ uniq -c aaa
 ```
 
 #### # vi / vim 
+- Open file in read-only mode
+  `vi -R file-name`
+
 ![tune2fs](https://ping-t.com/mondai3/img/jpg/k33911.jpg)
 
 
@@ -1415,7 +1418,10 @@ rtt min/avg/max/mdev = 223.584/224.767/225.950/1.183 ms
 ### # Process
 #### # Kill Process
 1. kill - terminate a process
-</br>You can control processes by using signals. Actually pressing Ctrl+c and Ctrl+z is also sending signals. Another way for this is using the kill command:
+- You can control processes by using signals. Actually pressing Ctrl+c and Ctrl+z is also sending signals. 
+- ctrl+c = interrupt (sigint):2
+- ctrl+z = stop (sigstop):19
+- Another way for this is using the kill command:
 - kill using job number
 ```bash
 $ jobs
