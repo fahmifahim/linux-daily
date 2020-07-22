@@ -95,6 +95,7 @@ $ cat /proc/bus/usb/devices
   `modprobe Zwifi`
   or
   `insmod Zwifi`
+- modprobe setting files are put together inside the `/etc/modprobe.d/<your-modprobe-conf-file>.conf`. It must have *.conf* extension
 
 **rmmod**
 - Remove or uninstall module
@@ -709,22 +710,16 @@ $ zypper [option] subcommand
 Command is one of:
     * install package1 [package2] [...]
     * update [package1] [package2] [...]
-    * update-to [package1] [package2] [...]
-    * update-minimal [package1] [package2] [...]
     * check-update
     * upgrade [package1] [package2] [...]
     * upgrade-to [package1] [package2] [...]
     * distribution-synchronization [package1] [package2] [...]
     * remove | erase package1 [package2] [...]
-    * autoremove [package1] [...]
     * list [...]
     * info [...]
-    * provides | whatprovides feature1 [feature2] [...]
     * clean [ packages | metadata | expire-cache | rpmdb | plugins | all ]
-    * makecache [fast]
-    * groups [...]
+    * grouplist
     * search string1 [string2] [...]
-    * shell [filename]
 ```
 
 ***
@@ -1251,15 +1246,17 @@ $ ls -l aaa.txt
 $ cat aaa.txt
     aaaa
     bbbb
-    bbbb
-    bbbb
-    bbbb
 
 $ gzip -c aaa.txt > aaa.gz
 
 $ ls -l | grep aaa
     -rw-r--r-- 1 root  root   37 Jul 19 17:15 aaa.gz
     -rwx------ 2 fahmi fahmi  25 Jul 18 16:26 aaa.txt
+
+# cat the compressed file
+$ zcat aaa.gz
+    aaaa
+    bbbb
 
 # Decompress with gzip
 $ gzip -d aaa.gz
@@ -1834,6 +1831,10 @@ suid: suid and sgid available
 
 **mount**
 ```bash
+# Show currently mounted directory. This works for non-user root also
+$ mount
+--> the result is same as recorded on /etc/mtab
+
 # Mount all content on /etc/fstab
 $ mount -a 
 
