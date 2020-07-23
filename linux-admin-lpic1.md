@@ -2373,9 +2373,9 @@ The following is a partial list of the used files, terms and utilities:
 ###### # Adding Users
 - When creating new user, the entry for new user is added to these config files: 
   1. /etc/passwd : user information list
-    -rw-r--r-- 1 root root /etc/passwd
+    `-rw-r--r-- 1 root root /etc/passwd`
   2. /etc/shadow : user password list
-    ---------- 1 root root /etc/shadow
+    `---------- 1 root root /etc/shadow`
   3. /etc/group : group list
   4. /etc/gshadow : group password list
 
