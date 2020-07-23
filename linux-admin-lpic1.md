@@ -2148,6 +2148,19 @@ The following is a partial list of the used files, terms and utilities:
 - function
 - alias
 
+**Login Shell** 
+- Here is the order: 
+  - /etc/profile
+  - ~/.bash_profile
+  - ~/.bash_login
+  - ~/.profile
+
+**shebang**
+- Bourne shell = `#!/bin/sh`
+- bash = `#!/bin/bash`
+- perl = `#!/usr/bin/perl`
+- python = `#!/usr/bin/python`
+
 *** 
 
 #### # 105.2 Customize or write simple scripts
@@ -2333,6 +2346,16 @@ The following is a partial list of the used files, terms and utilities:
 - ISO-8859
 - ASCII
 - Unicode
+
+**Shell variable** 
+| shell variable | description |
+|:---:|:---:|
+|$$ |shell PID |
+|$? |return code |
+|$# |number of parameter |
+|$* |all parameters, devided by space |
+|$0 |shell filename |
+|$1, $2 ... |1st parameter, 2nd paramter ... |
 
 ***
 
