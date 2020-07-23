@@ -2189,6 +2189,53 @@ The following is a partial list of the used files, terms and utilities:
 - ||
 - &&
 
+- **if** 
+  ```bash
+  if [command]
+    command
+  fi
+
+  if test [condition]
+
+  -d : is directory and exist
+  -f : is file and exist
+  -e : is exist
+  -x : is executable file and exist 
+  -eq: equal
+  -ge: greater or equal: >=
+  -gt: greater than: > 
+  -le: less or equal: <=
+  -lt: less than: <
+
+  ```
+
+- **for**
+  ```bash
+  --sample1--
+  for VARIABLE in 1 2 3 4 5 .. N
+  do
+    command1
+    command2
+    commandN
+  done
+
+  --sample2--
+  for VARIABLE in file1 file2 file3
+  do
+    command1 on $VARIABLE
+    command2
+    commandN
+  done
+
+  --sample3--
+  for OUTPUT in $(Linux-Or-Unix-Command-Here)
+  do
+    command1 on $OUTPUT
+    command2 on $OUTPUT
+    commandN
+  done
+  ```
+
 *** 
 
 ### # Topic 106: User Interfaces and Desktops
@@ -2352,7 +2399,7 @@ The following is a partial list of the used files, terms and utilities:
 |:---:|:---:|
 |$$ |shell PID |
 |$? |return code |
-|$# |number of parameter |
+|$# |number of parameters |
 |$* |all parameters, devided by space |
 |$0 |shell filename |
 |$1, $2 ... |1st parameter, 2nd paramter ... |
