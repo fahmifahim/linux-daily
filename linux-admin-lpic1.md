@@ -2373,18 +2373,44 @@ The following is a partial list of the used files, terms and utilities:
 ###### # Adding Users
 - When creating new user, the entry for new user is added to these config files: 
   1. /etc/passwd : user information list
+    -rw-r--r-- 1 root root /etc/passwd
   2. /etc/shadow : user password list
+    ---------- 1 root root /etc/shadow
   3. /etc/group : group list
   4. /etc/gshadow : group password list
 
 - `useradd`
   ```bash
-  -d	home directory (-d /home/user)
-  -m	create home directory
-  -s	specify shell
-  -G	add to additional groups
+  -d	--home-dir  : home directory (-d /home/user)
+  -m	--create-home : create home directory
+  -s	--shell : specify shell
+  -g  --gid : add to a group or group id
+  -G	--groups  : add to additional/secondary groups
   -c	comment. most of the time, users actual name. Use quotes if comments has spaces or special characters in them
+  -f  --inactive  : The number of days after a password expires until the account is permanently disabled
   ```
+  - Set manually user expire date to 25 december 2020
+  ```bash
+  $ useradd -D -e 2020/12/25 test-user1
+  $ grep user-test1 /etc/shadow
+      user-test1:!!:18466:0:99999:7::18621:
+  ```
+
+  - `chage` 
+  ```bash
+  $ chage -E 2020/12/31 test-user1
+  $ grep test-user1 /etc/shadow
+      test-user1:!!:18466:0:99999:7::18627:
+  $ chage -l test-user1
+      Last password change					: Jul 23, 2020
+      Password expires					: never
+      Password inactive					: never
+      Account expires						: Dec 31, 2020
+      Minimum number of days between password change		: 0
+      Maximum number of days between password change		: 99999
+      Number of days of warning before password expires	: 7
+  ```
+
 - When a new user directory is being created, the system will copy the contents of /etc/skel to their home dir. /etc/skel is used as a template for the home of users.
   ```bash
   /etc/skel
@@ -2400,6 +2426,23 @@ The following is a partial list of the used files, terms and utilities:
   -L  --lock : lock this account
   -U  --unlock : Unlock this account
   -aG   --append --groups : add to more groups
+
+  $ usermod -s /sbin/nologin yuko
+  ```
+
+###### # Deleting Users
+- `userdel`
+  ```bash
+  userdel fahmi
+  userdel -r fahmi --> home directory and mail spool will be erased too
+  userdel -f -r fahmi --> force remove user even when the user is login 
+  ``
+
+##### # Managing Groups
+###### # Adding Group
+- `groupadd`
+  ```bash
+  groupadd -g 1200 newgroup
   ```
 
 
