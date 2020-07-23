@@ -2357,6 +2357,52 @@ The following is a partial list of the used files, terms and utilities:
 - userdel
 - usermod
 
+##### # Changing Password
+- Each user can change their password using the `passwd` command:
+  ```bash
+  $ passwd
+      Changing password for fahmi.
+      (current) UNIX password: 
+      New password: 
+      Retype new password: 
+      passwd: password updated successfully
+  ```
+- The root user can change any users password to anything (weak passwords) without providing their current password
+
+##### # Managing Users
+###### # Adding Users
+- When creating new user, the entry for new user is added to these config files: 
+  1. /etc/passwd : user information list
+  2. /etc/shadow : user password list
+  3. /etc/group : group list
+  4. /etc/gshadow : group password list
+
+- `useradd`
+  ```bash
+  -d	home directory (-d /home/user)
+  -m	create home directory
+  -s	specify shell
+  -G	add to additional groups
+  -c	comment. most of the time, users actual name. Use quotes if comments has spaces or special characters in them
+  ```
+- When a new user directory is being created, the system will copy the contents of /etc/skel to their home dir. /etc/skel is used as a template for the home of users.
+  ```bash
+  /etc/skel
+    |-- .bash_logout
+    |-- .bash_profile
+    |-- .bashrc
+  ```
+
+###### # Modifying Users
+- `usermod`
+  ```bash
+  -s  --shell : login shell
+  -L  --lock : lock this account
+  -U  --unlock : Unlock this account
+  -aG   --append --groups : add to more groups
+  ```
+
+
 ***
 
 #### # 107.2 Automate system administration tasks by scheduling jobs
