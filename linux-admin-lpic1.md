@@ -2236,6 +2236,27 @@ The following is a partial list of the used files, terms and utilities:
   done
   ```
 
+- **seq**
+  ```bash
+  seq 3
+      1
+      2
+      3
+  
+  seq 5 +3 15
+      5
+      8
+      11
+      14
+  
+  seq 10 -3 1
+      10
+      7
+      4
+      1
+  ```
+
+
 *** 
 
 ### # Topic 106: User Interfaces and Desktops
