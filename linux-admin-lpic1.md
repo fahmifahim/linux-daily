@@ -2480,43 +2480,43 @@ The following is a partial list of the used files, terms and utilities:
 - Crontab files are responsible to run commands on specific intervals. 
 - Each line has 5 fields to specify the run time and whatever after it is considered the command to be run.
 
-```bash
-A    B    C    D    E    command and arguments
-```
+  ```bash
+  A    B    C    D    E    command and arguments
+  ```
 
-|field | Meaning | values|
-|:---:|:---:|
-|A | minute | 0-59|
-|B	|hour	|0-23|
-|C	|day of month|1-31|
-|D	|month	|1-12 (or names, see below)|
-|E	|day of week	|0-7 (0 or 7 is Sunday, or use names: mon, tue, wed, thu, fri, sat, sun)|
+  |field | Meaning | values|
+  |:---:|:---:|
+  |A | minute | 0-59|
+  |B	|hour	|0-23|
+  |C	|day of month|1-31|
+  |D	|month	|1-12 (or names, see below)|
+  |E	|day of week	|0-7 (0 or 7 is Sunday, or use names: mon, tue, wed, thu, fri, sat, sun)|
 
 - Each time field can be a * to indicate ANY. 
 
-```bash
-EXAMPLE: 
+  ```bash
+  EXAMPLE: 
 
-# run every 5 minutes
-5 0 * * *       $HOME/bin/daily.job >> $HOME/tmp/out 2>&1
+  # run every 5 minutes
+  5 0 * * *       $HOME/bin/daily.job >> $HOME/tmp/out 2>&1
 
-# run at 2:15pm on the first of every month 
-15 14 1 * *     $HOME/bin/monthly
+  # run at 2:15pm on the first of every month 
+  15 14 1 * *     $HOME/bin/monthly
 
-# run at 10 pm on weekdays, annoy Joe
-0 22 * * 1-5    mail -s "It's 10pm" joe%Joe,%%Where are your kids?%
+  # run at 10 pm on weekdays, annoy Joe
+  0 22 * * 1-5    mail -s "It's 10pm" joe%Joe,%%Where are your kids?%
 
-# run every two hours at 23 minutes everyday
-23 0-23/2 * * * echo "run 23 minutes after midn, 2am, 4am ..., everyday"
+  # run every two hours at 23 minutes everyday
+  23 0-23/2 * * * echo "run 23 minutes after midn, 2am, 4am ..., everyday"
 
-5 4 * * sun     echo "run at 5 after 4 every sunday"
+  5 4 * * sun     echo "run at 5 after 4 every sunday"
 
-*/5 * * * *    echo "each 5 mintues"
+  */5 * * * *    echo "each 5 mintues"
 
-42 8,18 * * 1-5    echo "8:42 and 18:42 and only on weekdays (monday till friday)"
+  42 8,18 * * 1-5    echo "8:42 and 18:42 and only on weekdays (monday till friday)"
 
-@reboot        echo "runs after the reboot"
-```
+  @reboot        echo "runs after the reboot"
+  ```
 
 > Note: be careful about using a * on the first filed. That will run your cron on every minute!
 
@@ -2550,82 +2550,113 @@ EXAMPLE:
 ##### # at
 - `at` runs a command once at specific time
 
-$ at now + 1 min
-warning: commands will be executed using /bin/sh
-at> touch /tmp/at
-at> <EOT>
-job 3 at Thu Oct 29 22:12:00 2015
-Note: As always, at the end of input we press Ctrl+D
+  ```bash
+  $ at now + 1 min
+      warning: commands will be executed using /bin/sh
+      at> touch /tmp/at
+      at> <EOT>   --> press Ctrl+d to end
+      job 3 at Thu Oct 29 22:12:00 2015
+  ```
+  > Note: As always, at the end of input we press Ctrl+d
 
-If you want to check what is in the queue you can use atq and then try atrm 4 to delete job number 4;
+- If you want to check what is in the queue you can use `atq`
+- `atrm <job-number>` to delete entry at specific job number
+
+  ```bash
+  atq
+      3	Fri Jul 24 10:42:00 2020 a root
+
+  atrm 3 
+      --> this will remove job-number 3
+
+  ```
+
+  ```bash
+  $ at teatime
+      warning: commands will be executed using /bin/sh
+      at> echo "tea time is 4pm" 
+      at> <EOT>
+      job 4 at Fri Oct 30 16:00:00 2015
+  
+  $ at tomorrow
+      warning: commands will be executed using /bin/sh
+      at> echo "tomorrow this time"
+      at> <EOT>
+      job 5 at Fri Oct 30 22:15:00 2015
+  
+  $ at 17:30
+      warning: commands will be executed using /bin/sh
+      at> echo "this is the first 17:30"
+      at> <EOT>
+      job 6 at Fri Oct 30 17:30:00 2015
+  
+  $ atq
+      5    Fri Oct 30 22:15:00 2015 a jadi
+      4    Fri Oct 30 16:00:00 2015 a jadi
+      6    Fri Oct 30 17:30:00 2015 a jadi
+  
+  $ atrm 4
+  $ atq
+      5    Fri Oct 30 22:15:00 2015 a jadi
+      6    Fri Oct 30 17:30:00 2015 a jadi
+  ```
+
+##### # System wide cron
+- `/etc/crontab` This looks like a normal user file opened with crontab -e but has one extra field: `USER`
+- This file should be edited with an editor directly and we can mention which user runs this commands.
+
+  ```bash
+  A    B    C    D    E    USER    command and arguments
 
 
-$ at teatime
-warning: commands will be executed using /bin/sh
-at> echo "tea time is 4pm" 
-at> <EOT>
-job 4 at Fri Oct 30 16:00:00 2015
-jadi@funlife:~$ at tomorrow
-warning: commands will be executed using /bin/sh
-at> echo "tomorrow this time"
-at> <EOT>
-job 5 at Fri Oct 30 22:15:00 2015
-jadi@funlife:~$ at 17:30
-warning: commands will be executed using /bin/sh
-at> echo "this is the first 17:30"
-at> <EOT>
-job 6 at Fri Oct 30 17:30:00 2015
-jadi@funlife:~$ atq
-5    Fri Oct 30 22:15:00 2015 a jadi
-4    Fri Oct 30 16:00:00 2015 a jadi
-6    Fri Oct 30 17:30:00 2015 a jadi
-jadi@funlife:~$ atrm 4
-jadi@funlife:~$ atq
-5    Fri Oct 30 22:15:00 2015 a jadi
-6    Fri Oct 30 17:30:00 2015 a jadi
-system wide cron
-There is file called /etc/crontab. This looks like a normal user file opened with crontab -e but has one extra filed:
+  $ cat /etc/crontab
+      SHELL=/bin/bash
+      PATH=/sbin:/bin:/usr/sbin:/usr/bin
+      MAILTO=root
 
-A    B    C    D    E    USER    command and arguments
-This file should be edited with an editor directly and we can mention which user runs this commands.
+      # For details see man 4 crontabs
 
-# cat /etc/crontab 
-SHELL=/bin/sh
-PATH=/usr/bin:/usr/sbin:/sbin:/bin:/usr/lib/news/bin
-MAILTO=root
-#
-# check scripts in cron.hourly, cron.daily, cron.weekly, and cron.monthly
-#
--*/15 * * * *   root  test -x /usr/lib/cron/run-crons && /usr/lib/cron/run-crons >/dev/null 2>&1
-Note: Have a look at first two line. It configures the shell which will run the commands and the PATH variable plus who will get the output emails.
+      # Example of job definition:
+      # .---------------- minute (0 - 59)
+      # |  .------------- hour (0 - 23)
+      # |  |  .---------- day of month (1 - 31)
+      # |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...
+      # |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat
+      # |  |  |  |  |
+      # *  *  *  *  * user-name  command to be executed
+  ```
 
-As you can see this default crontab runs other crons! They are hourly, daily, weekly and monthly crons.
+> Note: Have a look at first two line. It configures the shell which will run the commands and the PATH variable plus who will get the output emails.
 
-System hourly, daliy, weekly, monthly, .. crons
-We have some system level crontab files in /etc/cron.d/ too. In other words, whatever file which is copied there, will be treated just like /etc/crontab file (a system wide cron file). This make systems much cleaner and lets programs to copy one file there instead of editing the /etc/crontab.
+#### # System hourly, daliy, weekly, monthly, .. crons
+- System level crontab files : `/etc/cron.d/`. 
+- In other words, whatever file which is *copied there*, will be treated just like `/etc/crontab` file (a system wide cron file). This make systems much cleaner and lets programs to copy one file there instead of editing the /etc/crontab.
 
-$ sudo tree /etc/cron* 
-root's password:
-/etc/cron.d
-„¤„Ÿ„Ÿ mdadm
-/etc/cron.daily
-„¥„Ÿ„Ÿ google-chrome
-„¥„Ÿ„Ÿ mdadm
-„¥„Ÿ„Ÿ mlocate.cron
-„¥„Ÿ„Ÿ packagekit-background.cron
-„¥„Ÿ„Ÿ suse-clean_catman
-„¥„Ÿ„Ÿ suse.de-backup-rc.config
-„¥„Ÿ„Ÿ suse.de-backup-rpmdb
-„¥„Ÿ„Ÿ suse.de-check-battery
-„¥„Ÿ„Ÿ suse.de-cron-local
-„¥„Ÿ„Ÿ suse.de-snapper
-„¤„Ÿ„Ÿ suse-do_mandb
-/etc/cron.deny [error opening dir]
-/etc/cron.hourly
-„¤„Ÿ„Ÿ suse.de-snapper
-/etc/cron.monthly
-/etc/crontab [error opening dir]
-/etc/cron.weekly
+  ```bash
+  $ tree /etc/cron*
+      /etc/cron.d
+          |-- 0hourly
+          |-- raid-check
+          `-- sysstat
+
+      /etc/cron.daily
+          |-- logrotate
+          |-- man-db.cron
+          `-- mlocate
+
+      /etc/cron.deny [error opening dir]
+      
+      /etc/cron.hourly
+      |-- 0anacron
+      `-- mcelog.cron
+      
+      /etc/cron.monthly
+      
+      /etc/crontab [error opening dir]
+      
+      /etc/cron.weekly
+  ```
+
 Lets have a look at one of the cron.d files:
 
 $ cat /etc/cron.d/mdadm 
