@@ -2828,6 +2828,12 @@ The following is a partial list of the used files, terms and utilities:
 - chronyc
 - pool.ntp.org
 
+#### # How computer deals with time
+- Computer has a clock inside its motherboard. It has its own battery and keeps the time even when the computer is turned-off. 
+
+##### # NTP
+- Network Time Protocol 
+
 - **ntpdate** 
   - set the date and time via NTP
   - The most straight forward command to set the systemclock is ntpdate and used like this:
@@ -2848,6 +2854,9 @@ The following is a partial list of the used files, terms and utilities:
   ```
 
   - After this, we need to set the `hwclock` to the just corrected system time by `sudo hwclock -w`.
+
+- **ntp daemon**
+  - `/etc/ntp.conf` is a configuration file for ntp daemon
 
 ***
 
