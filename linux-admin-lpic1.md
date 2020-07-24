@@ -51,7 +51,7 @@ The following is a partial list of the used files, terms and utilities:
 - lspci
 - lsusb
 
-**/proc** 
+**/proc**   
 | FileName | Details | 
 | :--- | :--- |
 | /proc/interrupts | IRQ information | 
@@ -62,6 +62,19 @@ The following is a partial list of the used files, terms and utilities:
 | /proc/cpuinfo | CPU information | 
 | /proc/dma | DMA channel information | 
 | /proc/modules | Loaded modules information | 
+
+```bash
+cat /proc/partitions
+    major minor  #blocks  name
+      8        0  488386584 sda
+      8        1    9764864 sda1
+      8        2  146484224 sda2
+      8        3   19530752 sda3
+      8        4          1 sda4
+      8        5    9764864 sda5
+      8        6  302838784 sda6
+      11        0    4481024 sr0
+```
 
 
 **lsusb** - list USB devices
@@ -134,7 +147,7 @@ The following is a partial list of the used files, terms and utilities:
 - Device priority can be set manually on BIOS display. 
 - Currently, other than BIOS, UEFI (Unified Extensible Firmware Interface) is recently developed and widely being used in the modern system. 
 
-#### 2. bootloader
+#### 2. Bootloader
 - Load the Kernel (from HDD) and initial RAM (initramfs)
 - Bootloader can be GRUB (1&2) or LILO which are great for disks less than 2TB.
 
@@ -181,7 +194,10 @@ The following is a partial list of the used files, terms and utilities:
 
 #### dmesg
 - Funny fact: During the bootup, only The Kernel is running so it should record and keep its own logs!
+- You may find the physical file of dmesg from `/var/log/dmesg`
 - dmesg command will show the full data from kernel ring buffer up to now. 
+- If the log amount met the maximum buffer size, the old log-entry will be replaced by the new one.
+
 ```bash
 # Print or control the kernel ring buffer
 $ dmesg
@@ -518,11 +534,15 @@ Description: Candidates should be able to determine the shared libraries that ex
 - Identify the typical locations of system libraries.
 - Load shared libraries.
 
+- By default, library files are located at `/lib` or `/usr/lib directory`. If you want to put library files other than these directory, you have to defined them as shared library mentioned below:  
+
 The following is a partial list of the used files, terms and utilities:
 - ldd
   - the ldd command helps you find:
     - If a program is dynamically or statically linked
     - What libraries a program needs
+    - ldd - print shared library dependencies
+
     ```bash
     $ ldd /sbin/ldconfig
     not a dynamic executable
@@ -543,7 +563,7 @@ The following is a partial list of the used files, terms and utilities:
     ```bash
     $ ldconfig
     ```
-    - ldconfig will update the `/etc/ld.so.cache`
+    - ldconfig will update the `/etc/ld.so.cache`. Program will use this cache file to refer the newly added library files. 
     
   2. Set the library path to LD_LIBRARY_PATH
   - Use this variable if you need to override the original installed libraries and use your own or a specific library. 
@@ -627,6 +647,8 @@ $ dpkg --status package-name
 ![dpkg-command](https://ping-t.com/mondai3/img/jpg/k33766.jpg)
 
 ##### apt-get
+- apt-get is purposed to install, update, remove Debian packages
+
 ```bash
 # Remove specific package
 $ apt-get remove [package-name]
@@ -699,6 +721,9 @@ $ rpm -q --changelog nfs-utils-1.3.0-0.61.el7.x86_64
 # Check and verify all packages
 $ rpm -Va
 $ rpm --verify --all
+
+# Findout which package owns a file called /etc/paper.config
+$ rpm -qf /etc/paper.config
 ```
 - <b>query</b></br>
 ![rpm](https://ping-t.com/mondai3/img/jpg/k35692.jpg)
@@ -721,7 +746,9 @@ $ zypper [option] subcommand
 ```
 
 **yum**
-- `/etc/yum.repos.d`
+- `/etc/yum.repos.d` is directory for yum repository information
+- Yum has the ability to install package with its dependency packages. 
+
 ```bash
 Command is one of:
     * install package1 [package2] [...]
@@ -736,6 +763,7 @@ Command is one of:
     * clean [ packages | metadata | expire-cache | rpmdb | plugins | all ]
     * grouplist
     * search string1 [string2] [...]
+    * provides - Is used to find out which package provides some feature or file.
 ```
 
 ***
@@ -1915,6 +1943,56 @@ The following is a partial list of the used files, terms and utilities:
 - umask
 - chown
 - chgrp
+
+#### # umask
+- This command tells the system what permissions **should not be given** to new files:
+
+```bash
+$ umask
+    0002
+- Which removes write (2) permissions from files.
+
+```
+
+- If we need to change umask, it can be done with the same command:
+- Rules for File: 
+  - 666 - umask
+  ```bash
+  umask = 0022
+  touch newfile
+  ls -l newfile = 666 - 022 = 644 -rw-r--r--
+  ```
+
+- Rules for Directory: 
+  - 777 - umask
+  ```bash
+  umask = 0022
+  mkdir newdir
+  ls -ld newdir = 755 drwxr-xr-x
+  ```
+
+
+```bash
+$ umask
+    0002
+
+$ touch newfile
+$ ls -ltrh newfile 
+    -rw-rw-r-- 1 jadi jadi 0 Feb  8 21:38 newfile
+
+$ mkdir newdir
+$ ls -ltrhd newdir
+    drwxrwxr-x 2 jadi jadi 4.0K Feb  8 21:38 newdir
+
+$ umask u=rw,g=,o=
+$ touch newerfile
+$ ls -l newerfile 
+    -rw------- 1 jadi jadi 0 Feb  8 21:41 newerfile
+$ umask
+    0177
+
+Note how we use u=rw,g=,o= to tell umask or chomd what we exactly need.
+```
 
 #### # File and Directory Permission (SUID, SGID, Stickybit)
 
