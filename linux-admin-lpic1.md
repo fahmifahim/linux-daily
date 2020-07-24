@@ -275,6 +275,10 @@ The following is a partial list of the used files, terms and utilities:
 - /etc/systemd/
 - /usr/lib/systemd/
 - wall
+  ```bash
+  $ wall "shutdown occurring in 5 minutes" 
+    --> send all users on the system a global standard output message on their running terminal.
+  ```
 
 #### # SysVinit
 - /sbin/init is started during the initial process. Autostart application is executed by order as recorded in the `/etc/inittab`.
@@ -343,6 +347,10 @@ $ shutdown -h +60
 $ shutdown -h 23:00
 $ shutdown -r 23:00 "Rebooting in 60 minutes"
 $ shutdown -r +60 "Rebooting in 60 minutes"
+
+# Shutdown command that will force a fsck to be run during the boot up process
+$ shutdown -F 
+
 ```
 
 #### # Systemctl command
@@ -413,10 +421,12 @@ Key Knowledge Areas:
 The following is a partial list of the used files, terms and utilities:
 - / (root) filesystem
 - /var filesystem
+  - is a filesystem stores files that are changed frequently
 - /home filesystem
 - /boot filesystem
 - EFI System Partition (ESP)
 - swap space
+  - Linux swap space is represented as `0x82`
 - mount points
 - partitions
 
@@ -742,6 +752,9 @@ $ rpm --verify --all
 
 # Findout which package owns a file called /etc/paper.config
 $ rpm -qf /etc/paper.config
+
+# verify the signature of a package
+$ rpm --checksig
 ```
 - <b>query</b></br>
 ![rpm](https://ping-t.com/mondai3/img/jpg/k35692.jpg)
@@ -888,6 +901,10 @@ The following is a partial list of the used files, terms and utilities:
 - zcat
 - nl
 - cut
+  ```bash
+  $ cut -f1 -d : /etc/passwd
+      --> display all the username
+  ```
 - sed
 - tr
 - uniq
@@ -920,11 +937,11 @@ $ uniq file1
 $ uniq -u file1
 aaaa  --> display only the uniqe entry
 
-$ uniq -d aaa
+$ uniq -d file1
 bbbb  --> display the duplicate entry
 
 # Count the number of occurences
-$ uniq -c aaa
+$ uniq -c file1
       1 aaaa
       4 bbbb
 ```
@@ -1212,6 +1229,8 @@ The following is a partial list of the used files, terms and utilities:
   `dd if=/backup/file of=/dev/hda bs=446 count=1`
   - Clear the bootloader
   `dd if=/dev/zero of=/dev/sda bs=446 count=1`
+  - Create a file full of zeros that is 1gig in size
+  `dd if=/dev/zero of=filename bs=1M count=1024`
 
 #### # File access timestamp
 - *stat*
@@ -1757,9 +1776,20 @@ $ mkfs -t ext4 /dev/sdc1
 ```
 ![mkfs](https://ping-t.com/mondai3/img/jpg/k34068.jpg)
 
-##### *mkswap*
+##### *mkswap* and **swapon-swapoff**
 ```bash
 $ mkswap /dev/sda6
+--> This will make the swap partition on /dev/sda6
+
+$ swapon /dev/sda6
+--> swapon enable devices and files for paging and swapping
+
+$ swapoff /dev/sda6
+
+$ free -h
+    total        used        free      shared  buff/cache   available
+    Mem:           3.5G        358M        2.0G         24M        1.2G        2.8G
+    Swap:          9.3G         53M        9.3G
 ```
 
 ##### *xfs* 
@@ -1786,6 +1816,9 @@ btrfs subvolume snapshot /home /tmp/home_bak
 | XFS | Developed by Silicongraphics, Journaling filesystem, Dynamic inode |
 | JFS | Developed by IBM, Journaling filesystem, Dynamic inod |
 
+- **dumpe2fs**
+  - dumps ext2/ext3/ext4 filesystem information
+
 ***
 #### 104.2 Maintain the integrity of filesystems
 Weight: 2
@@ -1801,6 +1834,9 @@ The following is a partial list of the used files, terms and utilities:
 - du
 - df
 - fsck
+  - fsck is a process that checks and repairs the Linux file system and can only be performed on unmounted file systems.
+  - `fsck -A` will check all file systems listed in /etc/fstab
+
 - e2fsck
   ```bash
   # automatically select "yes" for the question
@@ -2029,6 +2065,7 @@ Note how we use u=rw,g=,o= to tell umask or chomd what we exactly need.
 |guid |2000 |g+s |
 |stickybit |1000 |t |
 
+- When you set the setuid on a directory **it will be ignored**
 
 - File and Directory permission 
 
