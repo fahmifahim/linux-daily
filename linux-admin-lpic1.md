@@ -418,10 +418,10 @@ poweroff
 - More about systemctl
   - systemd unit : 
     - target
-    - mount
-    - device
-    - service
+    - service 
     - swap
+    - device
+    - mount
 
 ```bash
 $ ls -l /etc/systemd/system
