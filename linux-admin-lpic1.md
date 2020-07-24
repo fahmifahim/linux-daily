@@ -159,14 +159,20 @@ The following is a partial list of the used files, terms and utilities:
   - /etc/grub.d
 ```
 
-- GRUB Legacy (/boot/grub/menu.lst)
-  - disk1, partition1 : root(hd0,0)
-  - disk1, partition2 : root(hd0,1)
-  - disk2, partition2 : root(hd1,1)
-- GRUB2 (/boot/grub/grub.cfg)
-  - disk1, partition1 : root(hd0,1)
-  - disk1, partition2 : root(hd0,2)
-  - disk2, partition2 : root(hd1,2)
+- GRUB Legacy 
+  - /boot/grub/menu.lst, grub.conf
+  - Start from `disk0, partition0` 
+    - disk1, partition1 : root(hd0,0)
+    - disk1, partition2 : root(hd0,1)
+    - disk2, partition2 : root(hd1,1)
+- GRUB2 
+  - /boot/grub/grub.cfg
+  - /etc/default/grub
+  - /etc/grub.d
+  - Start from `disk0, partition1`
+    - disk1, partition1 : root(hd0,1)
+    - disk1, partition2 : root(hd0,2)
+    - disk2, partition2 : root(hd1,2)
 
 #### 3. Kernel
 - Kernel parameters (sometimes called boot parameters) supply the kernel with information about hardware parameters that it might not determine on its own - say single user mod boot (S)
@@ -189,8 +195,9 @@ The following is a partial list of the used files, terms and utilities:
 #### 4. init
 - When the kernel finishes loading, it usually starts /sbin/init. This program remains running until the system is shutdown. 
 - It is always assigned PID 1 for init process.
-- In SysVinit system, /sbin/init is started during the initial process. Autostart application is executed by order as recorded in the `/etc/inittab`. 
-- In recent/modern system (like `systemd`), /etc/inittab is no more used.  
+  - In `SysVinit` system, /sbin/init is started during the initial process. Autostart application is executed by order as recorded in the `/etc/inittab`. 
+  - In `UpStart` system, `/etc/event.d/rc-default` event is executed in parralel. The unit is job. 
+  - In `Systemd` system, `/lib/systemd/system/default.target` is executed. /etc/inittab is no more used.  
 
 #### dmesg
 - During the bootup, only The Kernel is running, so it should record and keep its own logs. `dmesg` extract information about the boot process. 
@@ -298,7 +305,9 @@ The following is a partial list of the used files, terms and utilities:
     RunLevel: 
     0 = poweroff
     1 = rescue / single user
-    2,3,4 = multi-user
+    2 = multi-user (Network disable, no NFS)
+    3 = multi-user (CUI)
+    4 = not used
     5 = graphical
     6 = reboot
     ```
@@ -333,6 +342,37 @@ telinit S
 
 
 #### # RunLevel
+- Runlevel
+  ```bash
+  RunLevel: 
+    0 = poweroff
+    1 = rescue / single user
+    2 = multi-user (Network disable, no NFS)
+    3 = multi-user (CUI)
+    4 = not used
+    5 = graphical
+    6 = reboot
+  ```
+
+- Setting files 
+  - SysVinit: /etc/inittab
+  - UpStart: /etc/event.d/rc-default
+  - Systemd: /lib/systemd/system/default.target
+
+- Command to change runlevel
+  - init N
+  - telinit N
+  - N: runlevel
+
+- Reload configuration
+  - init q
+  - init Q
+  - telinit q
+  - telinit Q
+
+- Check the current runlevel
+  - `runlevel`
+
 ```bash
 $ runlevel
 N 5
