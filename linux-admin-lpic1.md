@@ -2639,62 +2639,71 @@ The following is a partial list of the used files, terms and utilities:
           |-- raid-check
           `-- sysstat
 
+      /etc/cron.hourly
+          |-- 0anacron
+          `-- mcelog.cron
+      
       /etc/cron.daily
           |-- logrotate
           |-- man-db.cron
           `-- mlocate
 
-      /etc/cron.deny [error opening dir]
-      
-      /etc/cron.hourly
-      |-- 0anacron
-      `-- mcelog.cron
-      
       /etc/cron.monthly
-      
+          |-- monthly-executed-script-here
+          `-- monthly-executed-script-here
+            
+      /etc/cron.weekly
+          |-- weekly-executed-script-here
+          `-- weekly-executed-script-here
+
+      /etc/cron.deny [error opening dir]
       /etc/crontab [error opening dir]
       
-      /etc/cron.weekly
   ```
 
-Lets have a look at one of the cron.d files:
+- Lets have a look at one of the cron.d files:
+  
+  ```bash
+  $ cat /etc/cron.d/mdadm 
+      #
+      # cron.d/mdadm - regular redundancy checks
+      #
 
-$ cat /etc/cron.d/mdadm 
-#
-# cron.d/mdadm - regular redundancy checks
-#
+      # Start checking each month early in the morning.
+      # Continue each day until all done
 
-# Start checking each month early in the morning.
-# Continue each day until all done
+      PATH=/sbin:/usr/sbin:/bin:/usr/bin
+      0 1 * * 0 root source /etc/sysconfig/mdadm; [ -n "$MDADM_CHECK_DURATION" -a -x /usr/share/mdadm/mdcheck -a $(date +\%d) -le 7 ] && /usr/share/mdadm/mdcheck --duration "$MDADM_CHECK_DURATION"
+      0 1 * * 1-6 root source /etc/sysconfig/mdadm; [ -n "$MDADM_CHECK_DURATION" -a -x /usr/share/mdadm/mdcheck ] && /usr/share/mdadm/mdcheck --continue --duration "$MDADM_CHECK_DURATION"
+      But /etc/cron.hourly, /etc/cron.daily, /etc/cron.weekly, /etc/cron.monthly is TOTALLY DIFFERENT. In these directories are actual executable scripts and files. The cron will run these files one a hour, one a day, once a week or once a month based on their directory names.
+  ```
 
-PATH=/sbin:/usr/sbin:/bin:/usr/bin
-0 1 * * 0 root source /etc/sysconfig/mdadm; [ -n "$MDADM_CHECK_DURATION" -a -x /usr/share/mdadm/mdcheck -a $(date +\%d) -le 7 ] && /usr/share/mdadm/mdcheck --duration "$MDADM_CHECK_DURATION"
-0 1 * * 1-6 root source /etc/sysconfig/mdadm; [ -n "$MDADM_CHECK_DURATION" -a -x /usr/share/mdadm/mdcheck ] && /usr/share/mdadm/mdcheck --continue --duration "$MDADM_CHECK_DURATION"
-But /etc/cron.hourly, /etc/cron.daily, /etc/cron.weekly, /etc/cron.monthly is TOTALLY DIFFERENT. In these directories are actual executable scripts and files. The cron will run these files one a hour, one a day, once a week or once a month based on their directory names.
+#### # anacron
+- The difference between cron and anacron, is this:
 
-anacron
-The difference between cron and anacron, is this:
+    - If the system is down when the cron should run a task, that cron job wont run till the next occurrence! 
+    - But anacron creates the timestamp each time a daily, weekly or monthly job runs. If the system boots up and find outs that one of the anacron jobs are missed, it will run it during the boot!
 
-If the system is down when the cron should run a task, that cron job wont run till the next occurrence! But anacron creates the timestamp each time a daily, weekly or monthly job runs. If the system boots up and find outs that one of the anacron jobs are missed, it will run it during the boot!
+- As you can see anacron is useful for important tasks. If you need to take a backup once a week it is better to use anacron instead of cron; or feeding your kitten once a day using cron may lead to it staying hungry for a day if the system is down when he should be fed.
 
-As you can see anacron is useful for important tasks. If you need to take a backup once a week it is better to use anacron instead of cron; or feeding your dog once a day using cron may lead to it staying hungry for a day if the system is down when he should be fed.
+- *Note*: anacron checks the timestamps at BOOT TIME and do not handle hourly crons.
 
-Note: anacron checks the timestamps at BOOT TIME and do not handle hourly crons.
+#### # Controlling access using files
+- You have already seen files at /var/spool/cron/USERNAME. There are also 4 more files to control who can and can not use cron and at. The files are:
 
-controlling access using files
-You have already seen files at /var/spool/cron/tabs/USERNAME. There are also 4 more files to control who can and can not use cron and at. The files are:
+  - `/etc/cron.allow`
+  - `/etc/cron.deny`
 
-/etc/cron.allow
-/etc/cron.deny
+  - `/etc/at.allow`
+  - `/etc/at.deny`
 
-/etc/at.allow
-/etc/at.deny
-In most systems none of these files exist but if you create them, they will become active as follow:
+- In most systems none of these files exist but if you create them, they will become active as follow:
 
-file extension	functionality
-.allow	ONLY users mentioned in this file are allowed to run this service. All other users will be denied
-.deny	Everybody can use the service except the users mentioned in this file
-.
+|file extension	| functionality| 
+|:--:|:--|
+|.allow	| ONLY users mentioned in this file are allowed to run this service. All other users will be denied|
+|.deny	|Everybody can use the service except the users mentioned in this file
+.|
 
 
 ***
