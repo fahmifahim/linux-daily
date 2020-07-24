@@ -111,7 +111,7 @@ $ cat /proc/bus/usb/devices
 - modprobe setting files are put together inside the `/etc/modprobe.d/<your-modprobe-conf-file>.conf`. It must have *.conf* extension
 
 **rmmod**
-- Remove or uninstall module
+- Remove or uninstall kernel module
   `rmmod Zwifi`
 
 ***
@@ -193,7 +193,7 @@ The following is a partial list of the used files, terms and utilities:
 - In recent/modern system (like `systemd`), /etc/inittab is no more used.  
 
 #### dmesg
-- Funny fact: During the bootup, only The Kernel is running so it should record and keep its own logs!
+- During the bootup, only The Kernel is running, so it should record and keep its own logs. `dmesg` extract information about the boot process. 
 - You may find the physical file of dmesg from `/var/log/dmesg`
 - dmesg command will show the full data from kernel ring buffer up to now. 
 - If the log amount met the maximum buffer size, the old log-entry will be replaced by the new one.
@@ -510,6 +510,24 @@ The following is a partial list of the used files, terms and utilities:
 - grub-mkconfig
 - MBR
 
+#### # grub-mkconfig
+- In order to apply changes to the GRUB configuration file, we can follow the below command: 
+  ```bash
+  # make change on the GRUB TIMEOUT
+  vi /etc/default/grub
+      GRUB_TIMEOUT=5    --> change this setting
+      GRUB_DISTRIBUTOR="$(sed 's, release .*$,,g' /etc/system-release)"
+      GRUB_DEFAULT=saved
+      GRUB_DISABLE_SUBMENU=true
+      GRUB_TERMINAL_OUTPUT="console"
+      GRUB_CMDLINE_LINUX="crashkernel=auto rhgb quiet"
+      GRUB_DISABLE_RECOVERY="true"
+  
+  # apply changes
+  grub-mkconfig > /boot/grub/grub.cfg
+
+  grub-mkconfig - Generate a GRUB configuration file.
+  ```
 
 #### # Maintenance Mode on Grub
 ```bash
@@ -1132,7 +1150,14 @@ The following is a partial list of the used files, terms and utilities:
 - unxz
 - file globbing
 
-- *rmdir*
+
+- **find**
+  ```bash
+  # find files modified at least 3 days ago in your current working directory
+  find . -mtime +3
+  ```
+
+- **rmdir**
   - Remove multiple empty directory
   ```bash
   $ mkdir -p 1/2/3/4
