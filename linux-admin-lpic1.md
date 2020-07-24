@@ -2161,6 +2161,16 @@ The following is a partial list of the used files, terms and utilities:
 - perl = `#!/usr/bin/perl`
 - python = `#!/usr/bin/python`
 
+**Shell variable** 
+| shell variable | description |
+|:---:|:---:|
+|$$ |shell PID |
+|$? |return code |
+|$# |number of parameters |
+|$* |all parameters, devided by space |
+|$0 |shell filename |
+|$1, $2 ... |1st parameter, 2nd paramter ... |
+
 *** 
 
 #### # 105.2 Customize or write simple scripts
@@ -2471,8 +2481,8 @@ The following is a partial list of the used files, terms and utilities:
 - /var/spool/cron/
 - crontab
 - at
-- atq
-- atrm
+- atq : at -l
+- atrm : at -d
 - systemctl
 - systemd-run
 
@@ -2528,6 +2538,7 @@ The following is a partial list of the used files, terms and utilities:
 - Cron is a linux service. 
 - Use `crontab -l` to check your crons
 - Use `crontab -e` to edit your crons. This will open the cron files with a special editor and will load your inserted crons.
+- `crontab -r` to remove all your crontab entry. 
 
 - The files will be saved at `/var/spool/cron` or `/var/spool/crontabs`:
   - You should never edit these files directly; Use crontab -e instead.
@@ -2544,6 +2555,11 @@ The following is a partial list of the used files, terms and utilities:
   # Check the saved files at /var/spool/cron/<user>
   cat /var/spool/cron/root
       5 * * * * ping -c 1 master >> /tmp/kubernetes-ping.log
+
+  # Remove all crontab entries
+  crontab -r
+  crontab -l 
+      no crontab for root
   ```
 
 
@@ -2564,9 +2580,13 @@ The following is a partial list of the used files, terms and utilities:
 
   ```bash
   atq
+  --or--
+  at -l
       3	Fri Jul 24 10:42:00 2020 a root
 
-  atrm 3 
+  atrm 3
+  --or--
+  at -d 3 
       --> this will remove job-number 3
 
   ```
@@ -2702,8 +2722,7 @@ The following is a partial list of the used files, terms and utilities:
 |file extension	| functionality| 
 |:--:|:--|
 |.allow	| ONLY users mentioned in this file are allowed to run this service. All other users will be denied|
-|.deny	|Everybody can use the service except the users mentioned in this file
-.|
+|.deny	|Everybody can use the service except the users mentioned in this file|
 
 
 ***
@@ -2736,15 +2755,47 @@ The following is a partial list of the used files, terms and utilities:
 - ASCII
 - Unicode
 
-**Shell variable** 
-| shell variable | description |
-|:---:|:---:|
-|$$ |shell PID |
-|$? |return code |
-|$# |number of parameters |
-|$* |all parameters, devided by space |
-|$0 |shell filename |
-|$1, $2 ... |1st parameter, 2nd paramter ... |
+#### # Timezone
+- On linux systems you can use `date` and `cal` commands to check the date and the calendar. It is possible to print a custom date using + formatter:
+
+  ```bash
+  $ date +'%Y%m%d-%H%M'
+      20160103-2239
+  
+  Y = year
+  m = month
+  d = date
+  H = hour
+  M = minute
+  ```
+
+- **Setting Time Zone (with `tzselect`)**
+  - You can configure your timezone while installing the system or by using a GUI in the system settings. 
+  - There is a command line way to set the timezone manually. 
+  ```bash
+  # Set timezone manually to NewYork UTC. All these commands give the same result: 
+  TZ=New_York date
+  TZ=UTC date
+  date --utc
+  ```
+
+  ```bash
+  $ tzselect 
+      Please identify a location so that time zone rules can be set correctly.
+      Please select a continent, ocean, "coord", or "TZ".
+      1) Africa
+      2) Americas
+      3) Antarctica
+      4) Arctic Ocean
+      5) Asia
+      6) Atlantic Ocean
+      7) Australia
+      8) Europe
+      9) Indian Ocean
+      10) Pacific Ocean
+      11) coord - I want to use geographical coordinates.
+      12) TZ - I want to specify the time zone using the Posix TZ format.
+  ```
 
 ***
 
@@ -2770,12 +2821,33 @@ The following is a partial list of the used files, terms and utilities:
 - /etc/ntp.conf
 - /etc/chrony.conf
 - date
-- hwclock
+- hwclock 
 - timedatectl
 - ntpd
 - ntpdate
 - chronyc
 - pool.ntp.org
+
+- **ntpdate** 
+  - set the date and time via NTP
+  - The most straight forward command to set the systemclock is ntpdate and used like this:
+
+  ```bash
+  ntpdate pool.ntp.org
+      4 Jan 22:15:02 ntpdate[18708]: adjust time server 194.225.150.25 offset -0.006527 sec
+      
+  -q      Query only - don't set the clock.
+  
+  ntpdate -q ntp.nict.jp
+      server 133.243.238.244, stratum 1, offset 0.001352, delay 0.04015
+      server 133.243.238.164, stratum 1, offset 0.001476, delay 0.04015
+      server 133.243.238.243, stratum 1, offset 0.001645, delay 0.04114
+      server 61.205.120.130, stratum 1, offset 0.001800, delay 0.04990
+      server 133.243.238.163, stratum 1, offset 0.001070, delay 0.03937
+      24 Jul 15:16:20 ntpdate[7045]: adjust time server 133.243.238.163 offset 0.001070 sec
+  ```
+
+  - After this, we need to set the `hwclock` to the just corrected system time by `sudo hwclock -w`.
 
 ***
 
