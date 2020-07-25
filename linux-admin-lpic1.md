@@ -194,7 +194,7 @@ The following is a partial list of the used files, terms and utilities:
 
 #### 4. init
 - When the kernel finishes loading, it usually starts /sbin/init. This program remains running until the system is shutdown. 
-- It is always assigned PID 1 for init process.
+- It is always assigned PID 1 for init process. Åö
   - In `SysVinit` system, /sbin/init is started during the initial process. Autostart application is executed by order as recorded in the `/etc/inittab`. 
   - In `UpStart` system, `/etc/event.d/rc-default` event is executed in parralel. The unit is job. 
   - In `Systemd` system, `/lib/systemd/system/default.target` is executed. /etc/inittab is no more used.  
@@ -556,7 +556,7 @@ Key Knowledge Areas:
 
 The following is a partial list of the used files, terms and utilities:
 - menu.lst, grub.cfg and grub.conf
-- grub-install
+- grub-install  Åö
 - grub-mkconfig
 - MBR
 
@@ -642,9 +642,9 @@ The following is a partial list of the used files, terms and utilities:
 - Common library directory
 ```bash
 /lib
-/lib64
+/lib64  Åö
 /usr/lib
-/usr/lib64
+/usr/lib64Å@Åö
 ```
 
 *Linking*
@@ -1547,7 +1547,7 @@ rtt min/avg/max/mdev = 223.584/224.767/225.950/1.183 ms
 #### # Kill Process
 1. kill - terminate a process
 - You can control processes by using signals. Actually pressing Ctrl+c and Ctrl+z is also sending signals. 
-- ctrl+c = interrupt (sigint):2
+- ctrl+c = interrupt (sigint):2   Åö
 - ctrl+z = stop (sigstop):19
 - Another way for this is using the kill command:
 - kill using job number
@@ -1808,6 +1808,7 @@ The following is a partial list of the used files, terms and utilities:
 
 ##### *mkfs*
 - This command + option (-t) will create file system ext2/ext3/ext4/xfs/jfs
+  - `if -t not specified, the default is to crate ext2 filesystem`  Åö
 - on the other hand, mke2fs creates ext2/ext3/ext4
 ```bash
 $ mkfs [option] [device-name]
@@ -2250,7 +2251,7 @@ Key Knowledge Areas:
 The following is a partial list of the used files, terms and utilities:
 - find
 - locate
-- updatedb
+- updatedb  Åö
 - /etc/updatedb.conf
 - whereis
 - which
