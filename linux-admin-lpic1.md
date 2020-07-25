@@ -3183,6 +3183,7 @@ user.*                -/var/log/user.log
 - Now we are generating a lot of logs. What should we do with them? How they should be archived? The logrotate utility assists us in this area. Its main config file is /etc/logrotate.conf and as any modern program, other config files can go into /etc/logrotate.d/.
 - `logrotate create 600 user-name group-name`
 - `mailadmin@example.com` will cause the log to be emailed to admin@example.com when the logrotation process completed
+- `nocompress`: option to disable compression
 
 
 
@@ -3245,13 +3246,14 @@ The following is a partial list of the used files, terms and utilities:
 **CUPS web interface**
 - The general way to access the CUPS configuration and info page is going to the servers IP on port `631` from a browser. 
 - That will be `localhost:631` or 127.0.0.1:631 from your browser.
+- `http://localhost:631/jobs?which_jobs=completed` : to view a list of completed print jobs
 
 **legacy tools**
 - lpr :	print a file
 - lpq :	show print queue/jobs
   - lpq
-  - lpstat -a
-  - lpc status all 
+  - `lpstat -a`: lpc status all 
+  - `lpstat -w completed`: show the completed print job
 - lprm : rm/remove a file from priner queue
 - lpc	: printer control / troubleshooting program
 
@@ -3331,6 +3333,19 @@ The following is a partial list of the used files, terms and utilities:
 - Subnetting
 - TCP, UDP, ICMP
 
+##### # CIDR
+- Classless Inter-Domain Routing or CIDR is another way of talking about subnet masks. Telling someone that "my network is 192.168.1.0 and my subnet mask is 255.255.255.0" is difficult so some people prefer to say "my network is 192.168.1.0/24". This is a shortcut! 24 is the number of 1s in your subnet which is 11111111.11111111.11111111.00000000 in binary and has twenty four 1s. At the beginning this might look difficult but in practice it is more functional to use "my network is 172.16.1.1/16" instead of "my network is 172.16.1.1 with netmask 255.255.0.0".
+
+|decimal netmask | binary netmask | CIDR|
+|:--:|:--:|:--:|
+|255.255.255.0 | 11111111.11111111.11111111.00000000 | /24|
+|255.255.0.0 | 11111111.11111111.00000000.00000000 | /16|
+|255.0.0.0 | 11111111.00000000.00000000.00000000 | /8|
+|255.255.255.240 | 11111111.11111111.11111111.11110000 | /28|
+|255.255.255.248 | 11111111.11111111.11111111.11111000 | /29|
+
+
+
 ***
 
 #### # 109.2 Persistent network configuration
@@ -3405,6 +3420,15 @@ The following is a partial list of the used files, terms and utilities:
 - host
 - dig
 - getent
+
+
+- **CIDR**
+  - /25
+  - 255.255.255.10000000
+  - 255.255.255.128
+
+- route
+  - route add -net 192.168.51.0 netmask 255.255.255.0 gw 192.168.51.1
 
 ***
 
