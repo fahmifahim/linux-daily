@@ -3069,6 +3069,7 @@ The following is a partial list of the used files, terms and utilities:
 - /etc/localtime
   - `/etc/localtime` file, which can be an actual file or a symbolic link, is used to indicate the local time zone. 
 - /etc/ntp.conf
+  - `driftfile` configuration option sets the location of the driftfile for ntpd. The drift file helps to maintain time accuracy. 
 - /etc/chrony.conf
 - date
 - hwclock 
@@ -3077,6 +3078,7 @@ The following is a partial list of the used files, terms and utilities:
 - ntpdate
 - chronyc
 - pool.ntp.org
+  - `pool.ntp.org` provides a free service for time synchronization. When you use pool.ntp.org as the target, you will typically receive an NTP server that is geographically close to your location, or at least as close as possible.
 
 #### # How computer deals with time
 - Computer has a clock inside its motherboard. It has its own battery and keeps the time even when the computer is turned-off. 
@@ -3176,6 +3178,7 @@ user.*                -/var/log/user.log
 
 ##### # logrotate
 - Now we are generating a lot of logs. What should we do with them? How they should be archived? The logrotate utility assists us in this area. Its main config file is /etc/logrotate.conf and as any modern program, other config files can go into /etc/logrotate.d/.
+- `logrotate create 600 user-name group-name`
 
 
 
@@ -3221,6 +3224,8 @@ Key Knowledge Areas:
 The following is a partial list of the used files, terms and utilities:
 - CUPS configuration files, tools and utilities
 - /etc/cups/
+  - Configuration files for CUPS are found in **/etc/cups**. 
+  - However, it is also common to manage CUPS through its web interface.
 - lpd legacy interface (lpr, lprm, lpq)
 
 ##### # CUPS
@@ -3235,6 +3240,9 @@ The following is a partial list of the used files, terms and utilities:
 **legacy tools**
 - lpr :	print a file
 - lpq :	show print queue/jobs
+  - lpq
+  - lpstat -a
+  - lpc status all 
 - lprm : rm/remove a file from priner queue
 - lpc	: printer control / troubleshooting program
 
@@ -3242,11 +3250,21 @@ The following is a partial list of the used files, terms and utilities:
 - This command is used to send a job to a printer. Again the printer is specified by -P
 - If no printer is specified, the default printer will be used
 ```bash
+# print document with specific printer name
 $ lpr -P Apple-Dot-Matrix for_print.txt 
     lpq
     Apple-Dot-Matrix is ready and printing
     Rank    Owner   Job     File(s)                         Total Size
     active  jadi    1       Untitled Document 1             7168 bytes
+
+--or--
+$ lp -d Apple-Dot-Matrix for_print.txt
+    -d: --destination
+
+# Print document without filtering
+$ lpr -o raw file-name
+$ lp -o raw file-name
+$ lpr -l file-name
 ```
 
 **lprm**
@@ -3274,7 +3292,12 @@ Apple-Dot-Matrix:
 - `cupsreject`	tells the printer to reject any new job
 - `cupsenable`	enables the actual/physical printing of the jobs
 - `cupsdisable`	disables the physical printing of the jobs
+  - `cupsdisable -c -r ReasonOfCancellation PrinterName`
 
+- **PPD**: Postscript Printer Description
+
+**lpadmin**
+- lpadmin - configure cups printers and classes
 
 ***
 
