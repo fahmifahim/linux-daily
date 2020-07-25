@@ -889,7 +889,7 @@ The following is a partial list of the used files, terms and utilities:
 - man
 - uname
 - history
-- .bash_history
+- .bash_history š
 - Quoting
 
 #### # Environment
@@ -911,6 +911,13 @@ $ set | egrep var[1,2]
 
 ```
 ![printenv](https://ping-t.com/mondai3/img/jpg/k34146.jpg)
+
+- Remove environment variables 
+  ```bash
+  env -u
+    --> --unset
+  ```
+
 
 #### # history
 ```bash
@@ -2316,18 +2323,32 @@ The following is a partial list of the used files, terms and utilities:
 - .
 - source
 - /etc/bash.bashrc
+  - `--norc` is an option to bash that will cause the shell to be executed without reading the initialization ( `/etc/bash.bashrc` or `~/.bashrc` )
 - /etc/profile
 - env
 - export
 - set
 - unset
+  - `-v` option, which is the default, tells unset that the name given is a shell variable rather than a function. 
 - ~/.bash_profile
 - ~/.bash_login
 - ~/.profile
 - ~/.bashrc
 - ~/.bash_logout
+  - Other than this bash, there is /etc/bash.bash_logout: This shell will execute command on logout for all users.
 - function
 - alias
+  - The alias command's format is `name=value`
+  - Example: `alias ls="ls -la"`
+
+**source**
+- The source command is used to execute commands from a file. 
+- A typical use case is to create functions or variables that are then **available for use within the current session**.
+- Minimum permission is to be able to read the file. `chmod 400 file-name`
+
+**exec**
+- The exec command executes the command given as its argument and will then exit the shell. 
+- The `source` command does not exit the shell.
 
 **Login Shell** 
 - Here is the order: 
@@ -2351,6 +2372,15 @@ The following is a partial list of the used files, terms and utilities:
 |$* |all parameters, devided by space |
 |$0 |shell filename |
 |$1, $2 ... |1st parameter, 2nd paramter ... |
+
+**PS1**
+- The PS1 variable usually has its default set in /etc/profile and is used as the shell prompt. Users can customize the prompt to include hostname, working directory, and other elements.
+  ```bash
+  # example of PS1
+  echo $PS1
+      [\u@\h \W]\$
+  ```
+
 
 *** 
 
@@ -2425,6 +2455,10 @@ The following is a partial list of the used files, terms and utilities:
     command2 on $OUTPUT
     commandN
   done
+
+  --sample4--
+  LIST="one two three four"
+  for VAR in $LIST
   ```
 
 - **seq**
@@ -2602,6 +2636,9 @@ The following is a partial list of the used files, terms and utilities:
       Minimum number of days between password change		: 0
       Maximum number of days between password change		: 99999
       Number of days of warning before password expires	: 7
+
+  # When provided with -1, the expiration will be removed.
+  $ chage -E -1 test-user1
   ```
 
 - When a new user directory is being created, the system will copy the contents of /etc/skel to their home dir. /etc/skel is used as a template for the home of users.
@@ -2638,6 +2675,10 @@ The following is a partial list of the used files, terms and utilities:
   groupadd -g 1200 newgroup
   ```
 
+- Changing group name
+  ```bash
+  groupmod -n before-change after-change
+  ```
 
 ***
 
@@ -2714,6 +2755,16 @@ The following is a partial list of the used files, terms and utilities:
 > Note: Use with care. Something like 42 8 1 1 0 runs ONLY IF 1st Of Jan is a Monday!
 
 - When a cron runs, the output will be emailed to the owner of the cron.
+
+##### # Shortcuts
+- @reboot : Run once after reboot.
+- @yearly : Run once a year, ie. 0 0 1 1 *
+- @annually : Run once a year, ie. 0 0 1 1 *
+- @monthly : Run once a month, ie. 0 0 1 * *
+- @weekly : Run once a week, ie. 0 0 * * 0
+- @daily : Run once a day, ie. 0 0 * * *
+- @hourly : Run once an hour, ie. 0 * * * *
+
 
 ##### # User specific crons
 - Cron is a linux service. 
@@ -2923,6 +2974,8 @@ The following is a partial list of the used files, terms and utilities:
 - /etc/localtime
 - /usr/share/zoneinfo/
 - LC_*
+  - `LC_TIME` environment variable is used to control the display and behavior of the date and time. 
+  - `LC_TIME`: environment variable controls the format of dates and times, such as a 12-hour or 24-hour formatted clock
 - LC_ALL
 - LANG
 - TZ
@@ -2931,8 +2984,12 @@ The following is a partial list of the used files, terms and utilities:
 - timedatectl
 - date
 - iconv
+  - iconv - convert text from one character encoding to another
+  - `iconv --list`: shows the available character sets on a given system
 - UTF-8
+  - UTF-8 provides multibyte character encoding and is generally accepted as the standard for encoding moving forward
 - ISO-8859
+  - ISO-8859 is single byte encoded
 - ASCII
 - Unicode
 
@@ -2997,8 +3054,11 @@ Key Knowledge Areas:
 
 The following is a partial list of the used files, terms and utilities:
 - /usr/share/zoneinfo/
+  - In this directory you will find information on the various regions and time zones available. 
+  - The files within this hierarchy can be symlinked to `/etc/localtime`. 
 - /etc/timezone
 - /etc/localtime
+  - `/etc/localtime` file, which can be an actual file or a symbolic link, is used to indicate the local time zone. 
 - /etc/ntp.conf
 - /etc/chrony.conf
 - date
