@@ -2615,6 +2615,7 @@ The following is a partial list of the used files, terms and utilities:
   -G	--groups  : add to additional/secondary groups
   -c	comment. most of the time, users actual name. Use quotes if comments has spaces or special characters in them
   -f  --inactive  : The number of days after a password expires until the account is permanently disabled
+  -r  --system  : Create a system account
   ```
   - Set manually user expire date to 25 december 2020
   ```bash
@@ -2639,6 +2640,8 @@ The following is a partial list of the used files, terms and utilities:
 
   # When provided with -1, the expiration will be removed.
   $ chage -E -1 test-user1
+
+  # 
   ```
 
 - When a new user directory is being created, the system will copy the contents of /etc/skel to their home dir. /etc/skel is used as a template for the home of users.
@@ -2692,6 +2695,7 @@ Key Knowledge Areas:
 - Manage cron and at jobs.
 - Configure user access to cron and at services.
 - Understand systemd timer units.
+  - `list-timers` option shows the currently active timers with systemd
 
 The following is a partial list of the used files, terms and utilities:
 - /etc/cron.{d,daily,hourly,monthly,weekly}/
@@ -2701,6 +2705,8 @@ The following is a partial list of the used files, terms and utilities:
 - /etc/cron.allow
 - /etc/cron.deny
 - /var/spool/cron/
+  - /var/spool/cron/crontabs : cron
+  - /var/spool/cron/atjobs : at
 - crontab
 - at
 - atq : at -l
@@ -2900,14 +2906,14 @@ The following is a partial list of the used files, terms and utilities:
           |-- man-db.cron
           `-- mlocate
 
-      /etc/cron.monthly
-          |-- monthly-executed-script-here
-          `-- monthly-executed-script-here
-            
       /etc/cron.weekly
           |-- weekly-executed-script-here
           `-- weekly-executed-script-here
 
+      /etc/cron.monthly
+          |-- monthly-executed-script-here
+          `-- monthly-executed-script-here
+            
       /etc/cron.deny [error opening dir]
       /etc/crontab [error opening dir]
       
@@ -3015,6 +3021,9 @@ The following is a partial list of the used files, terms and utilities:
   TZ=New_York date
   TZ=UTC date
   date --utc
+
+  --or-- (to set timezon to central time)
+  TZ='America/Chicago'; export TZ
   ```
 
   ```bash
@@ -3131,6 +3140,47 @@ Terms and Utilities:
 - /etc/systemd/journald.conf
 - /var/log/journal/
 
+
+- The Linux logging system is under heavy changes. We will cover the syslog but most system have replaced it with rsyslog and systemd journals. The strange thing is the fact that systemd journal uses a binary file format which is not that common in Linux world.
+
+- The logging in linux is orginized based on three concepts: facilities, priorities and actions. When a program generated a log, it tags or labels that log with a facility (like mail) which says what this log is and a priority (like alert). Each tag can have values like the following list:
+
+  - facilities: auth, user, kern, cron, daemon, mail, user, local1, local2, ...
+  - priorities: emerg/panic, alert, crit, err/error, warn/warning, notice, info, debug
+
+##### # syslog and rsyslog
+- Most modern system use rsyslog instead of syslog. Their functionality is mostly same and here we will only cover the rsyslog.
+
+- The main configuration file in rsyslog, as you should be able to guess is /etc/syslog.conf. It loads some modules on the top and then have lines like this:
+
+```bash
+auth,authpriv.*            /var/log/auth.log
+*.*;auth,authpriv.none        -/var/log/syslog
+#cron.*                /var/log/cron.log
+daemon.*            -/var/log/daemon.log
+kern.*                -/var/log/kern.log
+lpr.*                -/var/log/lpr.log
+mail.*                -/var/log/mail.log
+user.*                -/var/log/user.log
+```
+
+##### # journalctl
+- The newer distributions are switching to systemd and are using systemd journal for their logging. As I mentioned earlier the systemd keeps its logs as binary files and the user should use the journalctl to access them.
+
+##### # logger
+- It is possible to use the logger command to generate some logs:
+  ```bash
+  logger local1.info test-hello
+  ```
+- This will appear at /var/log/syslog.
+
+##### # logrotate
+- Now we are generating a lot of logs. What should we do with them? How they should be archived? The logrotate utility assists us in this area. Its main config file is /etc/logrotate.conf and as any modern program, other config files can go into /etc/logrotate.d/.
+
+
+
+
+
 ***
 
 #### # 108.3 Mail Transfer Agent (MTA) basics
@@ -3172,6 +3222,59 @@ The following is a partial list of the used files, terms and utilities:
 - CUPS configuration files, tools and utilities
 - /etc/cups/
 - lpd legacy interface (lpr, lprm, lpq)
+
+##### # CUPS
+- Most Linux distros use CUPS for printing. 
+- CUPS stands for `Common Unix Printing System`. 
+- There are different interfaces for CUPS link command line tools, web based interface and GUIs. CUPS is designed to simplify the printing on various printers from different manufactures.
+
+**CUPS web interface**
+- The general way to access the CUPS configuration and info page is going to the servers IP on port `631` from a browser. 
+- That will be `localhost:631` or 127.0.0.1:631 from your browser.
+
+**legacy tools**
+- lpr :	print a file
+- lpq :	show print queue/jobs
+- lprm : rm/remove a file from priner queue
+- lpc	: printer control / troubleshooting program
+
+**lpr**
+- This command is used to send a job to a printer. Again the printer is specified by -P
+- If no printer is specified, the default printer will be used
+```bash
+$ lpr -P Apple-Dot-Matrix for_print.txt 
+    lpq
+    Apple-Dot-Matrix is ready and printing
+    Rank    Owner   Job     File(s)                         Total Size
+    active  jadi    1       Untitled Document 1             7168 bytes
+```
+
+**lprm**
+- The rm is for remove so the lprm will remove jobs from the queue. You need to provide the Job ID to this command.
+- `lprm -` will remove all the print jobs
+
+**lpc**
+- Here, the c is for `control`. 
+- lpc lets you check the status (via lpc status) and troubleshoot your printers.
+
+```bash
+$ lpc status
+Apple-Dot-Matrix:
+    printer is on device 'ipp' speed -1
+    queuing is enabled
+    printing is enabled
+    2 entries
+    daemon present
+```
+
+- **queuing is enabled** tell us that the queue can accept new print jobs. If the queue is disabled, you can not even send new jobs to the printer.
+- **printing is enabled** means that the printer is actually can print on the paper. This will be on the disable state if the printer is out of ink or paper or experiencing a paper jam.
+
+- `cupsaccept`	tells the printer queue to accept new jobs
+- `cupsreject`	tells the printer to reject any new job
+- `cupsenable`	enables the actual/physical printing of the jobs
+- `cupsdisable`	disables the physical printing of the jobs
+
 
 ***
 
