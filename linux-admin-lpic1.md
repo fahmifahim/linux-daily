@@ -255,6 +255,9 @@ $ journalctl -p 3
 
 # Tail the new entry
 $ journalctl -f -u '*docker*'
+
+# determine the amount of disk space used by systemd journal log files
+$ journalctl --disk-usage
 ```
 
 ***
@@ -3179,6 +3182,7 @@ user.*                -/var/log/user.log
 ##### # logrotate
 - Now we are generating a lot of logs. What should we do with them? How they should be archived? The logrotate utility assists us in this area. Its main config file is /etc/logrotate.conf and as any modern program, other config files can go into /etc/logrotate.d/.
 - `logrotate create 600 user-name group-name`
+- `mailadmin@example.com` will cause the log to be emailed to admin@example.com when the logrotation process completed
 
 
 
@@ -3203,8 +3207,13 @@ Terms and Utilities:
 - newaliases
 - mail
 - mailq
+  - The mailq command is used on Postfix servers in order to view a summary of the current mail queue. 
+  - Details of the queue include the ID of the mail being sent along with one or more of the email addresses involved in the transaction. 
+  - The mailq command may also work with newer versions of sendmail.
 - postfix
 - sendmail
+  - `sendmail -bp`: List the mail queue.
+  - same as `mailq`
 - exim
 
 ***
