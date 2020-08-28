@@ -328,6 +328,11 @@ The following is a partial list of the used files, terms and utilities:
 ```bash
 # Change mode temporary to GUI mode
 systemctl isolate graphical.target
+reboot 
+
+# Change mode temporary to CUI multi-user
+systemctl isolate multi-user.target
+reboot
 ```
 
 #### # Telinit
