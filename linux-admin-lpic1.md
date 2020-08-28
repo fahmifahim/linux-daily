@@ -194,7 +194,7 @@ The following is a partial list of the used files, terms and utilities:
 
 #### 4. init
 - When the kernel finishes loading, it usually starts /sbin/init. This program remains running until the system is shutdown. 
-- It is always assigned PID 1 for init process. š
+- It is always assigned PID 1 for init process. â˜…
   - In `SysVinit` system, /sbin/init is started during the initial process. Autostart application is executed by order as recorded in the `/etc/inittab`. 
   - In `UpStart` system, `/etc/event.d/rc-default` event is executed in parralel. The unit is job. 
   - In `Systemd` system, `/lib/systemd/system/default.target` is executed. /etc/inittab is no more used.  
@@ -322,6 +322,13 @@ The following is a partial list of the used files, terms and utilities:
     Example: K01Bluetooth
     ```
   - As mentioned above, in Single-User system, the appropriate Kill script name for Blueetooth process: `/etc/rc1.d/K01Bluetooth`
+
+
+#### # Change default target
+```bash
+# Change mode temporary to GUI mode
+systemctl isolate graphical.target
+```
 
 #### # Telinit
 ```bash
@@ -559,7 +566,7 @@ Key Knowledge Areas:
 
 The following is a partial list of the used files, terms and utilities:
 - menu.lst, grub.cfg and grub.conf
-- grub-install  š
+- grub-install  â˜…
 - grub-mkconfig
 - MBR
 
@@ -645,9 +652,9 @@ The following is a partial list of the used files, terms and utilities:
 - Common library directory
 ```bash
 /lib
-/lib64  š
+/lib64  â˜…
 /usr/lib
-/usr/lib64@š
+/usr/lib64ã€€â˜…
 ```
 
 *Linking*
@@ -892,7 +899,7 @@ The following is a partial list of the used files, terms and utilities:
 - man
 - uname
 - history
-- .bash_history š
+- .bash_history â˜…
 - Quoting
 
 #### # Environment
@@ -1539,7 +1546,7 @@ $ jobs
 - The nohup command lets you run your commands even after you logged out and writes its output to nohup.out:
 ```bash
 $ nohup ping 4.2.2.4
-nohup: ignoring input and appending output to Âenohup.outÂf
+nohup: ignoring input and appending output to ï¾‚â€˜nohup.outï¾‚â€™
 ^C
 
 $ cat nohup.out 
@@ -1557,7 +1564,7 @@ rtt min/avg/max/mdev = 223.584/224.767/225.950/1.183 ms
 #### # Kill Process
 1. kill - terminate a process
 - You can control processes by using signals. Actually pressing Ctrl+c and Ctrl+z is also sending signals. 
-- ctrl+c = interrupt (sigint):2   š
+- ctrl+c = interrupt (sigint):2   â˜…
 - ctrl+z = stop (sigstop):19
 - Another way for this is using the kill command:
 - kill using job number
@@ -1818,7 +1825,7 @@ The following is a partial list of the used files, terms and utilities:
 
 ##### *mkfs*
 - This command + option (-t) will create file system ext2/ext3/ext4/xfs/jfs
-  - `if -t not specified, the default is to crate ext2 filesystem`  š
+  - `if -t not specified, the default is to crate ext2 filesystem`  â˜…
 - on the other hand, mke2fs creates ext2/ext3/ext4
 ```bash
 $ mkfs [option] [device-name]
@@ -2261,7 +2268,7 @@ Key Knowledge Areas:
 The following is a partial list of the used files, terms and utilities:
 - find
 - locate
-- updatedb  š
+- updatedb  â˜…
 - /etc/updatedb.conf
 - whereis
 - which
