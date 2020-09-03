@@ -194,7 +194,7 @@ The following is a partial list of the used files, terms and utilities:
 
 #### 4. init
 - When the kernel finishes loading, it usually starts /sbin/init. This program remains running until the system is shutdown. 
-- It is always assigned PID 1 for init process. â˜…
+- It is always assigned PID 1 for init process. â˜?
   - In `SysVinit` system, /sbin/init is started during the initial process. Autostart application is executed by order as recorded in the `/etc/inittab`. 
   - In `UpStart` system, `/etc/event.d/rc-default` event is executed in parralel. The unit is job. 
   - In `Systemd` system, `/lib/systemd/system/default.target` is executed. /etc/inittab is no more used.  
@@ -571,7 +571,7 @@ Key Knowledge Areas:
 
 The following is a partial list of the used files, terms and utilities:
 - menu.lst, grub.cfg and grub.conf
-- grub-install  â˜…
+- grub-install  â˜?
 - grub-mkconfig
 - MBR
 
@@ -657,9 +657,9 @@ The following is a partial list of the used files, terms and utilities:
 - Common library directory
 ```bash
 /lib
-/lib64  â˜…
+/lib64  â˜?
 /usr/lib
-/usr/lib64ã€€â˜…
+/usr/lib64ã€€â˜?
 ```
 
 *Linking*
@@ -904,7 +904,7 @@ The following is a partial list of the used files, terms and utilities:
 - man
 - uname
 - history
-- .bash_history â˜…
+- .bash_history â˜?
 - Quoting
 
 #### # Environment
@@ -1359,6 +1359,12 @@ Modify: 2020-07-19 17:29:42.145041851 +0900
 #### * Archive (tar, bz2, xz, gzip) -> [reference](https://jadi.gitbooks.io/lpic1/content/1033_perform_basic_file_management.html)
 1. tar 
 ```bash
+# Archive to tar, then compress in gzip (tgz)
+$ tar czvf test.tgz /folder-to-compress
+# Decompress tgz
+$ tar tzvf test.tgz 
+$ tar xzvf test.tgz
+
 # Compress and decompress tar.bzip2
 $ tar cfjv test.tar.bzip2 /test
 $ tar tfjv test.tar.bzip2
@@ -1551,7 +1557,7 @@ $ jobs
 - The nohup command lets you run your commands even after you logged out and writes its output to nohup.out:
 ```bash
 $ nohup ping 4.2.2.4
-nohup: ignoring input and appending output to ï¾‚â€˜nohup.outï¾‚â€™
+nohup: ignoring input and appending output to ?¾‚â€˜nohup.out?¾‚â€?
 ^C
 
 $ cat nohup.out 
@@ -1569,7 +1575,7 @@ rtt min/avg/max/mdev = 223.584/224.767/225.950/1.183 ms
 #### # Kill Process
 1. kill - terminate a process
 - You can control processes by using signals. Actually pressing Ctrl+c and Ctrl+z is also sending signals. 
-- ctrl+c = interrupt (sigint):2   â˜…
+- ctrl+c = interrupt (sigint):2   â˜?
 - ctrl+z = stop (sigstop):19
 - Another way for this is using the kill command:
 - kill using job number
@@ -1830,7 +1836,7 @@ The following is a partial list of the used files, terms and utilities:
 
 ##### *mkfs*
 - This command + option (-t) will create file system ext2/ext3/ext4/xfs/jfs
-  - `if -t not specified, the default is to crate ext2 filesystem`  â˜…
+  - `if -t not specified, the default is to crate ext2 filesystem`  â˜?
 - on the other hand, mke2fs creates ext2/ext3/ext4
 ```bash
 $ mkfs [option] [device-name]
@@ -2273,7 +2279,7 @@ Key Knowledge Areas:
 The following is a partial list of the used files, terms and utilities:
 - find
 - locate
-- updatedb  â˜…
+- updatedb  â˜?
 - /etc/updatedb.conf
 - whereis
 - which
