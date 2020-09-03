@@ -1362,7 +1362,7 @@ Modify: 2020-07-19 17:29:42.145041851 +0900
 # Archive to tar, then compress in gzip (tgz)
 $ tar czvf test.tgz /folder-to-compress
 # Decompress tgz
-$ tar tzvf test.tgz 
+$ tar tzvf test.tgz  # --> list files inside the tgz file
 $ tar xzvf test.tgz
 
 # Compress and decompress tar.bzip2
