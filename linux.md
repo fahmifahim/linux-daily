@@ -14,3 +14,16 @@ $ hostnamectl set-hostname [hostname-you-want-to-set]
 # Check hostname
 $ uname -n 
 ```
+
+#### Mount shared NFS (temporary)  
+```bash
+$ mount -t nfs 192.168.0.100:/nfsshare /mnt/nfsshare
+
+$ mount | grep nfs
+        sunrpc on /var/lib/nfs/rpc_pipefs type rpc_pipefs (rw)
+        nfsd on /proc/fs/nfsd type nfsd (rw)
+        192.168.0.100:/nfsshare on /mnt type nfs (rw,addr=192.168.0.100)
+
+# Unmount 
+$ umount /mnt/nfsshare
+```
