@@ -1234,6 +1234,19 @@ The following is a partial list of the used files, terms and utilities:
   ```bash
   # find files modified at least 3 days ago in your current working directory
   find . -mtime +3
+  ```  
+  ##### How to find a directory on Linux  
+  ```bash
+  find /where/to/look/up criteria action
+  find /dir/path/look/up criteria action
+  find /dir/path/look/up -name "dir-name-here"
+  find /dir/path/look/up -name "pattern"
+  find /dir/path/look/up -name "dir-name-here" -print
+  find /dir/path/look/up -name "dir-name-here"
+  find / -name "dir-name-here"
+  find / -type d -name "dir-name-here"
+  find / -type d -name "dir-name-here" 2>/dev/null
+
   ```
 
 - **rmdir**
