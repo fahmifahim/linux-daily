@@ -1257,6 +1257,15 @@ The following is a partial list of the used files, terms and utilities:
       917524    4 drwxr-xr-x   6 root     root         4096 Jun 18 02:28 /etc/apt
       917721    4 -rw-r--r--   1 root     root          173 Apr 15  2011 /etc/logrotate.d/apt
       918762   16 -rwxr-xr-x   1 root     root        14985 Mar 14 12:48 /etc/cron.daily/apt
+  ```  
+
+  ##### How do I list only directories?  
+  ```bash
+  find  / -type d -name "apt" -ls
+      4719035    4 drwxr-xr-x   2 root     root         4096 Aug 22 06:25 /var/log/apt
+      4718597    4 drwxr-xr-x   5 root     root         4096 Aug  4 13:46 /var/lib/apt
+      4718601    4 drwxr-xr-x   3 root     root         4096 Aug  8 09:37 /var/cache/apt
+      917524    4 drwxr-xr-x   6 root     root         4096 Jun 18 02:28 /etc/apt
   ```
 
 - **rmdir**
