@@ -38,3 +38,16 @@ PaaS Characteristics:
 -Scalable – you can choose from various tiers of resources to suit the size of your business.
 -Built on virtualization technology.
 -Easy to run without extensive system administration knowledge.
+
+
+3. SaaS (Software as a Service).
+SaaS platforms make software available to users over the internet, usually for a monthly subscription fee.
+Most SaaS providers operate a subscription model with a fixed, inclusive monthly account fee.
+
+SaaS Delivery:
+Over the internet.
+
+SaaS Advantages:
+-With SaaS, you don’t need to install and run software applications on your computer (or any computer).
+-You can usually access the software from any device, anytime (as long as there is an internet connection).
+-You no longer need to engage an IT specialist to download the software onto multiple computers throughout your office or worry about keeping the software on every computer up-to-date.
