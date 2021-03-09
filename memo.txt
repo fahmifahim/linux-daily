@@ -29,7 +29,9 @@ PaaS Delivery:
 Over the internet.
 
 PaaS Advantages:
-PaaS is primarily used by developers who are building software or applications.
+-PaaS is primarily used by developers who are building software or applications.
+-PaaS allows the developer to focus on the creative side of app development, as opposed to menial tasks such as managing software updates or security patches. 
+-Any platform updates, security patches and general maintenance to their store would be the responsibility of the merchant.
 
 PaaS Characteristics:
 -Accessible by multiple users.
