@@ -51,3 +51,9 @@ SaaS Advantages:
 -With SaaS, you don’t need to install and run software applications on your computer (or any computer).
 -You can usually access the software from any device, anytime (as long as there is an internet connection).
 -You no longer need to engage an IT specialist to download the software onto multiple computers throughout your office or worry about keeping the software on every computer up-to-date.
+
+SaaS Characteristics:
+-Available over the internet.
+-Hosted on a remote server by a third-party provider.
+-Scalable, with different tiers for small, medium, and enterprise-level businesses.
+-Inclusive, offering security, compliance, and maintenance as part of the cost.
