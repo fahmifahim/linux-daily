@@ -13,4 +13,10 @@ IaaS Delivery:
 Over the internet.
 
 IaaS Advantages:
-Maintaining on-premise IT infrastructure is costly and labor-intensive.
+-Maintaining on-premise IT infrastructure is costly and labor-intensive.
+-IaaS solutions are highly flexible and highly scalable, and you can replace it whenever you need without losing money on your initial investment.
+
+IaaS Characteristics:
+-Highly flexible and highly scalable.
+-Accessible by multiple users.
+-Cost-effective.
