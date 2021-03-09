@@ -20,3 +20,13 @@ IaaS Characteristics:
 -Highly flexible and highly scalable.
 -Accessible by multiple users.
 -Cost-effective.
+
+
+2. PaaS (Platform as a Service).
+A PaaS vendor provides hardware and software tools over the internet, and people use these tools to develop applications. PaaS users tend to be developers.
+
+PaaS Delivery:
+Over the internet.
+
+PaaS Advantages:
+PaaS is primarily used by developers who are building software or applications.
