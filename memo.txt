@@ -3,3 +3,14 @@ IaaS: cloud-based services, pay-as-you-go for services such as storage, networki
 PaaS: hardware and software tools available over the internet.
 SaaS: software that’s available via a third-party over the internet.
 On-premise: software that’s installed in the same building as your business.
+
+
+1. IaaS (Infrastructure as a Service).
+-IaaS businesses offer services such as pay-as-you-go storage, networking, and virtualization.
+-IaaS gives users cloud-based alternatives to on-premise infrastructure, so businesses can avoid investing in expensive on-site resources.
+
+IaaS Delivery:
+Over the internet.
+
+IaaS Advantages:
+Maintaining on-premise IT infrastructure is costly and labor-intensive.
