@@ -30,3 +30,9 @@ Over the internet.
 
 PaaS Advantages:
 PaaS is primarily used by developers who are building software or applications.
+
+PaaS Characteristics:
+-Accessible by multiple users.
+-Scalable – you can choose from various tiers of resources to suit the size of your business.
+-Built on virtualization technology.
+-Easy to run without extensive system administration knowledge.
