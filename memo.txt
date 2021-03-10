@@ -61,3 +61,5 @@ SaaS Characteristics:
 
 ---
 Google Cloud: 
+- GCE (Google Cloud Engine)
+- 
