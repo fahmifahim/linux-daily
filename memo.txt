@@ -72,4 +72,4 @@ Serverless computing:
   -Pricing is based on the actual amount of resources consumed by an application.[1] It can be a form of utility computing. 
   -"Serverless" is a misnomer in the sense that servers are still used by cloud service providers to execute code for developers. 
   -However developers of serverless applications are not concerned with capacity planning, configuration, management, maintenance, operating or scaling of containers, VMs, or physical servers.
-  -Developer don't have to care about their infrastructure thingy. 
+  -Client/Business Owner/Developer don't have to care about their infrastructure things (ignore the server, serverless). 
