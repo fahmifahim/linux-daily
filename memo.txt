@@ -63,3 +63,4 @@ SaaS Characteristics:
 Google Cloud: 
 - GCE (Google Cloud Engine)
 - GKE (Google Kubernetes Enginer)
+- GAE (Google App Engine)
