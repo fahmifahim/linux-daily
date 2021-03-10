@@ -57,3 +57,7 @@ SaaS Characteristics:
 -Hosted on a remote server by a third-party provider.
 -Scalable, with different tiers for small, medium, and enterprise-level businesses.
 -Inclusive, offering security, compliance, and maintenance as part of the cost.
+
+
+---
+Google Cloud: 
