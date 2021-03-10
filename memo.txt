@@ -69,7 +69,7 @@ Google Cloud:
 
 Serverless computing: 
   -cloud computing model in which the cloud provider allocates machine resources ON DEMAND, taking care of the servers on behalf of their customers. 
-  -When an app is not in use, there are no computing resources allocated to the app. 
   -Pricing is based on the actual amount of resources consumed by an application.[1] It can be a form of utility computing. 
   -"Serverless" is a misnomer in the sense that servers are still used by cloud service providers to execute code for developers. 
   -However developers of serverless applications are not concerned with capacity planning, configuration, management, maintenance, operating or scaling of containers, VMs, or physical servers.
+  -Developer don't have to care about their infrastructure thingy. 
