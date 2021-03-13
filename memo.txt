@@ -70,14 +70,14 @@ Google Cloud:
 - GAE (Google App Engine)
 
 
-What is Serverless computing? 
+★What is Serverless computing? 
   -cloud computing model in which the cloud provider allocates machine resources ON DEMAND, taking care of the servers on behalf of their customers. 
   -Client/Business Owner/Developer don't have to care about their infrastructure things (ignore the server, serverless). 
   -Pricing is based on the actual amount of resources consumed by an application.
   -"Serverless" is a misnomer in the sense that servers are still used by cloud service providers to execute code for developers. 
   -However developers of serverless applications are not concerned with capacity planning, configuration, management, maintenance, operating or scaling of containers, VMs, or physical servers.
 
-What is Agile, CI/CD and DevOps? How they differ?
+★What is Agile, CI/CD and DevOps? How they differ?
 Agile: 
 -focus on PROCESS
 -highlighting CHANGE
