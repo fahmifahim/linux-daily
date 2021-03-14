@@ -93,6 +93,23 @@ DevOps:
 -emphasize RESPONSIVENESS
 
 
-★
+★Network
+What is different between TCP/UDP
+TCP: 
+  -Transfer Control Protocol
+  -信頼性の高い通信（3 way handshake: SYN -> SYN/ACK -> ACK）
+  -Connection型：通信状況を確立しながら、データ転送
+  -転送速度が低い
+  -用途：Web閲覧、メール送受信、ファイル転送
+  -デメリット：メモリ/CPUを消費する
+
+UDP:
+  -User Datagram Protocol
+  -信頼性低い
+  -Connectionless型：通信状況を確認せず、データ転送（push）
+  -転送速度が早い
+  -用途：動画ストリーミング、broadcast
+  -デメリット：パケットロスが発生しうる
+
 ★
 ★
