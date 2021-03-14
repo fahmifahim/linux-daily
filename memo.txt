@@ -111,7 +111,14 @@ UDP:
   -用途：動画ストリーミング、broadcast
   -デメリット：パケットロスが発生しうる
 
-★HTTP Status code
+★HTTP vs HTTPS
+HTTP: Hyper Text Transfer Protocol 
+  ホームページのファイルを受け渡しするときに使う通信規約
+HTTPS: Hyper Text Transfer Protocol Secure
+  HTTPのやりとりを暗号化している状態での通信規約（Secured with SSL/TLS）
+  SSL: Secure Socket Layer
+  TLS: Transfer Layer Security
+HTTP Status code:
   1xx informational response – the request was received, continuing process
   2xx successful – the request was successfully received, understood, and accepted
   3xx redirection – further action needs to be taken in order to complete the request
