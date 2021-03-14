@@ -93,8 +93,8 @@ DevOps:
 -emphasize RESPONSIVENESS
 
 
-★Network
-What is different between TCP/UDP
+★★Network
+★What is different between TCP/UDP
 TCP: 
   -Transfer Control Protocol
   -信頼性の高い通信（3 way handshake: SYN -> SYN/ACK -> ACK）
@@ -111,5 +111,11 @@ UDP:
   -用途：動画ストリーミング、broadcast
   -デメリット：パケットロスが発生しうる
 
-★
+★HTTP Status code
+  1xx informational response – the request was received, continuing process
+  2xx successful – the request was successfully received, understood, and accepted
+  3xx redirection – further action needs to be taken in order to complete the request
+  4xx client error – the request contains bad syntax or cannot be fulfilled
+  5xx server error – the server failed to fulfil an apparently valid request
+
 ★
