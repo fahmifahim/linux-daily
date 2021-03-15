@@ -125,4 +125,14 @@ HTTP Status code:
   4xx client error – the request contains bad syntax or cannot be fulfilled
   5xx server error – the server failed to fulfil an apparently valid request
 
+★Virtualization vs Container
+Virtualization/サーバ仮想化技術
+-物理サーバ上で仮想化ソフトウェア(HyperVisor)を実行し、その上の仮想マシン(VM)ごとにGuestOS -> Middleware -> Application実行環境を管理する。
+-Applicationを実行する際、ゲストOSから起動するので時間がかかることや、複数のゲストOSがCPUやメモリー、ストレージなどのサーバ資源を利用するため、リソースの無駄が生じる場合もあります。
+★
+★
+★
+★
+★
+★
 ★
