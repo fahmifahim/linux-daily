@@ -127,18 +127,25 @@ HTTP Status code:
 
 ★Virtualization vs Container
 Virtualization/サーバ仮想化技術
--物理サーバ上で仮想化ソフトウェア(HyperVisor)を実行し、その上の仮想マシン(VM)ごとにGuestOS -> Middleware -> Application実行環境を管理する。
--Applicationを実行する際、ゲストOSから起動するので時間がかかることや、複数のゲストOSがCPUやメモリー、ストレージなどのサーバ資源を利用するため、リソースの無駄が生じる場合もあります。
+  -物理サーバ上で仮想化ソフトウェア(HyperVisor)を実行し、その上の仮想マシン(VM)ごとにGuestOS -> Middleware -> Application実行環境を管理する。
+  -Applicationを実行する際、ゲストOSから起動するので時間がかかることや、複数のゲストOSがCPUやメモリー、ストレージなどのサーバ資源を利用するため、リソースの無駄が生じる場合もあります。
+  -複数OSでH/Wリソースを共有
+  -OSを問わずに仮想マシンが稼働可能
+  -物理と同様にIP管理できる
+
 
 
 ★Container advantage vs disadvantage
-コンテナ：アプリケーションの実行環境をパッケージ化し、ホストOSからプロセスやネットワークなどのリソースをisolate(namespace/cgroup単位)した、一種の仮想環境です。アプリケーションの側からは、それぞれのコンテナは別のコンピューター上で稼働しているように見えます。
+コンテナ：アプリケーションの実行環境をパッケージ化し、ホストOS(Linux kernel feature)からprocessやnetworkなどのリソースをisolate(namespace/cgroup単位)した、一種の仮想環境です。アプリケーションの側からは、それぞれのコンテナは別のコンピューター上で稼働しているように見えます。
 https://thinkit.co.jp/article/17301
 Advantage
 1.高速: アプリケーションを簡単、迅速に起動できること
+  VMは起動に数分必要が、コンテナは数百milisecで起動できると言われている。
+  コンテナ環境は少ないコマンドで構築できる
 2.軽量: リソースを節約し、効率的に利用できること
   HyperVisorを使わず、ホストOSのKernelを共有することで、CPU/Memといったリソースを節約
 3.可搬性: アプリケーションをパッケージ化してどこでも起動可能
+  OnPremise/PrivateCloud/PublicCloudを選ばず、アプリケーション稼働できる
 
 Disadvantage: 
 新しい技術であり学習コストが比較的高い
