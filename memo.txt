@@ -133,6 +133,11 @@ Virtualization/サーバ仮想化技術
   -OSを問わずに仮想マシンが稼働可能
   -物理と同様にIP管理できる
 
+Container:
+  -ホストOSのKernelを共有して、Kernel機能でOSとアプリをisolate分離
+  -OverHeadなしでリソースを有効活用
+  -APIを豊富に提供しているため、自動化可能
+  -IPアドレスは自動設定、外部とはNATと接続
 
 
 ★Container advantage vs disadvantage
@@ -148,7 +153,11 @@ Advantage
   OnPremise/PrivateCloud/PublicCloudを選ばず、アプリケーション稼働できる
 
 Disadvantage: 
-新しい技術であり学習コストが比較的高い
+  -複数のホストでのコンテナ運用が煩雑になる
+  -カーネルを他のコンテナと共有するため、個別に変更できない
+  -コンテナ環境でベースとなるOSと異なるOSのシステムを動かすことはできない
+  -新しい技術であり学習コストが比較的高い
+  -初めて現行アプリからコンテナ構成に移行するときは、作り直し部分が複数ある（Network仕組み:NAT, Security, High Availabilityなど）
 
 ★
 ★
