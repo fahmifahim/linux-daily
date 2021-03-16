@@ -129,7 +129,12 @@ HTTP Status code:
 Virtualization/サーバ仮想化技術
 -物理サーバ上で仮想化ソフトウェア(HyperVisor)を実行し、その上の仮想マシン(VM)ごとにGuestOS -> Middleware -> Application実行環境を管理する。
 -Applicationを実行する際、ゲストOSから起動するので時間がかかることや、複数のゲストOSがCPUやメモリー、ストレージなどのサーバ資源を利用するため、リソースの無駄が生じる場合もあります。
-★
+
+
+★Container advantage vs disadvantage
+
+
+
 ★
 ★
 ★
