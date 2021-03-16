@@ -132,9 +132,15 @@ Virtualization/サーバ仮想化技術
 
 
 ★Container advantage vs disadvantage
+コンテナ：
+Advantage
 1.高速: アプリケーションを簡単、迅速に起動できること
 2.軽量: リソースを節約し、効率的に利用できること
+  HyperVisorを使わず、ホストOSのKernelを共有することで、CPU/Memといったリソースを節約
 3.可搬性: アプリケーションをパッケージ化してどこでも起動可能
+
+Disadvantage: 
+新しい技術であり学習コストが比較的高い
 
 ★
 ★
